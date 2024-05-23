@@ -2,7 +2,7 @@ version = 0.1
 [default]
 [default.deploy]
 [default.deploy.parameters]
-stack_name = "u7-capstone-watched"
+stack_name = "u7-watched-capstone"
 region = "us-east-2"
 confirm_changeset = false
 capabilities = "CAPABILITY_IAM"
