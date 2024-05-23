@@ -39,3 +39,4 @@ public class WatchlistNotFoundException extends RuntimeException {
         super(message, cause);
     }
 }
+

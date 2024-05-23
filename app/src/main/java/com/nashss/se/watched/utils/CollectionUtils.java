@@ -36,3 +36,4 @@ public class CollectionUtils {
         return ifNotNull(collectionToWrap, () -> new ArrayList<>(collectionToWrap));
     }
 }
+
