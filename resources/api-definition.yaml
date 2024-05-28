@@ -1,0 +1,249 @@
+openapi: 3.0.0
+info:
+  title: Watched
+  description: "This is the API definition for the Watched Service."
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000
+
+tags:
+  - name: Watchlists
+    description: Create, view, and update watchlists
+
+  - name: titles
+    description: View and titles to watchlists
+
+paths:
+
+  /watchlist/search:
+    get:
+      tags:
+        - Watchlists
+      parameters:
+        - name: q
+          in: query
+          description: Search term (title or tag)
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+      summary: Search for a watchlist (SearchWatchlistLambda)
+      responses:
+        "200":
+          description: A watchlist object
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  title:
+                    type: string
+                  userId:
+                    type: string
+
+
+  /watchlists:
+    post:
+      tags:
+        - Watchlists
+      summary: Create a new watchlist (CreateWatchlistLambda)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                customerId:
+                  type: string
+                tags:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        "200":
+          description: A watchlist object
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  customerId:
+                    type: string
+                  songCount:
+                    type: integer
+                  tags:
+                    type: array
+                    items:
+                      type: string
+
+  /playlists/{id}:
+    get:
+      tags:
+        - Watchlists
+      summary: Get an existing watchlist (GetWatchlistLambda)
+      parameters:
+        - name: id
+          in: path
+          description: ID of watchlist to retrieve
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: WatchlistResponse
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  customerId:
+                    type: string
+                  songCount:
+                    type: integer
+                  tags:
+                    type: array
+                    items:
+                      type: string
+        "500":
+          description: "Invalid input parameters"
+
+    put:
+      tags:
+        - Watchlists
+      summary: Update the name of an existing watchlist (UpdateWatchlistLambda)
+      parameters:
+        - name: id
+          in: path
+          description: ID of playlist to retrieve
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+                customerId:
+                  type: string
+
+      responses:
+        "200":
+          description: PlaylistResponse
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  customerId:
+                    type: string
+                  songCount:
+                    type: integer
+                  tags:
+                    type: array
+                    items:
+                      type: string
+        "500":
+          description: "Invalid input parameters"
+
+  /playlists/{id}/songs:
+    get:
+      tags:
+        - Songs
+      summary: Retrieves a list of all songs in a playlist (GetPlaylistSongsLambda)
+      operationId: getSongs
+      parameters:
+        - name: id
+          in: path
+          description: ID of playlist to return
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A playlist object
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  songList:
+                    type: array
+                    items:
+                      properties:
+                        asin:
+                          type: string
+                        title:
+                          type: string
+                        album:
+                          type: string
+                        trackNumber:
+                          type: integer
+
+    post:
+      tags:
+        - Songs
+      summary: Add a song to a playlist (AddSongToPlaylistLambda)
+      operationId: addSong
+      parameters:
+        - name: id
+          in: path
+          description: ID of playlist to return
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                asin:
+                  type: string
+                trackNumber:
+                  type: integer
+                id:
+                  type: string
+
+      responses:
+        "200":
+          description: the song
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  songList:
+                    type: array
+                    items:
+                      properties:
+                        asin:
+                          type: string
+                        title:
+                          type: string
+                        album:
+                          type: string
+                        trackNumber:
+                          type: integer
