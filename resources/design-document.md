@@ -65,7 +65,7 @@ String contentId;
 String watchlistId;
 String title;
 String userId;
-String steamService;
+String streamService;
 Boolean watched;
 
 ```
@@ -162,7 +162,7 @@ contentId // primary key, string
 watchlistId // partition key, string
 title // string
 userId // string, userId-watchlistId-index partition key
-streamServie // string
+streamService // string
 watched // boolean
 ```
 
