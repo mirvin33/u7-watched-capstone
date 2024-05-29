@@ -217,7 +217,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Role: !GetAtt AccessRole.Arn
-      CodeUri: GetWatchlistLambda
+      CodeUri: app
       Handler: com.nashss.se.watched.lambda.GetWatchlistLambda::handleRequest
       Runtime: java11
       Architectures:
