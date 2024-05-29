@@ -1,8 +1,11 @@
 package com.nashss.se.watched.dependency;
 
-import com.nashss.se.watched.activity.GetWatchlistActivity;
+import com.amazonaws.services.lambda.runtime.RequestHandler;
+import com.nashss.se.watched.activity.*;
+import com.nashss.se.watched.activity.request.DeleteWatchlistRequest;
 import com.nashss.se.watched.dynamodb.WatchlistDao;
 
+import com.nashss.se.watched.lambda.AddContentToWatchlistLambda;
 import dagger.Component;
 
 import javax.inject.Singleton;
@@ -28,5 +31,13 @@ public interface ServiceComponent {
      * @return the GetWatchlistActivity instance
      */
     GetWatchlistActivity provideGetWatchlistActivity();
+
+    CreateWatchlistActivity provideCreateWatchlistActivity();
+
+    UpdateWatchlistActivity provideUpdateWatchlistActivity();
+
+    AddContentToWatchlistActivity provideAddContentToWatchlistActivity();
+
+    DeleteWatchlistActivity provideDeleteWatchlistActivity();
 }
 

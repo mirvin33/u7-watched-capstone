@@ -1,6 +1,8 @@
 package com.nashss.se.watched.services;
 
+import com.nashss.se.watched.activity.CreateWatchlistActivity;
 import com.nashss.se.watched.activity.GetWatchlistActivity;
+import com.nashss.se.watched.activity.UpdateWatchlistActivity;
 import com.nashss.se.watched.dynamodb.WatchlistDao;
 import com.nashss.se.watched.metrics.MetricsPublisher;
 
@@ -91,5 +93,41 @@ public class ServiceModule {
     public GetWatchlistActivity provideGetWatchlistActivity(WatchlistDao watchlistDao) {
         return new GetWatchlistActivity(watchlistDao);
     }
+
+    /**
+     *
+     * @param watchlistDao the WatchlistDao
+     * @return a CreateWatchlistActivity instance
+     */
+    @Provides
+    public CreateWatchlistActivity provideCreateWatchlistActivity(WatchlistDao watchlistDao) {
+        return new CreateWatchlistActivity(watchlistDao);
+    }
+
+    @Provides
+    public UpdateWatchlistActivity provideUpdateWatchlistActivity(WatchlistDao watchlistDao) {
+        return new UpdateWatchlistActivity(watchlistDao);
+    }
+
+//    @Provides
+//    public AddContentToWatchlistActivity provideAddContentToWatchlistActivity(WatchlistDao watchlistDao) {
+//        return new AddContentToWatchlistActivity(watchlistDao);
+//    }
+//
+//    @Provides
+//    public DeleteWatchlistActivity provideDeleteWatchlistActivity(WatchlistDao watchlistDao) {
+//        return new DeleteWatchlistActivity(watchlistDao);
+//    }
+//
+//    @Provides
+//    public GetWatchlistContentActivity provideGetWatchlistContentActivity(WatchlistDao watchlistDao) {
+//        return new GetWatchlistContentActivity(watchlistDao);
+//    }
+//
+//    @Provides
+//    public GetWatchlistsForUserActivity provideGetWatchlistsForUserActivity(WatchlistDao watchlistDao) {
+//        return new GetWatchlistsForUserActivity(watchlistDao);
+//    }
 }
+
 
