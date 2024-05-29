@@ -23,7 +23,7 @@ paths:
       parameters:
         - name: q
           in: query
-          description: Search term (title or tag)
+          description: Search term (title)
           required: true
           schema:
             type: array
@@ -86,10 +86,10 @@ paths:
                     items:
                       type: string
 
-  /playlists/{id}:
+  /watchlist/{id}:
     get:
       tags:
-        - Watchlists
+        - Watchlist
       summary: Get an existing watchlist (GetWatchlistLambda)
       parameters:
         - name: id
