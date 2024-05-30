@@ -4,7 +4,7 @@ package com.nashss.se.watched.activity.request;
  * Request class for deleting a watchlist.
  */
 public class DeleteWatchlistRequest {
-    private final String id; // The ID of the watchlist to be deleted.
+    private final String id;
 
     /**
      * Constructs an instance of DeleteWatchlistRequest.
@@ -37,7 +37,7 @@ public class DeleteWatchlistRequest {
      * Builder class for constructing DeleteWatchlistRequest objects.
      */
     public static class Builder {
-        private String id; // The ID of the watchlist to be deleted.
+        private String id;
 
         /**
          * Sets the ID of the watchlist to be deleted.

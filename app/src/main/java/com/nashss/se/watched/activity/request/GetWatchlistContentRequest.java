@@ -6,7 +6,7 @@ package com.nashss.se.watched.activity.request;
  * Request class for retrieving watchlist content.
  */
 public class GetWatchlistContentRequest {
-    private final String id; // The ID of the watchlist for which content is requested.
+    private final String id;
 
     /**
      * Constructs an instance of GetWatchlistContentRequest.
@@ -39,7 +39,7 @@ public class GetWatchlistContentRequest {
      * Builder class for constructing GetWatchlistContentRequest objects.
      */
     public static class Builder {
-        private String id; // The ID of the watchlist for which content is requested.
+        private String id;
 
         /**
          * Sets the ID of the watchlist for which content is requested.

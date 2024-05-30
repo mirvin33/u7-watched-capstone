@@ -5,8 +5,8 @@ package com.nashss.se.watched.activity.request;
  * Request class for updating a watchlist.
  */
 public class UpdateWatchlistRequest {
-    private final String id; // The ID of the watchlist to update.
-    private final String title; // The new title for the watchlist.
+    private final String id;
+    private final String title;
 
     /**
      * Constructs an instance of UpdateWatchlistRequest.
@@ -50,8 +50,8 @@ public class UpdateWatchlistRequest {
      * Builder class for constructing UpdateWatchlistRequest objects.
      */
     public static class Builder {
-        private String id; // The ID of the watchlist to update.
-        private String title; // The new title for the watchlist.
+        private String id;
+        private String title;
 
         /**
          * Sets the ID of the watchlist to update.

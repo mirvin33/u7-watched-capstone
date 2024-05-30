@@ -32,8 +32,14 @@ public class GetWatchlistActivity {
      */
     public GetWatchlistResult handleRequest(GetWatchlistRequest request) {
         Watchlist watchlist = watchlistDao.getWatchlist(request.getId());
-        WatchlistModel watchlistModel = WatchlistModel.builder().build();
-        return GetWatchlistResult.builder().withWatchlist(watchlistModel).build();
+        WatchlistModel watchlistModel = WatchlistModel.builder()
+                .withId(watchlist.getId())
+                .withTitle(watchlist.getTitle())
+                .withUserId(watchlist.getUserId())
+                .build();
+        return GetWatchlistResult.builder()
+                .withWatchlist(watchlistModel)
+                .build();
     }
 }
 
