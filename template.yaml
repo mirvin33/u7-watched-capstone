@@ -359,6 +359,8 @@ Resources:
       AttributeDefinitions:
         - AttributeName: "contentId"
           AttributeType: "S"
+        - AttributeName: "title"
+          AttributeType: "S"
         - AttributeName: "watchlistId"
           AttributeType: "S"
       KeySchema:
