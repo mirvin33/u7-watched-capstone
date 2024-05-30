@@ -1,10 +1,12 @@
 package com.nashss.se.watched.activity.request;
 
+
+
 /**
  * Represents a request to get a watchlist by ID.
  */
 public class GetWatchlistRequest {
-    private final String id;
+    private final String id; // The ID of the watchlist to retrieve.
 
     /**
      * Constructs a GetWatchlistRequest with the specified ID.
@@ -37,7 +39,7 @@ public class GetWatchlistRequest {
      * Builder for creating a GetWatchlistRequest.
      */
     public static class Builder {
-        private String id;
+        private String id; // The ID of the watchlist to retrieve.
 
         /**
          * Sets the ID of the watchlist to retrieve.

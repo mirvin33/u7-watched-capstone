@@ -15,6 +15,8 @@ import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+
+
 /**
  * Accesses data for a watchlist using {@link Watchlist} to represent the model in DynamoDB.
  */
@@ -107,6 +109,58 @@ public class WatchlistDao {
                 .append(", ")
                 .append(valueMapNamePrefix).append(position)
                 .append(") ");
+    }
+
+    /**
+     * Returns a list of {@link Watchlist} objects for a specified user ID.
+     *
+     * @param userId the user ID
+     * @return a list of Watchlist objects for the specified user
+     */
+    public List<Watchlist> getWatchlistsForUser(String userId) {
+        Map<String, AttributeValue> valueMap = new HashMap<>();
+        valueMap.put(":userId", new AttributeValue().withS(userId));
+
+        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression()
+                .withFilterExpression("userId = :userId")
+                .withExpressionAttributeValues(valueMap);
+
+        return dynamoDbMapper.scan(Watchlist.class, scanExpression);
+    }
+
+    /**
+     * Deletes a watchlist with the specified ID.
+     *
+     * @param id the watchlist ID
+     */
+    public void deleteWatchlist(String id) {
+        Watchlist watchlist = getWatchlist(id);
+        if (watchlist != null) {
+            dynamoDbMapper.delete(watchlist);
+        } else {
+            throw new WatchlistNotFoundException("Could not find watchlist with id " + id);
+        }
+    }
+
+    /**
+     * Adds content to a watchlist with the specified ID.
+     *
+     * @param watchlistId the watchlist ID
+     * @param contentId   the content ID to add
+     * @param queueNext   whether to queue the content next
+     * @return the updated Watchlist object
+     */
+    public Watchlist addContent(String watchlistId, String contentId, boolean queueNext) {
+        Watchlist watchlist = getWatchlist(watchlistId);
+        if (watchlist == null) {
+            throw new WatchlistNotFoundException("Could not find watchlist with id " + watchlistId);
+        }
+
+        // Assuming the Watchlist class has a method to add content
+        watchlist.addContent(contentId, queueNext);
+        saveWatchlist(watchlist);
+
+        return watchlist;
     }
 }
 

@@ -3,12 +3,12 @@ package com.nashss.se.watched.activity.results;
 import com.nashss.se.watched.dynamodb.models.Watchlist;
 
 /**
- * Result class for adding content to a watchlist.
+ * Result class for retrieving watchlist content.
  */
-public class AddContentToWatchlistResult {
+public class GetWatchlistContentResult {
     private final Watchlist watchlist;
 
-    private AddContentToWatchlistResult(Watchlist watchlist) {
+    private GetWatchlistContentResult(Watchlist watchlist) {
         this.watchlist = watchlist;
     }
 
@@ -28,8 +28,8 @@ public class AddContentToWatchlistResult {
             return this;
         }
 
-        public AddContentToWatchlistResult build() {
-            return new AddContentToWatchlistResult(watchlist);
+        public GetWatchlistContentResult build() {
+            return new GetWatchlistContentResult(watchlist);
         }
     }
 }

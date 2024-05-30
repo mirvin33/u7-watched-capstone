@@ -22,3 +22,4 @@ public class DeleteWatchlistLambda implements RequestHandler<DeleteWatchlistRequ
         return serviceComponent.provideDeleteWatchlistActivity().handleRequest(request);
     }
 }
+
