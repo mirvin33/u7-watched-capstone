@@ -1,0 +1,7 @@
+{
+  "TableName": "watchlist",
+  "Item": {
+    "id": {"S": "1"},
+    "name": {"S": "My Watchlist"}
+  }
+}
