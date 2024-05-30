@@ -1,6 +1,6 @@
 package com.nashss.se.watched.dependency;
 
-import com.nashss.se.watched.activity.GetWatchlistActivity;
+import com.nashss.se.watched.activity.*;
 import com.nashss.se.watched.dynamodb.WatchlistDao;
 
 import dagger.Component;
@@ -28,5 +28,17 @@ public interface ServiceComponent {
      * @return the GetWatchlistActivity instance
      */
     GetWatchlistActivity provideGetWatchlistActivity();
+
+    CreateWatchlistActivity provideCreateWatchlistActivity();
+
+    UpdateWatchlistActivity provideUpdateWatchlistActivity();
+
+    AddContentToWatchlistActivity provideAddContentToWatchlistActivity();
+
+    DeleteWatchlistActivity provideDeleteWatchlistActivity();
+
+    GetWatchlistContentActivity provideGetWatchlistContentActivity();
+
+    GetWatchlistsForUserActivity provideGetWatchlistsForUserActivity();
 }
 

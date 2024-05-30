@@ -1,7 +1,7 @@
 package com.nashss.se.watched.lambda;
 
 import com.nashss.se.watched.dependency.ServiceComponent;
-import com.nashss.se.watched.services.DaggerServiceComponent;
+import com.nashss.se.watched.dependency.DaggerServiceComponent;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -56,3 +56,4 @@ public class LambdaActivityRunner<TRequest, TResult> {
         return service;
     }
 }
+
