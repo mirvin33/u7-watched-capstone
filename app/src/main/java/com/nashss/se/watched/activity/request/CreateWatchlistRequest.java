@@ -1,6 +1,5 @@
 package com.nashss.se.watched.activity.request;
 
-import java.util.List;
 
 /**
  * Request class for creating a new watchlist.
