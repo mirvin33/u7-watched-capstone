@@ -12,11 +12,22 @@ import javax.inject.Inject;
 public class GetWatchlistsForUserActivity {
     private final WatchlistDao watchlistDao;
 
+    /**
+     * Constructs a GetWatchlistsForUserActivity with the specified WatchlistDao.
+     *
+     * @param watchlistDao the WatchlistDao to use for accessing the watchlist data
+     */
     @Inject
     public GetWatchlistsForUserActivity(WatchlistDao watchlistDao) {
         this.watchlistDao = watchlistDao;
     }
 
+    /**
+     * Handles the GetWatchlistsForUserRequest and returns a GetWatchlistsForUserResult.
+     *
+     * @param request the request containing the user ID whose watchlists are to be retrieved
+     * @return the result containing the retrieved watchlists
+     */
     public GetWatchlistsForUserResult handleRequest(GetWatchlistsForUserRequest request) {
         return GetWatchlistsForUserResult.builder()
                 .withWatchlists(watchlistDao.getWatchlistsForUser(request.getUserId()))

@@ -14,18 +14,29 @@ import javax.inject.Inject;
 public class AddContentToWatchlistActivity {
     private final WatchlistDao watchlistDao;
 
+    /**
+     * Constructs an AddContentToWatchlistActivity with the given WatchlistDao.
+     *
+     * @param watchlistDao the WatchlistDao to interact with the database
+     */
     @Inject
     public AddContentToWatchlistActivity(WatchlistDao watchlistDao) {
         this.watchlistDao = watchlistDao;
     }
 
+    /**
+     * Handles the request to add content to a watchlist.
+     *
+     * @param request the request containing the watchlist ID and content details
+     * @return the result of adding content to the watchlist
+     * @throws WatchlistNotFoundException if the watchlist is not found
+     */
     public AddContentToWatchlistResult handleRequest(AddContentToWatchlistRequest request) {
         Watchlist watchlist = watchlistDao.getWatchlist(request.getId());
         if (watchlist == null) {
             throw new WatchlistNotFoundException("Watchlist not found with ID: " + request.getId());
         }
 
-        // Assuming there's a method to add content to a watchlist
         watchlist.addContent(request.getContentId(), request.getQueueNext());
         watchlistDao.saveWatchlist(watchlist);
 

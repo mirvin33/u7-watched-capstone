@@ -1,4 +1,4 @@
-package com.nashss.se.watched.activityTest.result;
+package com.nashss.se.watched.activityTest.results;
 
 import com.nashss.se.watched.activity.results.GetWatchlistResult;
 import com.nashss.se.watched.models.WatchlistModel;

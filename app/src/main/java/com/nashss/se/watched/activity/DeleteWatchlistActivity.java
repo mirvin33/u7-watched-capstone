@@ -14,11 +14,23 @@ import javax.inject.Inject;
 public class DeleteWatchlistActivity {
     private final WatchlistDao watchlistDao;
 
+    /**
+     * Constructs a DeleteWatchlistActivity with the given WatchlistDao.
+     *
+     * @param watchlistDao the WatchlistDao to interact with the database
+     */
     @Inject
     public DeleteWatchlistActivity(WatchlistDao watchlistDao) {
         this.watchlistDao = watchlistDao;
     }
 
+    /**
+     * Handles the request to delete a watchlist.
+     *
+     * @param request the request containing the ID of the watchlist to be deleted
+     * @return the result of the delete operation
+     * @throws WatchlistNotFoundException if the watchlist is not found
+     */
     public DeleteWatchlistResult handleRequest(DeleteWatchlistRequest request) {
         Watchlist watchlist = watchlistDao.getWatchlist(request.getId());
         if (watchlist == null) {

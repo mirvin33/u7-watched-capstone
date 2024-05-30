@@ -4,9 +4,9 @@ package com.nashss.se.watched.activity.request;
  * Request class for adding content to a watchlist.
  */
 public class AddContentToWatchlistRequest {
-    private final String id; // The ID of the user or session making the request.
-    private final String contentId; // The ID of the content being added to the watchlist.
-    private final boolean queueNext; // Indicates whether the content should be queued next for playback.
+    private final String id;
+    private final String contentId;
+    private final boolean queueNext;
 
     /**
      * Constructs an instance of AddContentToWatchlistRequest.
@@ -61,9 +61,9 @@ public class AddContentToWatchlistRequest {
      * Builder class for constructing AddContentToWatchlistRequest objects.
      */
     public static class Builder {
-        private String id; // The ID of the user or session making the request.
-        private String contentId; // The ID of the content being added to the watchlist.
-        private boolean queueNext; // Indicates whether the content should be queued next for playback.
+        private String id;
+        private String contentId;
+        private boolean queueNext;
 
         /**
          * Sets the ID of the user or session making the request.

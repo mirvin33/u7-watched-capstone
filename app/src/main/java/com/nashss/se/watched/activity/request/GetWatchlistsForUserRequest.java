@@ -5,7 +5,7 @@ package com.nashss.se.watched.activity.request;
  * Request class for retrieving watchlists for a user.
  */
 public class GetWatchlistsForUserRequest {
-    private final String userId; // The ID of the user whose watchlists are being retrieved.
+    private final String userId;
 
     /**
      * Constructs a GetWatchlistsForUserRequest with the specified user ID.
@@ -38,7 +38,7 @@ public class GetWatchlistsForUserRequest {
      * Builder for creating a GetWatchlistsForUserRequest.
      */
     public static class Builder {
-        private String userId; // The ID of the user whose watchlists are being retrieved.
+        private String userId;
 
         /**
          * Sets the ID of the user whose watchlists are being retrieved.

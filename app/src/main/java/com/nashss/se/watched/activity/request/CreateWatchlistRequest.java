@@ -6,8 +6,8 @@ import java.util.List;
  * Request class for creating a new watchlist.
  */
 public class CreateWatchlistRequest {
-    private final String title; // The title of the new watchlist.
-    private final String userId; // The ID of the user creating the watchlist.
+    private final String title;
+    private final String userId;
 
     /**
      * Constructs an instance of CreateWatchlistRequest.
@@ -51,8 +51,8 @@ public class CreateWatchlistRequest {
      * Builder class for constructing CreateWatchlistRequest objects.
      */
     public static class Builder {
-        private String title; // The title of the new watchlist.
-        private String userId; // The ID of the user creating the watchlist.
+        private String title;
+        private String userId;
 
         /**
          * Sets the title of the new watchlist.

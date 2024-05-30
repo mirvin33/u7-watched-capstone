@@ -18,42 +18,85 @@ public class Watchlist {
     private String userId;
     private List<String> contentList;
 
+    /**
+     * Constructs a Watchlist with an empty content list.
+     */
     public Watchlist() {
         this.contentList = new ArrayList<>();
     }
 
+    /**
+     * Gets the ID of the watchlist.
+     *
+     * @return the ID of the watchlist
+     */
     @DynamoDBHashKey(attributeName = "id")
     public String getId() {
         return id;
     }
 
+    /**
+     * Sets the ID of the watchlist.
+     *
+     * @param id the ID to set
+     */
     public void setId(String id) {
         this.id = id;
     }
 
+    /**
+     * Gets the title of the watchlist.
+     *
+     * @return the title of the watchlist
+     */
     @DynamoDBAttribute(attributeName = "watchlistTitle")
     public String getTitle() {
         return title;
     }
 
+    /**
+     * Sets the title of the watchlist.
+     *
+     * @param title the title to set
+     */
     public void setTitle(String title) {
         this.title = title;
     }
 
+    /**
+     * Gets the user ID associated with the watchlist.
+     *
+     * @return the user ID
+     */
     @DynamoDBAttribute(attributeName = "userId")
     public String getUserId() {
         return userId;
     }
 
+    /**
+     * Sets the user ID associated with the watchlist.
+     *
+     * @param userId the user ID to set
+     */
     public void setUserId(String userId) {
         this.userId = userId;
     }
 
+    /**
+     * Gets the list of content IDs in the watchlist.
+     *
+     * @return the list of content IDs
+     */
     @DynamoDBAttribute(attributeName = "contentList")
     public List<String> getContentList() {
         return contentList;
     }
 
+    /**
+     * Sets the list of content IDs in the watchlist.
+     *
+     * @param contentList the list of content IDs to set
+     */
     public void setContentList(List<String> contentList) {
         this.contentList = contentList;
     }
