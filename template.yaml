@@ -206,7 +206,7 @@ Resources:
             Statement:
             - Effect: Allow
               Action: dynamodb:*
-              Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/appointments"
+              Resource: !GetAtt WatchlistTable.Arn
 
 
 #  -----------------------------------------------------
@@ -347,9 +347,20 @@ Resources:
       AttributeDefinitions:
         - AttributeName: "id"
           AttributeType: "S"
+        - AttributeName: "userId"
+          AttributeType: "S"
       KeySchema:
         - AttributeName: "id"
           KeyType: "HASH"
+      GlobalSecondaryIndexes:
+        - IndexName: "userId-watchlistId-index"
+          KeySchema:
+            - AttributeName: "userId"
+              KeyType: "HASH"
+            - AttributeName: "id"
+              KeyType: "RANGE"
+          Projection:
+            ProjectionType: "ALL"
       BillingMode: "PAY_PER_REQUEST"
       TableName: "watchlist"
 
@@ -363,11 +374,24 @@ Resources:
           AttributeType: "S"
         - AttributeName: "watchlistId"
           AttributeType: "S"
+        - AttributeName: "title"
+          AttributeType: "S"
+        - AttributeName: "userId"
+          AttributeType: "S"
       KeySchema:
         - AttributeName: "contentId"
           KeyType: "HASH"
         - AttributeName: "title"
           KeyType: "RANGE"
+      GlobalSecondaryIndexes:
+        - IndexName: "userId-watchlistId-index"
+          KeySchema:
+            - AttributeName: "userId"
+              KeyType: "HASH"
+            - AttributeName: "watchlistId"
+              KeyType: "RANGE"
+          Projection:
+            ProjectionType: "ALL"
       BillingMode: "PAY_PER_REQUEST"
       TableName: "content"
 

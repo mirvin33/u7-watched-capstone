@@ -7,7 +7,7 @@
           "watchlistId": { "N": "1" },
           "title": { "S": "Guardians of the Galaxy" },
           "streamService": { "S": "Disney+" },
-          "watched": { "B": "false" }
+          "watched": { "BOOL": false }
         }
       }
     },
@@ -18,89 +18,97 @@
           "watchlistId": { "N": "1" },
           "title": { "S": "Split" },
           "streamService": { "S": "Netflix" },
-          "watched": { "B": "true" }
+          "watched": { "BOOL": true }
         }
       }
-    }, {
+    },
+    {
       "PutRequest": {
         "Item": {
           "contentId": { "S": "3" },
           "watchlistId": { "N": "1" },
           "title": { "S": "Fantastic Beasts and Where to Find Them" },
           "streamService": { "S": "Max" },
-          "watched": { "B": "false" }
+          "watched": { "BOOL": false }
         }
       }
-    }, {
+    },
+    {
       "PutRequest": {
         "Item": {
           "contentId": { "S": "4" },
           "watchlistId": { "N": "1" },
           "title": { "S": "The Secret Life of Pets" },
           "streamService": { "S": "Netflix" },
-          "watched": { "B": "false" }
+          "watched": { "BOOL": false }
         }
       }
-    }, {
+    },
+    {
       "PutRequest": {
         "Item": {
           "contentId": { "S": "5" },
           "watchlistId": { "N": "1" },
           "title": { "S": "Halo" },
           "streamService": { "S": "Paramount+" },
-          "watched": { "B": "false" }
+          "watched": { "BOOL": false }
         }
       }
-    }, {
+    },
+    {
       "PutRequest": {
         "Item": {
           "contentId": { "S": "6" },
           "watchlistId": { "N": "1" },
           "title": { "S": "The Mandalorian" },
           "streamService": { "S": "Disney+" },
-          "watched": { "B": "true" }
+          "watched": { "BOOL": true }
         }
       }
-    }, {
+    },
+    {
       "PutRequest": {
         "Item": {
           "contentId": { "S": "7" },
           "watchlistId": { "N": "1" },
           "title": { "S": "Independence Day" },
           "streamService": { "S": "Peacock" },
-          "watched": { "B": "false" }
+          "watched": { "BOOL": false }
         }
       }
-    }, {
+    },
+    {
       "PutRequest": {
         "Item": {
           "contentId": { "S": "8" },
           "watchlistId": { "N": "1" },
           "title": { "S": "Passengers" },
           "streamService": { "S": "AmazonPrime" },
-          "watched": { "B": "false" }
+          "watched": { "BOOL": false }
         }
       }
-    }, {
+    },
+    {
       "PutRequest": {
         "Item": {
           "contentId": { "S": "9" },
           "watchlistId": { "N": "1" },
           "title": { "S": "Raya the Last Dragon" },
           "streamService": { "S": "Disney+" },
-          "watched": { "B": "true" }
+          "watched": { "BOOL": true }
         }
       }
-    }, {
+    },
+    {
       "PutRequest": {
         "Item": {
           "contentId": { "S": "10" },
           "watchlistId": { "N": "1" },
           "title": { "S": "Teenage Mutant Ninja Turtles" },
           "streamService": { "S": "Netflix" },
-          "watched": { "B": "false" }
+          "watched": { "BOOL": false }
         }
       }
     }
-    ]
+  ]
 }
