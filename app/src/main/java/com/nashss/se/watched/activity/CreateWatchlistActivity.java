@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 
 
+
 /**
  * Activity to create a new watchlist.
  */
