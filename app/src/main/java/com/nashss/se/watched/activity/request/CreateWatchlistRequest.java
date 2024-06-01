@@ -14,7 +14,7 @@ public class CreateWatchlistRequest {
      * @param title The title of the new watchlist.
      * @param userId The ID of the user creating the watchlist.
      */
-    private CreateWatchlistRequest(String title, String userId) {
+    public CreateWatchlistRequest(String title, String userId) {
         this.title = title;
         this.userId = userId;
     }

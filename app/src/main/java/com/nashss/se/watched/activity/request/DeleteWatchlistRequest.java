@@ -11,7 +11,7 @@ public class DeleteWatchlistRequest {
      *
      * @param id The ID of the watchlist to be deleted.
      */
-    private DeleteWatchlistRequest(String id) {
+    public DeleteWatchlistRequest(String id) {
         this.id = id;
     }
 

@@ -15,7 +15,7 @@ public class AddContentToWatchlistRequest {
      * @param contentId The ID of the content being added to the watchlist.
      * @param queueNext Indicates whether the content should be queued next for playback.
      */
-    private AddContentToWatchlistRequest(String id, String contentId, boolean queueNext) {
+    public AddContentToWatchlistRequest(String id, String contentId, boolean queueNext) {
         this.id = id;
         this.contentId = contentId;
         this.queueNext = queueNext;
