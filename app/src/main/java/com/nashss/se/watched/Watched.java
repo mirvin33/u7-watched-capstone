@@ -16,7 +16,7 @@ package com.nashss.se.watched;
 //import java.util.List;
 //
 //
-//
+
 public class Watched {
 //    public void main(String[] args) {
 //        AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard().build();

@@ -1,4 +1,4 @@
-package com.nashss.se.watched;
+package com.nashss.se.watched.services;
 
 import com.nashss.se.watched.dynamodb.ContentDao;
 import com.nashss.se.watched.dynamodb.WatchlistDao;
