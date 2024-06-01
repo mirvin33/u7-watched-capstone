@@ -2,9 +2,11 @@ package com.nashss.se.watched.activity;
 
 import com.nashss.se.watched.activity.request.UpdateWatchlistRequest;
 import com.nashss.se.watched.activity.results.UpdateWatchlistResult;
+import com.nashss.se.watched.converters.WatchlistConverter;
 import com.nashss.se.watched.dynamodb.WatchlistDao;
 import com.nashss.se.watched.dynamodb.models.Watchlist;
 import com.nashss.se.watched.exceptions.WatchlistNotFoundException;
+import com.nashss.se.watched.models.WatchlistModel;
 
 import javax.inject.Inject;
 
@@ -40,8 +42,10 @@ public class UpdateWatchlistActivity {
         watchlist.setTitle(request.getTitle());
         watchlistDao.saveWatchlist(watchlist);
 
+        WatchlistModel watchlistModel = WatchlistConverter.toWatchlistModel(watchlist);
+
         return UpdateWatchlistResult.builder()
-                .withWatchlist(watchlist)
+                .withWatchlist(watchlistModel)
                 .build();
     }
 }

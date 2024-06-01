@@ -1,20 +1,20 @@
 package com.nashss.se.watched.activity.results;
 
-import com.nashss.se.watched.dynamodb.models.Watchlist;
 import com.nashss.se.watched.models.WatchlistModel;
+
 
 /**
  * Result class for updating a watchlist.
  */
 public class UpdateWatchlistResult {
-    private final Watchlist watchlist;
+    private final WatchlistModel watchlist;
 
     /**
      * Constructs an UpdateWatchlistResult object with the provided watchlist.
      *
      * @param watchlist the updated watchlist
      */
-    private UpdateWatchlistResult(Watchlist watchlist) {
+    private UpdateWatchlistResult(WatchlistModel watchlist) {
         this.watchlist = watchlist;
     }
 
@@ -33,14 +33,17 @@ public class UpdateWatchlistResult {
      * @return the updated watchlist
      */
     public WatchlistModel getWatchlist() {
-        return WatchlistModel.builder().build();
+        return watchlist;
     }
 
     /**
      * Builder class for constructing UpdateWatchlistResult objects.
      */
     public static class Builder {
-        private Watchlist watchlist;
+        private WatchlistModel watchlist;
+
+        private Builder() {
+        }
 
         /**
          * Sets the updated watchlist for the result being built.
@@ -48,7 +51,7 @@ public class UpdateWatchlistResult {
          * @param watchlist the updated watchlist
          * @return the builder instance for method chaining
          */
-        public Builder withWatchlist(Watchlist watchlist) {
+        public Builder withWatchlist(WatchlistModel watchlist) {
             this.watchlist = watchlist;
             return this;
         }
