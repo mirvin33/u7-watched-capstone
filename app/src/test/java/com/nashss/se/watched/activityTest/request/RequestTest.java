@@ -46,6 +46,7 @@ public class RequestTest {
         assertEquals("watchlist123", request.getId());
     }
 
+
     @Test
     public void testGetWatchlistRequest() {
         GetWatchlistRequest request = GetWatchlistRequest.builder()
