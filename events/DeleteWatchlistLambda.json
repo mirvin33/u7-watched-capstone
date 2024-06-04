@@ -1,0 +1,4 @@
+{
+  "path": "/watchlist/{id}/delete",
+  "httpMethod": "DELETE"
+}

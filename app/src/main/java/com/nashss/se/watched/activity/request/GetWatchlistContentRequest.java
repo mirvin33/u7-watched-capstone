@@ -13,7 +13,7 @@ public class GetWatchlistContentRequest {
      *
      * @param id The ID of the watchlist for which content is requested.
      */
-    private GetWatchlistContentRequest(String id) {
+    public GetWatchlistContentRequest(String id) {
         this.id = id;
     }
 
