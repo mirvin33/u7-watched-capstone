@@ -374,8 +374,6 @@ Resources:
           AttributeType: "S"
         - AttributeName: "watchlistId"
           AttributeType: "S"
-        - AttributeName: "title"
-          AttributeType: "S"
         - AttributeName: "userId"
           AttributeType: "S"
       KeySchema:
