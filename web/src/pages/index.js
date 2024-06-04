@@ -1,4 +1,4 @@
-import HealthManagementClient from '../api/healthManagementClient';
+import MusicPlaylistClient from '../api/musicPlaylistClient';
 import Header from '../components/header';
 import BindingClass from "../util/bindingClass";
 

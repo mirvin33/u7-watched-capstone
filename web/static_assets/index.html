@@ -1,38 +1,32 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Watched</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-  <style>
-    body,h1 {font-family: "Raleway", sans-serif}
-    body, html {height: 100%}
-    .bgimg {
-      background-image: url('');
-      min-height: 100%;
-      background-position: center;
-      background-size: cover;
-      background-color: black;
-    }
-  </style>
-</head>
-<body>
 
-<div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
-  <div class="w3-display-topleft w3-padding-large w3-xlarge">
-    All your Watchlists, All in one Place
-  </div>
-  <div class="w3-display-middle">
-    <h1 class="w3-jumbo w3-animate-top">Watched</h1>
-    <hr class="w3-border-grey" style="margin:auto;width:40%">
-    <p class="w3-large w3-center ">Coming Soon</p>
-  </div>
-  <div class="w3-display-bottomleft w3-padding-large">
+<head>
+  <script type="text/javascript" src="assets/searchPlaylists.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body class="background">
+<header class="header" id="header"></header>
+<div class="card">
+  <h2>Search Playlists</h2>
+  <form class="card-content" id="search-playlists-form">
+    <p class="form-field">
+      <label>Search by name or tag</label>
+      <input type="text" class="validated-field" id="search-criteria" placeholder="smooth-jamz" autofocus>
+      <sub>Search is case-sensitive and tags must match exactly.</sub>
+    </p>
+  </form>
+  <p class="button-group">
+    <a href="#" class="button" id="search-btn">Search</a>
+    <a href="createPlaylist.html" class="button">New Playlist</a>
+  </p>
+</div>
+<div class="card hidden" id='search-results-container'>
+  <h3>Results for <span id="search-criteria-display"></span></h3>
+  <div id="search-results-display">
   </div>
 </div>
-
 </body>
-</html>
 
+</html>
