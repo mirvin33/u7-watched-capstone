@@ -1,0 +1,4 @@
+{
+  "path": "/watchlist/{id}",
+  "httpMethod": "GET"
+}

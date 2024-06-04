@@ -1,4 +1,4 @@
-import healthManagementClient from '../api/healthManagementClient';
+import MusicPlaylistClient from '../api/musicPlaylistClient';
 import BindingClass from "../util/bindingClass";
 
 /**
@@ -14,17 +14,14 @@ export default class Header extends BindingClass {
         ];
         this.bindClassMethods(methodsToBind, this);
 
-        this.client = new HealthManagementClient();
+        this.client = new MusicPlaylistClient();
     }
 
     /**
      * Add the header to the page.
      */
-    
     async addHeaderToPage() {
-        console.log('Adding header to page...');
         const currentUser = await this.client.getIdentity();
-        console.log('Current user:', currentUser);
 
         const siteTitle = this.createSiteTitle();
         const userInfo = this.createUserInfoForHeader(currentUser);
@@ -32,14 +29,13 @@ export default class Header extends BindingClass {
         const header = document.getElementById('header');
         header.appendChild(siteTitle);
         header.appendChild(userInfo);
-        console.log('Header added successfully.');
     }
 
     createSiteTitle() {
         const homeButton = document.createElement('a');
         homeButton.classList.add('header_home');
         homeButton.href = 'index.html';
-        homeButton.innerText = 'Home';
+        homeButton.innerText = 'Playlists';
 
         const siteTitle = document.createElement('div');
         siteTitle.classList.add('site-title');

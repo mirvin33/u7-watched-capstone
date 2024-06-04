@@ -14,7 +14,7 @@ public class UpdateWatchlistRequest {
      * @param id    The ID of the watchlist to update.
      * @param title The new title for the watchlist.
      */
-    private UpdateWatchlistRequest(String id, String title) {
+    public UpdateWatchlistRequest(String id, String title) {
         this.id = id;
         this.title = title;
     }
