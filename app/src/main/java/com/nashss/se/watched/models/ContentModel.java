@@ -1,6 +1,7 @@
 package com.nashss.se.watched.models;
 
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * POJO for content.
@@ -23,7 +24,7 @@ public class ContentModel {
      */
     public ContentModel(String contentId, String watchlistId, String title, String userId, String streamService,
                         Boolean watched) {
-        this.contentId = contentId;
+        this.contentId = contentId != null ? contentId : UUID.randomUUID().toString();
         this.watchlistId = watchlistId;
         this.title = title;
         this.userId = userId;
@@ -55,12 +56,6 @@ public class ContentModel {
         return watched;
     }
 
-    /**
-     * Indicates whether some other object is "equal to" this one.
-     *
-     * @param o the reference object with which to compare
-     * @return true if this object is the same as the obj argument; false otherwise
-     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -76,27 +71,23 @@ public class ContentModel {
                 Objects.equals(watched, that.watched);
     }
 
-    /**
-     * Returns a hash code value for the object.
-     *
-     * @return a hash code value for this object
-     */
     @Override
     public int hashCode() {
         return Objects.hash(contentId, watchlistId, title, userId, streamService, watched);
     }
 
     /**
-     * Creates a builder for ContentModel.
+     * Returns a new builder instance to construct a ContentModel object.
      *
-     * @return a new Builder instance
+     * @return A new instance of the ContentModel builder.
      */
     public static Builder builder() {
         return new Builder();
     }
 
     /**
-     * Builder class for ContentModel.
+     * Builder pattern for constructing ContentModel instances.
+     * Provides methods to set individual attributes of the ContentModel.
      */
     public static class Builder {
         private String contentId;
@@ -109,8 +100,8 @@ public class ContentModel {
         /**
          * Sets the contentId for the ContentModel being built.
          *
-         * @param pContentId the unique identifier for the content
-         * @return the current Builder instance
+         * @param pContentId The unique identifier for the content.
+         * @return The builder instance for method chaining.
          */
         public Builder withContentId(String pContentId) {
             this.contentId = pContentId;
@@ -120,8 +111,8 @@ public class ContentModel {
         /**
          * Sets the watchlistId for the ContentModel being built.
          *
-         * @param pWatchlistId the identifier for the watchlist containing this content
-         * @return the current Builder instance
+         * @param pWatchlistId The identifier for the watchlist containing the content.
+         * @return The builder instance for method chaining.
          */
         public Builder withWatchlistId(String pWatchlistId) {
             this.watchlistId = pWatchlistId;
@@ -131,8 +122,8 @@ public class ContentModel {
         /**
          * Sets the title for the ContentModel being built.
          *
-         * @param pTitle the title of the show or movie
-         * @return the current Builder instance
+         * @param pTitle The title of the content.
+         * @return The builder instance for method chaining.
          */
         public Builder withTitle(String pTitle) {
             this.title = pTitle;
@@ -142,8 +133,8 @@ public class ContentModel {
         /**
          * Sets the userId for the ContentModel being built.
          *
-         * @param pUserId the identifier of the user (usually an email)
-         * @return the current Builder instance
+         * @param pUserId The identifier of the user associated with the content.
+         * @return The builder instance for method chaining.
          */
         public Builder withUserId(String pUserId) {
             this.userId = pUserId;
@@ -151,10 +142,9 @@ public class ContentModel {
         }
 
         /**
-         * Sets the streamService for the ContentModel being built.
          *
-         * @param pStreamService the streaming service where the content is available
-         * @return the current Builder instance
+         * @param pStreamService The streaming service for the content.
+         * @return The builder instance for method chaining.
          */
         public Builder withStreamService(String pStreamService) {
             this.streamService = pStreamService;
@@ -162,10 +152,9 @@ public class ContentModel {
         }
 
         /**
-         * Sets the watched status for the ContentModel being built.
          *
-         * @param pWatched whether the content has been watched
-         * @return the current Builder instance
+         * @param pWatched Boolean for if show has been watched.
+         * @return The builder instance for method chaining.
          */
         public Builder withWatched(Boolean pWatched) {
             this.watched = pWatched;
@@ -173,9 +162,9 @@ public class ContentModel {
         }
 
         /**
-         * Builds and returns a ContentModel instance.
+         * Constructs a ContentModel object based on the set parameters.
          *
-         * @return a new ContentModel instance
+         * @return The constructed ContentModel instance.
          */
         public ContentModel build() {
             return new ContentModel(contentId, watchlistId, title, userId, streamService, watched);

@@ -12,7 +12,7 @@ public class GetWatchlistsForUserRequest {
      *
      * @param userId the ID of the user
      */
-    private GetWatchlistsForUserRequest(String userId) {
+    public GetWatchlistsForUserRequest(String userId) {
         this.userId = userId;
     }
 
