@@ -1,4 +1,4 @@
-import MusicPlaylistClient from '../api/musicPlaylistClient';
+import WatchedClient from '../api/watchedClient';
 import BindingClass from "../util/bindingClass";
 
 /**
@@ -10,11 +10,11 @@ export default class Header extends BindingClass {
 
         const methodsToBind = [
             'addHeaderToPage', 'createSiteTitle', 'createUserInfoForHeader',
-            'createLoginButton', 'createLoginButton', 'createLogoutButton'
+            'createLoginButton', 'createLogoutButton'
         ];
         this.bindClassMethods(methodsToBind, this);
 
-        this.client = new MusicPlaylistClient();
+        this.client = new WatchedClient();
     }
 
     /**
@@ -35,7 +35,7 @@ export default class Header extends BindingClass {
         const homeButton = document.createElement('a');
         homeButton.classList.add('header_home');
         homeButton.href = 'index.html';
-        homeButton.innerText = 'Playlists';
+        homeButton.innerText = 'Watched';
 
         const siteTitle = document.createElement('div');
         siteTitle.classList.add('site-title');
@@ -71,10 +71,13 @@ export default class Header extends BindingClass {
         button.href = '#';
         button.innerText = text;
 
-        button.addEventListener('click', async () => {
+        button.addEventListener('click', async (event) => {
+            event.preventDefault();
             await clickHandler();
+            window.location.reload();
         });
 
         return button;
     }
 }
+
