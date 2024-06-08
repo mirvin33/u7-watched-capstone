@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script type="text/javascript" src="assets/getWatchlist.js"></script>]
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>My Watchlist</title>
+</head>
+
+<body class="background">
+    <header class="header" id="header"></header>
+
+    <div class="card">
+        <h2>My Watchlist</h2>
+        <form id="watchlist-form" class="card-content">
+            <p class="hidden error" id="error-message"></p>
+            <p class="form-field">
+                <label for="watchlist-id">Watchlist ID</label>
+                <input type="text" required class="validated-field" id="watchlist-id" placeholder="Enter Watchlist ID" autofocus>
+            </p>
+            <a href="#" class="button" id="get-watchlist">Get Watchlist</a>
+        </form>
+    </div>
+
+    <div class="card" id="watchlist-display" style="display: none;">
+        <h2 id="watchlist-name"></h2>
+        <h3>Created by: <span id="watchlist-owner"></span></h3>
+        <div class="tags" id="tags"></div>
+        <ol id="content-list"></ol>
+    </div>
+</body>
+</html>

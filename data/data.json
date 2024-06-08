@@ -4,8 +4,9 @@
       "PutRequest": {
         "Item": {
           "contentId": { "S": "1" },
-          "watchlistId": { "N": "1" },
+          "watchlistId": { "S": "1" },
           "title": { "S": "Guardians of the Galaxy" },
+          "userId": { "S": "user345@email.com"},
           "streamService": { "S": "Disney+" },
           "watched": { "BOOL": false }
         }
@@ -15,8 +16,9 @@
       "PutRequest": {
         "Item": {
           "contentId": { "S": "2" },
-          "watchlistId": { "N": "1" },
+          "watchlistId": { "S": "1" },
           "title": { "S": "Split" },
+          "userId": { "S": "user345@email.com"},
           "streamService": { "S": "Netflix" },
           "watched": { "BOOL": true }
         }
@@ -26,8 +28,9 @@
       "PutRequest": {
         "Item": {
           "contentId": { "S": "3" },
-          "watchlistId": { "N": "1" },
+          "watchlistId": { "S": "1" },
           "title": { "S": "Fantastic Beasts and Where to Find Them" },
+          "userId": { "S": "user345@email.com"},
           "streamService": { "S": "Max" },
           "watched": { "BOOL": false }
         }
@@ -37,8 +40,9 @@
       "PutRequest": {
         "Item": {
           "contentId": { "S": "4" },
-          "watchlistId": { "N": "1" },
+          "watchlistId": { "S": "1" },
           "title": { "S": "The Secret Life of Pets" },
+          "userId": { "S": "user345@email.com"},
           "streamService": { "S": "Netflix" },
           "watched": { "BOOL": false }
         }
@@ -48,8 +52,9 @@
       "PutRequest": {
         "Item": {
           "contentId": { "S": "5" },
-          "watchlistId": { "N": "1" },
+          "watchlistId": { "S": "1" },
           "title": { "S": "Halo" },
+          "userId": { "S": "user345@email.com"},
           "streamService": { "S": "Paramount+" },
           "watched": { "BOOL": false }
         }
@@ -59,8 +64,9 @@
       "PutRequest": {
         "Item": {
           "contentId": { "S": "6" },
-          "watchlistId": { "N": "1" },
+          "watchlistId": { "S": "1" },
           "title": { "S": "The Mandalorian" },
+          "userId": { "S": "user345@email.com"},
           "streamService": { "S": "Disney+" },
           "watched": { "BOOL": true }
         }
@@ -70,8 +76,9 @@
       "PutRequest": {
         "Item": {
           "contentId": { "S": "7" },
-          "watchlistId": { "N": "1" },
+          "watchlistId": { "S": "1" },
           "title": { "S": "Independence Day" },
+          "userId": { "S": "user345@email.com"},
           "streamService": { "S": "Peacock" },
           "watched": { "BOOL": false }
         }
@@ -81,8 +88,9 @@
       "PutRequest": {
         "Item": {
           "contentId": { "S": "8" },
-          "watchlistId": { "N": "1" },
+          "watchlistId": { "S": "1" },
           "title": { "S": "Passengers" },
+          "userId": { "S": "user345@email.com"},
           "streamService": { "S": "AmazonPrime" },
           "watched": { "BOOL": false }
         }
@@ -92,8 +100,9 @@
       "PutRequest": {
         "Item": {
           "contentId": { "S": "9" },
-          "watchlistId": { "N": "1" },
+          "watchlistId": { "S": "1" },
           "title": { "S": "Raya the Last Dragon" },
+          "userId": { "S": "user345@email.com"},
           "streamService": { "S": "Disney+" },
           "watched": { "BOOL": true }
         }
@@ -103,8 +112,9 @@
       "PutRequest": {
         "Item": {
           "contentId": { "S": "10" },
-          "watchlistId": { "N": "1" },
+          "watchlistId": { "S": "1" },
           "title": { "S": "Teenage Mutant Ninja Turtles" },
+          "userId": { "S": "user345@email.com"},
           "streamService": { "S": "Netflix" },
           "watched": { "BOOL": false }
         }

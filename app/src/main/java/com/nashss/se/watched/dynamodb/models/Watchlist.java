@@ -1,8 +1,6 @@
 package com.nashss.se.watched.dynamodb.models;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+import com.amazonaws.services.dynamodbv2.datamodeling.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,14 +14,14 @@ public class Watchlist {
     private String id;
     private String title;
     private String userId;
-    private List<String> contentList;
+//    private List<String> contentList;
 
     /**
      * Constructs a Watchlist with an empty content list.
      */
-    public Watchlist() {
-        this.contentList = new ArrayList<>();
-    }
+//    public Watchlist() {
+//        this.contentList = new ArrayList<>();
+//    }
 
     /**
      * Gets the ID of the watchlist.
@@ -49,7 +47,7 @@ public class Watchlist {
      *
      * @return the title of the watchlist
      */
-    @DynamoDBAttribute(attributeName = "watchlistTitle")
+    @DynamoDBAttribute(attributeName = "title")
     public String getTitle() {
         return title;
     }
@@ -68,7 +66,7 @@ public class Watchlist {
      *
      * @return the user ID
      */
-    @DynamoDBAttribute(attributeName = "userId")
+    @DynamoDBIndexHashKey(globalSecondaryIndexName = "userId-watchlistId-index", attributeName = "userId")
     public String getUserId() {
         return userId;
     }
@@ -87,41 +85,41 @@ public class Watchlist {
      *
      * @return the list of content IDs
      */
-    @DynamoDBAttribute(attributeName = "contentList")
-    public List<String> getContentList() {
-        return contentList;
-    }
-
-    /**
-     * Sets the list of content IDs in the watchlist.
-     *
-     * @param contentList the list of content IDs to set
-     */
-    public void setContentList(List<String> contentList) {
-        this.contentList = contentList;
-    }
-
-    /**
-     * Adds a content ID to the watchlist.
-     *
-     * @param contentId the content ID to add
-     * @param queueNext if true, adds the content to the beginning of the list; otherwise, adds to the end
-     */
-    public void addContent(String contentId, boolean queueNext) {
-        if (queueNext) {
-            this.contentList.add(0, contentId);
-        } else {
-            this.contentList.add(contentId);
-        }
-    }
-
-    /**
-     * Removes a content ID from the watchlist.
-     *
-     * @param contentId the content ID to remove
-     */
-    public void removeContent(String contentId) {
-        this.contentList.remove(contentId);
-    }
+//    @DynamoDBAttribute(attributeName = "contentList")
+//    public List<String> getContentList() {
+//        return contentList;
+//    }
+//
+//    /**
+//     * Sets the list of content IDs in the watchlist.
+//     *
+//     * @param contentList the list of content IDs to set
+//     */
+//    public void setContentList(List<String> contentList) {
+//        this.contentList = contentList;
+//    }
+//
+//    /**
+//     * Adds a content ID to the watchlist.
+//     *
+//     * @param contentId the content ID to add
+//     * @param queueNext if true, adds the content to the beginning of the list; otherwise, adds to the end
+//     */
+//    public void addContent(String contentId, boolean queueNext) {
+//        if (queueNext) {
+//            this.contentList.add(0, contentId);
+//        } else {
+//            this.contentList.add(contentId);
+//        }
+//    }
+//
+//    /**
+//     * Removes a content ID from the watchlist.
+//     *
+//     * @param contentId the content ID to remove
+//     */
+//    public void removeContent(String contentId) {
+//        this.contentList.remove(contentId);
+//    }
 }
 

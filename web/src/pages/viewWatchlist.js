@@ -21,14 +21,14 @@ class ViewWatchlist extends BindingClass {
      * Once the client is loaded, get the watchlist metadata and title list.
      */
     async clientLoaded() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const watchlistId = urlParams.get('id');
-        document.getElementById('watchlist-name').innerText = "Loading Watchlist ...";
-        const watchlist = await this.client.getWatchlist(watchlistId);
-        this.dataStore.set('watchlist', watchlist);
-        document.getElementById('titles').innerText = "(loading titles...)";
-        const titles = await this.client.getWatchlistTitles(watchlistId);
-        this.dataStore.set('titles', titles);
+        // const urlParams = new URLSearchParams(window.location.search);
+        // const watchlistId = urlParams.get('id');
+        // document.getElementById('watchlist-name').innerText = "Loading Watchlist ...";
+        // const watchlist = await this.client.getWatchlist(watchlistId);
+        // this.dataStore.set('watchlist', watchlist);
+        // document.getElementById('titles').innerText = "(loading titles...)";
+        // const titles = await this.client.getWatchlistTitles(watchlistId);
+        // this.dataStore.set('titles', titles);
     }
 
     /**

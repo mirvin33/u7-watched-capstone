@@ -65,19 +65,17 @@ export default class Header extends BindingClass {
         return this.createButton(`Logout: ${currentUser.name}`, this.client.logout);
     }
 
-    createButton(text, clickHandler) {
-        const button = document.createElement('a');
-        button.classList.add('button');
-        button.href = '#';
-        button.innerText = text;
+        createButton(text, clickHandler) {
+            const button = document.createElement('a');
+            button.classList.add('button');
+            button.href = '#';
+            button.innerText = text;
 
-        button.addEventListener('click', async (event) => {
-            event.preventDefault();
-            await clickHandler();
-            window.location.reload();
-        });
+            button.addEventListener('click', async () => {
+                await clickHandler();
+            });
 
-        return button;
+            return button;
     }
 }
 

@@ -206,7 +206,14 @@ Resources:
             Statement:
             - Effect: Allow
               Action: dynamodb:*
-              Resource: !GetAtt WatchlistTable.Arn
+              Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/watchlist"
+        - PolicyName: 'AccessContenTable'
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+            - Effect: Allow
+              Action: dynamodb:*
+              Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/content"      
 
 
 #  -----------------------------------------------------
@@ -216,22 +223,24 @@ Resources:
   GetWatchlistLambda:
     Type: AWS::Serverless::Function
     Properties:
-      Role: !GetAtt AccessRole.Arn
-      CodeUri: app
-      Handler: com.nashss.se.watched.lambda.GetWatchlistLambda::handleRequest
-      Runtime: java11
-      Architectures:
-        - x86_64
-      MemorySize: 512
-      Environment:
-        Variables:
-          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-      Events:
-        Watched:
-          Type: Api
-          Properties:
-            Path: /watchlist/{id}
-            Method: get
+       Role: !GetAtt AccessRole.Arn
+       CodeUri: app
+       Handler: com.nashss.se.watched.lambda.GetWatchlistLambda::handleRequest
+       Runtime: java11
+       Architectures:
+         - x86_64
+       MemorySize: 512
+       Environment:
+         Variables:
+           JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+       Events:
+         Watched:
+           Type: Api
+           Properties:
+             Path: /watchlist/{id}
+             Method: get
+             Auth:
+              Authorizer: 'NONE'
 
   CreateWatchlistLambda:
     Type: AWS::Serverless::Function
@@ -270,7 +279,7 @@ Resources:
         UpdateWatchlist:
           Type: Api
           Properties:
-            Path: /watchlist/{userId}/update/{contentId}
+            Path: /watchlist/{id}/update/{contentId}
             Method: put
 
   DeleteWatchlistLambda:
@@ -322,53 +331,50 @@ Resources:
     Type: AWS::DynamoDB::Table
     Properties:
       AttributeDefinitions:
-        - AttributeName: "id"
-          AttributeType: "S"
-        - AttributeName: "userId"
-          AttributeType: "S"
+      - AttributeName: id
+        AttributeType: S
+      - AttributeName: userId
+        AttributeType: S
       KeySchema:
-        - AttributeName: "id"
-          KeyType: "HASH"
+      - AttributeName: id
+        KeyType: HASH
       GlobalSecondaryIndexes:
-        - IndexName: "userId-watchlistId-index"
-          KeySchema:
-            - AttributeName: "userId"
-              KeyType: "HASH"
-            - AttributeName: "id"
-              KeyType: "RANGE"
-          Projection:
-            ProjectionType: "ALL"
-      BillingMode: "PAY_PER_REQUEST"
-      TableName: "watchlist"
-
+      - IndexName: id-watchlistId-index
+        KeySchema:
+        - AttributeName: userId
+          KeyType: HASH
+        - AttributeName: id
+          KeyType: RANGE
+        Projection:
+          ProjectionType: ALL
+      BillingMode: PAY_PER_REQUEST
+      TableName: watchlist
   ContentTable:
     Type: AWS::DynamoDB::Table
     Properties:
       AttributeDefinitions:
-        - AttributeName: "contentId"
-          AttributeType: "S"
-        - AttributeName: "title"
-          AttributeType: "S"
-        - AttributeName: "watchlistId"
-          AttributeType: "S"
-        - AttributeName: "userId"
-          AttributeType: "S"
+      - AttributeName: contentId
+        AttributeType: S  
+      - AttributeName: watchlistId
+        AttributeType: S
+      - AttributeName: userId
+        AttributeType: S
       KeySchema:
-        - AttributeName: "contentId"
-          KeyType: "HASH"
-        - AttributeName: "title"
-          KeyType: "RANGE"
+      - AttributeName: contentId
+        KeyType: HASH
+      - AttributeName: userId
+        KeyType: RANGE
       GlobalSecondaryIndexes:
-        - IndexName: "userId-watchlistId-index"
-          KeySchema:
-            - AttributeName: "userId"
-              KeyType: "HASH"
-            - AttributeName: "watchlistId"
-              KeyType: "RANGE"
-          Projection:
-            ProjectionType: "ALL"
-      BillingMode: "PAY_PER_REQUEST"
-      TableName: "content"
+      - IndexName: userId-watchlistId-index
+        KeySchema:
+        - AttributeName: userId
+          KeyType: HASH
+        - AttributeName: watchlistId
+          KeyType: RANGE
+        Projection:
+          ProjectionType: ALL
+      BillingMode: PAY_PER_REQUEST
+      TableName: content
 
 ##-----------------------------------------------------
 ## The outputs defined below will be printed

@@ -6,8 +6,9 @@ import com.nashss.se.watched.activity.results.GetWatchlistResult;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import java.util.logging.Logger;
+
 
 /**
  * AWS Lambda function handler for getting a watchlist.
@@ -15,7 +16,7 @@ import java.util.logging.Logger;
 public class GetWatchlistLambda  extends LambdaActivityRunner<GetWatchlistRequest, GetWatchlistResult>
         implements RequestHandler<LambdaRequest<GetWatchlistRequest>, LambdaResponse> {
 
-    private final Logger log = (Logger) LogManager.getLogger();
+    private final Logger log =  LogManager.getLogger();
 
     @Override
     public LambdaResponse handleRequest(LambdaRequest<GetWatchlistRequest> input, Context context) {

@@ -80,7 +80,9 @@ export default class WatchedClient extends BindingClass {
      */
     async getWatchlist(id, errorCallback) {
         try {
-            const response = await this.axiosClient.get(`watchlists/${id}`);
+            console.log("getWatchlist from Client");
+            const response = await this.axiosClient.get(`watchlist/${id}`
+               );
             return response.data.watchlist;
         } catch (error) {
             this.handleError(error, errorCallback)
