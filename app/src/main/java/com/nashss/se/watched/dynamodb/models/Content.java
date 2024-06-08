@@ -7,7 +7,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBIndexRangeKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
 
-@DynamoDBTable(tableName = "Content")
+@DynamoDBTable(tableName = "content")
 public class Content {
 
     private String contentId;
@@ -26,7 +26,8 @@ public class Content {
         this.contentId = contentId;
     }
 
-    @DynamoDBIndexHashKey(globalSecondaryIndexName = "userId-watchlistId-index", attributeName = "watchlistId")
+    @DynamoDBAttribute(attributeName = "watchlistId")
+    @DynamoDBIndexRangeKey(globalSecondaryIndexName = "userId-watchlistId-index")
     public String getWatchlistId() {
         return watchlistId;
     }
@@ -44,7 +45,8 @@ public class Content {
         this.title = title;
     }
 
-    @DynamoDBIndexRangeKey(globalSecondaryIndexName = "userId-watchlistId-index", attributeName = "userId")
+    @DynamoDBAttribute(attributeName = "userId")
+    @DynamoDBIndexHashKey(globalSecondaryIndexName = "userId-watchlistId-index")
     public String getUserId() {
         return userId;
     }

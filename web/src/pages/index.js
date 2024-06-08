@@ -1,4 +1,4 @@
-import MusicPlaylistClient from '../api/musicPlaylistClient';
+import WatchedClient from '../api/watchedClient';
 import Header from '../components/header';
 import BindingClass from "../util/bindingClass";
 
@@ -19,7 +19,7 @@ mount() {
 
         this.header.addHeaderToPage();
 
-        this.client = new HealthManagementClient();
+        this.client = new WatchedClient();
     }
 }
 
