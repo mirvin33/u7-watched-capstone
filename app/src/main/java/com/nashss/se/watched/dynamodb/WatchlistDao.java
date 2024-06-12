@@ -61,7 +61,9 @@ public class WatchlistDao {
      * @return The Watchlist object that was saved
      */
     public Watchlist saveWatchlist(Watchlist watchlist) {
+        System.out.println("Saving watchlist to DynamoDB: " + watchlist);
         this.dynamoDbMapper.save(watchlist);
+        System.out.println("Saved watchlist to DynamoDB: " + watchlist);
         return watchlist;
     }
 

@@ -4,22 +4,42 @@
 <head>
   <script type="text/javascript" src="assets/index.js"></script>
   <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <style>
+    body,h1 {font-family: "Raleway", sans-serif}
+    body, html {height: 100%}
+    .bgimg {
+      min-height: 100%;
+      background-position: center;
+      background-size: cover;
+    }
+    </style>
 </head>
 
 <body class="background">
 <header class="header" id="header"></header>
-<div class="card">
-  <h2>Search Watchlists</h2>
+<div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
+  <div class="w3-display-topleft w3-padding-large w3-xlarge">
+    Welcome
+  </div>
+  <div class="w3-display-middle">
+    <h1 class="w3-jumbo w3-animate-top">Watched</h1>
+    <hr class="w3-border-grey" style="margin:auto;width:40%">
+    <p class="w3-large w3-center">All your shows in once place</p>
+  </div>
+  <div class="w3-display-bottomleft w3-padding-large">
+<!-- <div class="card">
   <form class="card-content" id="search-playlists-form">
-    <p class="form-field">
-      <label>Search by name or tag</label>
-      <input type="text" class="validated-field" id="search-criteria" placeholder="my watchlist" autofocus>
-      <sub>Search is case-sensitive and tags must match exactly.</sub>
+    <p class="form-field"> -->
+      <!-- <label>Search by name or tag</label> -->
+      <!-- <input type="text" class="validated-field" id="search-criteria" placeholder="my watchlist" autofocus> -->
+      <!-- <sub>Search is case-sensitive and tags must match exactly.</sub> -->
     </p>
   </form>
   <p class="button-group">
-    <a href="#" class="button" id="search-btn">Search</a>
-    <a href="getWatchlist.html" class="button">New Watchlist</a>
+    <!-- <a href="#" class="button" id="search-btn">Search</a> -->
+    <a href="getWatchlist.html" class="button">My Watchlist</a>
   </p>
 </div>
 <div class="card hidden" id='search-results-container'>
@@ -28,5 +48,4 @@
   </div>
 </div>
 </body>
-
 </html>

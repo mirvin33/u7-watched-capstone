@@ -13,7 +13,7 @@ public class CreateWatchlistResult {
      *
      * @param watchlist the watchlist to include in the result
      */
-    private CreateWatchlistResult(Watchlist watchlist) {
+    public CreateWatchlistResult(Watchlist watchlist) {
         this.watchlist = watchlist;
     }
 

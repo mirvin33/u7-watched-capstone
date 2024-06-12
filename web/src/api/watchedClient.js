@@ -48,7 +48,6 @@ export default class WatchedClient extends BindingClass {
             if (!isLoggedIn) {
                 return undefined;
             }
-
             return await this.authenticator.getCurrentUserInfo();
         } catch (error) {
             this.handleError(error, errorCallback)
@@ -106,25 +105,24 @@ export default class WatchedClient extends BindingClass {
 
     /**
      * Create a new watchlist owned by the current user.
-     * @param name The name of the watchlist to create.
-     * @param tags Metadata tags to associate with a watchlist.
+     * @param title The name of the watchlist to create.
      * @param errorCallback (Optional) A function to execute if the call fails.
      * @returns The watchlist that has been created.
      */
-    async createWatchlist(name, tags, errorCallback) {
+    async createWatchlist(title, userId, errorCallback) {
         try {
-            const token = await this.getTokenOrThrow("Only authenticated users can create watchlists.");
-            const response = await this.axiosClient.post(`watchlists`, {
-                name: name,
-                tags: tags
-            }, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
+            // const token = await this.getTokenOrThrow("Only authenticated users can create watchlists.");
+            const response = await this.axiosClient.post(`watchlist/create`, {
+                title: title,
+                userId: userId
+            // }, {
+            //     headers: {
+            //         Authorization: `Bearer ${token}`
+            //     }
             });
             return response.data.watchlist;
         } catch (error) {
-            this.handleError(error, errorCallback)
+            this.handleError(error, errorCallback);
         }
     }
 

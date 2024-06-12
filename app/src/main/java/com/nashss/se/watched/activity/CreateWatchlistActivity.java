@@ -37,6 +37,7 @@ public class CreateWatchlistActivity {
      * @throws InvalidAttributeValueException if the watchlist name contains invalid characters
      */
     public CreateWatchlistResult handleRequest(CreateWatchlistRequest request) {
+        System.out.println("Received request to create watchlist: " + request);
         validateWatchlistName(request.getTitle());
 
         Watchlist watchlist = new Watchlist();
@@ -44,6 +45,7 @@ public class CreateWatchlistActivity {
         watchlist.setTitle(request.getTitle());
         watchlist.setUserId(request.getUserId());
 
+        System.out.println("Saving watchlist: " + watchlist);
         watchlistDao.saveWatchlist(watchlist);
 
         WatchlistModel watchlistModel = WatchlistModel.builder()
@@ -52,6 +54,7 @@ public class CreateWatchlistActivity {
                 .withUserId(watchlist.getUserId())
                 .build();
 
+        System.out.println("Created watchlist result: " + watchlistModel);
         return CreateWatchlistResult.builder()
                 .withWatchlist(watchlist)
                 .build();

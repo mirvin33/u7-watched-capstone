@@ -1,79 +1,29 @@
 {
   "watchlist": [
     {
-      "PutRequest": {
-        "Item": {
-          "id": {
-            "S": "1"
-          },
-          "title": {
-            "S": "My Watchlist"
-          },
-          "userId": {
-            "S": "user1@example.com"
-          }
-        }
-      }
+      "id": "1",
+      "title": "My Watchlist",
+      "userId": "user1@example.com"
     },
     {
-      "PutRequest": {
-        "Item": {
-          "id": {
-            "S": "2"
-          },
-          "title": {
-            "S": "Family Movies"
-          },
-          "userId": {
-            "S": "user2@example.com"
-          }
-        }
-      }
+      "id": "2",
+      "title": "Family Movies",
+      "userId": "user2@example.com"
     },
     {
-      "PutRequest": {
-        "Item": {
-          "id": {
-            "S": "3"
-          },
-          "title": {
-            "S": "Sci-Fi Favorites"
-          },
-          "userId": {
-            "S": "user3@example.com"
-          }
-        }
-      }
+      "id": "3",
+      "title": "Sci-Fi Favorites",
+      "userId": "user3@example.com"
     },
     {
-      "PutRequest": {
-        "Item": {
-          "id": {
-            "S": "4"
-          },
-          "title": {
-            "S": "Comedy Classics"
-          },
-          "userId": {
-            "S": "user4@example.com"
-          }
-        }
-      }
+      "id": "4",
+      "title": "Comedy Classics",
+      "userId": "user4@example.com"
     },
     {
-      "PutRequest": {
-        "Item": {
-          "id": {
-            "S": "5"
-          },
-          "title": {
-            "S": "Documentaries"
-          },
-          "userId": {
-            "S": "user5@example.com"
-          }
-        }
-      }
+      "id": "5",
+      "title": "Documentaries",
+      "userId": "user5@example.com"
     }
   ]
 }

@@ -9,9 +9,9 @@ import DataStore from '../util/DataStore';
 class CreateWatchlist extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['mount', 'submit', 'redirectToCreateWatchlist'], this);
+        this.bindClassMethods(['mount', 'submit', 'redirectToWatchlist'], this);
         this.dataStore = new DataStore();
-        this.dataStore.addChangeListener(this.redirectToCreateWatchlist);
+        this.dataStore.addChangeListener(this.redirectToWatchlist);
         this.header = new Header(this.dataStore);
     }
 
@@ -32,40 +32,41 @@ class CreateWatchlist extends BindingClass {
      */
     async submit(evt) {
         evt.preventDefault();
-
+    
         const errorMessageDisplay = document.getElementById('error-message');
         errorMessageDisplay.innerText = ``;
         errorMessageDisplay.classList.add('hidden');
-
+    
         const createButton = document.getElementById('create');
         const origButtonText = createButton.innerText;
-        createButton.innerText = 'Loading...';
-
-        const watchlistName = document.getElementById('watchlist-name').value;
-        const tagsText = document.getElementById('tags').value;
-
-        let tags;
-        if (tagsText.length < 1) {
-            tags = null;
-        } else {
-            tags = tagsText.split(/\s*,\s*/);
-        }
-
-        const watchlist = await this.client.createWatchlist(watchlistName, tags, (error) => {
-            createButton.innerText = origButtonText;
+        createButton.innerText = 'Creating...';
+    
+        const title = document.getElementById('watchlist-title').value;
+        const userId = document.getElementById('user-Id').value;
+        console.log("userId = ", userId);
+        console.log("watchlistName = ", watchlistName);
+    
+        try {
+            // Assuming you have a method in your WatchedClient to save the watchlist to DynamoDB
+            const watchlist = await this.client.saveWatchlistToDynamoDB(title, userId);
+            console.log('Watchlist saved:', watchlist);
+            // Optionally, you can redirect the user to another page after successful creation
+            // window.location.href = 'viewWatchlist.html';
+        } catch (error) {
+            console.error('Error saving watchlist:', error);
             errorMessageDisplay.innerText = `Error: ${error.message}`;
             errorMessageDisplay.classList.remove('hidden');
-        });
-        this.dataStore.set('watchlist', watchlist);
+        }
     }
+
 
     /**
      * When the watchlist is updated in the datastore, redirect to the view watchlist page.
      */
-    redirectToCreateWatchlist() {
+    redirectToWatchlist() {
         const watchlist = this.dataStore.get('watchlist');
-        if (playlist != null) {
-            window.location.href = `/watchlist.html?id=${watchlist.id}`;
+        if (watchlist != null) {
+            window.location.href = `/watchlist/${id}.html?id=${watchlist.id}`;
         }
     }
 }
@@ -78,5 +79,4 @@ const main = async () => {
     createWatchlist.mount();
 };
 
-window.addEventListener('DOMContentLoaded', main);
-
+document.addEventListener('DOMContentLoaded', main);
