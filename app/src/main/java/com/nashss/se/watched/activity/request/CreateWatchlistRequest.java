@@ -1,8 +1,5 @@
 package com.nashss.se.watched.activity.request;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 
 /**
  * Request class for creating a new watchlist.
@@ -17,9 +14,8 @@ public class CreateWatchlistRequest {
      * @param title The title of the new watchlist.
      * @param userId The ID of the user creating the watchlist.
      */
-    @JsonCreator
-    public CreateWatchlistRequest( @JsonProperty("title") String title,
-    @JsonProperty("userId") String userId) {
+
+    public CreateWatchlistRequest(String title, String userId) {
         System.out.println("CreateWatchlistRequest constructor called with title: " + title + " and userId: " + userId);
         this.title = title;
         this.userId = userId;

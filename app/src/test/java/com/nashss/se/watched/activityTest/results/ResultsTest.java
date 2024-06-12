@@ -11,9 +11,14 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ResultsTest {
+
+
     @Test
     public void testCreateWatchlistResultBuilder() {
-        Watchlist watchlist = new Watchlist();
+        String id = "1";
+        String title = "My Watchlist";
+        String userId = "user123";
+        WatchlistModel watchlist = new WatchlistModel(id, title, userId);
         CreateWatchlistResult result = CreateWatchlistResult.builder()
                 .withWatchlist(watchlist)
                 .build();

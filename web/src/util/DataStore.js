@@ -61,4 +61,13 @@ export default class DataStore extends BindingClass {
         this.listeners.push(listener);
     }
 
+     /**
+     * Delete a specific attribute from the DataStore.
+     * @param attribute The attribute to delete.
+     */
+     delete(attribute) {
+        delete this.state[attribute];
+        this.listeners.forEach(listener => listener());
+    }
+
 }

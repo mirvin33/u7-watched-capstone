@@ -109,12 +109,11 @@ export default class WatchedClient extends BindingClass {
      * @param errorCallback (Optional) A function to execute if the call fails.
      * @returns The watchlist that has been created.
      */
-    async createWatchlist(title, userId, errorCallback) {
+    async createWatchlist(title, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can create watchlists.");
-            const response = await this.axiosClient.post(`watchlist/${title}create`, {
+            const response = await this.axiosClient.post(`watchlist`, {
                 title: title,
-                userId: userId
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -156,10 +155,9 @@ export default class WatchedClient extends BindingClass {
      * @param id The id of the watchlist to delete.
      * @param errorCallback (Optional) A function to execute if the call fails.
      */
-    async deleteWatchlist(id, errorCallback) {
+    async deleteWatchlist(id, token, errorCallback) {
         try {
-            const token = await this.getTokenOrThrow("Only authenticated users can delete a watchlist.");
-            await this.axiosClient.delete(`watchlists/${id}`, {
+            await this.axiosClient.delete(`watchlists/${id}/delete`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }

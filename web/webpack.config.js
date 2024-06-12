@@ -26,7 +26,8 @@ module.exports = {
     index: path.resolve(__dirname, 'src', 'pages', 'index.js'),
     getWatchlist: path.resolve(__dirname, 'src', 'pages', 'getWatchlist.js'),
     createWatchlist: path.resolve(__dirname, 'src', 'pages', 'createWatchlist.js'),
-    deleteWatchlist: path.resolve(__dirname, 'src', 'pages', 'deleteWatchlist.js')
+    deleteWatchlist: path.resolve(__dirname, 'src', 'pages', 'deleteWatchlist.js'),
+    updateWatchlist: path.resolve(__dirname, 'src', 'pages', 'updateWatchlist.js')
   },
   output: {
     path: path.resolve(__dirname, 'build', 'assets'),

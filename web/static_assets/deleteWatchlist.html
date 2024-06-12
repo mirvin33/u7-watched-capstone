@@ -8,24 +8,23 @@
 </head>
 
 <body class="background">
-<header class="header" id="header"></header>
-<div class="card">
-    <h2>Delete Watchlist</h2>
-    <form class="card-content" id="create-watchlist-form">
-        <p class="hidden error" id="error-message"> </p>
-        <p class="form-field">
-            <label>Watchlist Name</label>
-            <input type="text" required class="validated-field" id="watchlist-title" placeholder="New Watchlist" autofocus>
-        </p>
-    
-        </p>
-        <p class="form-field">
-        </p>
-        <p>
-            <a type="submit" class="button" id="create">Delete Watchlist</a>
-        </p>
-    </form>
-</div>
-</body>
+  <header class="header" id="header"></header>
 
+  <div class="card">
+    <h2>Delete Watchlist</h2>
+    <form id="delete-watchlist-form" class="card-content">
+        <p class="error hidden" id="error-message"></p>
+        <p class="form-field">
+          <label for="watchlist-id">Watchlist Id</label>
+          <input type="text" required class="validated-field" id="watchlist-id" placeholder="This watchlist will be deleted" autofocus>
+        
+           <p class="button">
+          <button type="submit" id="delete-watchlist" class="button">Delete Watchlist</button>
+      </form>
+        </div>
+        <div class="card" id="watchlist-display" style="display: none;">
+            <h2 id="watchlist-name"></h2>
+            <h3>Created by: <span id="watchlist-owner"></span></h3>
+  </div>
+</body>
 </html>

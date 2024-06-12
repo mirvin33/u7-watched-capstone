@@ -56,7 +56,7 @@ public class CreateWatchlistActivity {
 
         System.out.println("Created watchlist result: " + watchlistModel);
         return CreateWatchlistResult.builder()
-                .withWatchlist(watchlist)
+                .withWatchlist(watchlistModel)
                 .build();
     }
 

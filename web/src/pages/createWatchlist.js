@@ -73,13 +73,13 @@ const main = async () => {
 };
 
 // document.addEventListener('DOMContentLoaded', () => {
-//     const form = document.getElementById('title');
+//     const form = document.getElementById('watchlist-title');
 //     if (form) {
 //         form.addEventListener('submit', (event) => {
 //             event.preventDefault();
-//             const input = document.getElementById('title');
+//             const input = document.getElementById('watchlist-title');
 //             if (input) {
-//                 const watchlistName = input.value;
+//                 const watchlistTitle = input.value;
 //                 // Submit the form with the watchlist name
 //                 console.log(`Watchlist created: ${watchlistName}`);
 //             } else {

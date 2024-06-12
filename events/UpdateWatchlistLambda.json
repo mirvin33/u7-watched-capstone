@@ -1,4 +1,4 @@
 {
-  "path": "/watchlist/{userId}/update/{contentId}",
+  "path": "/watchlist/{id}/update",
   "httpMethod": "PUT"
 }

@@ -1,4 +1,4 @@
 {
-  "path": "/watchlist/create",
+  "path": "/watchlist",
   "httpMethod": "POST"
 }
