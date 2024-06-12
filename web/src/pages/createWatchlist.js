@@ -32,31 +32,24 @@ class CreateWatchlist extends BindingClass {
      */
     async submit(evt) {
         evt.preventDefault();
-    
+
         const errorMessageDisplay = document.getElementById('error-message');
         errorMessageDisplay.innerText = ``;
         errorMessageDisplay.classList.add('hidden');
-    
+
         const createButton = document.getElementById('create');
         const origButtonText = createButton.innerText;
         createButton.innerText = 'Creating...';
-    
-        const title = document.getElementById('watchlist-title').value;
-        const userId = document.getElementById('user-Id').value;
-        console.log("userId = ", userId);
-        console.log("watchlistName = ", watchlistName);
-    
-        try {
-            // Assuming you have a method in your WatchedClient to save the watchlist to DynamoDB
-            const watchlist = await this.client.saveWatchlistToDynamoDB(title, userId);
-            console.log('Watchlist saved:', watchlist);
-            // Optionally, you can redirect the user to another page after successful creation
-            // window.location.href = 'viewWatchlist.html';
-        } catch (error) {
-            console.error('Error saving watchlist:', error);
+
+        const watchlistTitle = document.getElementById('watchlist-title').value;
+
+
+        const watchlist = await this.client.createWatchlist(watchlistTitle, (error) => {
+            createButton.innerText = origButtonText;
             errorMessageDisplay.innerText = `Error: ${error.message}`;
             errorMessageDisplay.classList.remove('hidden');
-        }
+        });
+        this.dataStore.set('watchlist', watchlist);
     }
 
 
@@ -79,4 +72,23 @@ const main = async () => {
     createWatchlist.mount();
 };
 
-document.addEventListener('DOMContentLoaded', main);
+// document.addEventListener('DOMContentLoaded', () => {
+//     const form = document.getElementById('title');
+//     if (form) {
+//         form.addEventListener('submit', (event) => {
+//             event.preventDefault();
+//             const input = document.getElementById('title');
+//             if (input) {
+//                 const watchlistName = input.value;
+//                 // Submit the form with the watchlist name
+//                 console.log(`Watchlist created: ${watchlistName}`);
+//             } else {
+//                 console.error('Input element with id "watchlistName" not found');
+//             }
+//         });
+//     } else {
+//         console.error('Form element with id "watchlistForm" not found');
+//     }
+// });
+
+window.addEventListener('DOMContentLoaded', main);

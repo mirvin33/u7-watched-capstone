@@ -111,14 +111,14 @@ export default class WatchedClient extends BindingClass {
      */
     async createWatchlist(title, userId, errorCallback) {
         try {
-            // const token = await this.getTokenOrThrow("Only authenticated users can create watchlists.");
-            const response = await this.axiosClient.post(`watchlist/create`, {
+            const token = await this.getTokenOrThrow("Only authenticated users can create watchlists.");
+            const response = await this.axiosClient.post(`watchlist/${title}create`, {
                 title: title,
                 userId: userId
-            // }, {
-            //     headers: {
-            //         Authorization: `Bearer ${token}`
-            //     }
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
             });
             return response.data.watchlist;
         } catch (error) {

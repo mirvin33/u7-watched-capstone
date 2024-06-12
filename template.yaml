@@ -259,7 +259,7 @@ Resources:
         CreateWatchlist:
           Type: Api
           Properties:
-            Path: /watchlist/create
+            Path: /watchlist/{title}/create
             Method: post
 
   UpdateWatchlistLambda:
