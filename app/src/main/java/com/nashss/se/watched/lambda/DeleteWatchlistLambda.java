@@ -12,26 +12,34 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 /**
  * Lambda function to handle deleting a watchlist.
  */
-public class DeleteWatchlistLambda implements RequestHandler<DeleteWatchlistRequest, DeleteWatchlistResult> {
-    private final ServiceComponent serviceComponent;
-
-    /**
-     * Constructs a DeleteWatchlistLambda with a ServiceComponent.
-     */
-    public DeleteWatchlistLambda() {
-        this.serviceComponent = DaggerServiceComponent.create();
-    }
-
+public class DeleteWatchlistLambda extends LambdaActivityRunner<DeleteWatchlistRequest, DeleteWatchlistResult>
+implements RequestHandler<AuthenticatedLambdaRequest<DeleteWatchlistRequest>, LambdaResponse> {
     /**
      * Handles the request to delete a watchlist.
      *
      * @param request the request containing the ID of the watchlist to delete
+     * @param input the input
      * @param context the Lambda execution environment context
      * @return the result indicating the status of the delete operation
      */
     @Override
-    public DeleteWatchlistResult handleRequest(DeleteWatchlistRequest request, Context context) {
-        return serviceComponent.provideDeleteWatchlistActivity().handleRequest(request);
+    public LambdaResponse handleRequest(AuthenticatedLambdaRequest<DeleteWatchlistRequest> input, Context context) {
+        return super.runActivity(
+                () -> {
+                    DeleteWatchlistRequest unauthenticatedRequest = input.fromPath(path ->
+                            DeleteWatchlistRequest.builder()
+                                    .withId(path.get("id"))
+                                    .build());
+                    return input.fromUserClaims(claims ->
+                            DeleteWatchlistRequest.builder()
+                                    .withId(unauthenticatedRequest.getId())
+                                    .withUserId(claims.get("email"))
+                                    .build());
+                },
+                (request, serviceComponent) ->
+                        serviceComponent.provideDeleteWatchlistActivity().handleRequest(request)
+        );
     }
 }
+
 

@@ -24,11 +24,10 @@ module.exports = {
   },
   entry: {
     index: path.resolve(__dirname, 'src', 'pages', 'index.js'),
-    rescheduleAppointments: path.resolve(__dirname, 'src', 'pages', 'rescheduleAppointments.js'),
-    createPlaylist: path.resolve(__dirname, 'src', 'pages', 'createPlaylist.js'),
-    viewPlaylist: path.resolve(__dirname, 'src', 'pages', 'viewPlaylist.js'),
-    searchPlaylists: path.resolve(__dirname, 'src', 'pages', 'searchPlaylists.js'),
-    getWatchlist: path.resolve(__dirname, 'src', 'pages', 'getWatchlist.js')
+    getWatchlist: path.resolve(__dirname, 'src', 'pages', 'getWatchlist.js'),
+    createWatchlist: path.resolve(__dirname, 'src', 'pages', 'createWatchlist.js'),
+    deleteWatchlist: path.resolve(__dirname, 'src', 'pages', 'deleteWatchlist.js'),
+    updateWatchlist: path.resolve(__dirname, 'src', 'pages', 'updateWatchlist.js')
   },
   output: {
     path: path.resolve(__dirname, 'build', 'assets'),

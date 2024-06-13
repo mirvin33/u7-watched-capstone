@@ -9,9 +9,9 @@ import DataStore from '../util/DataStore';
 class CreateWatchlist extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['mount', 'submit', 'redirectToCreateWatchlist'], this);
+        this.bindClassMethods(['mount', 'submit'], this);
         this.dataStore = new DataStore();
-        this.dataStore.addChangeListener(this.redirectToCreateWatchlist);
+        this.dataStore.addChangeListener(this.redirectToWatchlist);
         this.header = new Header(this.dataStore);
     }
 
@@ -32,41 +32,25 @@ class CreateWatchlist extends BindingClass {
      */
     async submit(evt) {
         evt.preventDefault();
-
+       
         const errorMessageDisplay = document.getElementById('error-message');
         errorMessageDisplay.innerText = ``;
         errorMessageDisplay.classList.add('hidden');
 
         const createButton = document.getElementById('create');
         const origButtonText = createButton.innerText;
-        createButton.innerText = 'Loading...';
+        createButton.innerText = 'Creating...';
 
-        const watchlistName = document.getElementById('watchlist-name').value;
-        const tagsText = document.getElementById('tags').value;
+        const watchlistTitle = document.getElementById('watchlist-title').value;
+        console.log("Create Watchlist")
+        createButton.innerText = 'Create Watchlist';
 
-        let tags;
-        if (tagsText.length < 1) {
-            tags = null;
-        } else {
-            tags = tagsText.split(/\s*,\s*/);
-        }
-
-        const watchlist = await this.client.createWatchlist(watchlistName, tags, (error) => {
+        const watchlist = await this.client.createWatchlist(watchlistTitle, (error) => {    
             createButton.innerText = origButtonText;
             errorMessageDisplay.innerText = `Error: ${error.message}`;
             errorMessageDisplay.classList.remove('hidden');
         });
         this.dataStore.set('watchlist', watchlist);
-    }
-
-    /**
-     * When the watchlist is updated in the datastore, redirect to the view watchlist page.
-     */
-    redirectToCreateWatchlist() {
-        const watchlist = this.dataStore.get('watchlist');
-        if (playlist != null) {
-            window.location.href = `/watchlist.html?id=${watchlist.id}`;
-        }
     }
 }
 

@@ -17,16 +17,28 @@
             <p class="form-field">
                 <label for="watchlist-id">Watchlist ID</label>
                 <input type="text" required class="validated-field" id="watchlist-id" placeholder="Enter Watchlist ID" autofocus>
-            </p>
-            <a href="#" class="button" id="get-watchlist">Get Watchlist</a>
+             
         </form>
+  <p class="button">
+            <button type="submit"  id="get-watchlist" class="button">Get Watchlist</button>
+        <p class="button">
+            <a href="createWatchlist.html" class="button">Create Watchlist</a>
+            <p class="button">
+                <a href="deleteWatchlist.html" class="button">Delete Watchlist</a>
+
+                
     </div>
 
     <div class="card" id="watchlist-display" style="display: none;">
         <h2 id="watchlist-name"></h2>
         <h3>Created by: <span id="watchlist-owner"></span></h3>
-        <div class="tags" id="tags"></div>
+         <h3>Watchlist Content: <span id="watchlist-content-size"></span></h3> 
+         <h3>Watchlist Id: <span id="watchlist-id"></span></h3>
+         <label for="watchlist-id">Watchlist Name:</label>
+      <input type="text" required class="validated-field" id="watchlist-newName" placeholder="Enter Watchlist Name" autofocus>
+      <button type="submit"  id="update-watchlist" class="button">Update</button>
         <ol id="content-list"></ol>
     </div>
+    
 </body>
 </html>

@@ -1,9 +1,13 @@
 package com.nashss.se.watched.activity.request;
 
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+
 /**
  * Request class for updating a watchlist.
  */
+@JsonDeserialize(builder = UpdateWatchlistRequest.Builder.class)
 public class UpdateWatchlistRequest {
     private final String id;
     private final String title;
@@ -49,9 +53,11 @@ public class UpdateWatchlistRequest {
     /**
      * Builder class for constructing UpdateWatchlistRequest objects.
      */
+    @JsonPOJOBuilder
     public static class Builder {
         private String id;
         private String title;
+        private String userId;
 
         /**
          * Sets the ID of the watchlist to update.
@@ -75,6 +81,11 @@ public class UpdateWatchlistRequest {
             return this;
         }
 
+        public Builder withUserId(String userId) {
+            this.userId = userId;
+            return this;
+        }
+
         /**
          * Builds an UpdateWatchlistRequest object with the provided parameters.
          *
@@ -83,6 +94,7 @@ public class UpdateWatchlistRequest {
         public UpdateWatchlistRequest build() {
             return new UpdateWatchlistRequest(id, title);
         }
+
     }
 }
 

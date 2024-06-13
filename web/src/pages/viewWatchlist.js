@@ -52,8 +52,8 @@ class ViewWatchlist extends BindingClass {
             return;
         }
 
-        document.getElementById('watchlist-name').innerText = watchlist.name;
-        document.getElementById('watchlist-owner').innerText = watchlist.customerName;
+        document.getElementById('watchlist-title').innerText = watchlist.title;
+        document.getElementById('watchlist-userId').innerText = watchlist.userId;
 
         let tagHtml = '';
         let tag;

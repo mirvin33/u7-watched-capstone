@@ -5,14 +5,16 @@ package com.nashss.se.watched.activity.request;
  */
 public class DeleteWatchlistRequest {
     private final String id;
+    private final String userId;
 
     /**
      * Constructs an instance of DeleteWatchlistRequest.
      *
      * @param id The ID of the watchlist to be deleted.
      */
-    public DeleteWatchlistRequest(String id) {
+    public DeleteWatchlistRequest(String id, String userId) {
         this.id = id;
+        this.userId = userId;
     }
 
     /**
@@ -38,6 +40,7 @@ public class DeleteWatchlistRequest {
      */
     public static class Builder {
         private String id;
+        private String userId;
 
         /**
          * Sets the ID of the watchlist to be deleted.
@@ -50,13 +53,18 @@ public class DeleteWatchlistRequest {
             return this;
         }
 
+        public Builder withUserId(String userId) {
+            this.userId = userId;
+            return this;
+        }
         /**
          * Builds a DeleteWatchlistRequest object with the provided parameters.
          *
          * @return A DeleteWatchlistRequest object.
          */
         public DeleteWatchlistRequest build() {
-            return new DeleteWatchlistRequest(id);
+            return new DeleteWatchlistRequest(id, userId);
+
         }
     }
 }

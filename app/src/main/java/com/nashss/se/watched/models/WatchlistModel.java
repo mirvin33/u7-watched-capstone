@@ -1,6 +1,8 @@
 package com.nashss.se.watched.models;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * POJO for Watchlist.
@@ -9,6 +11,7 @@ public class WatchlistModel {
     private final String id;
     private final String title;
     private final String userId;
+    private final List<String> contentSet;
 
     /**
      * Constructs a new WatchlistModel.
@@ -16,11 +19,13 @@ public class WatchlistModel {
      * @param id the unique identifier for the watchlist
      * @param title the title of the watchlist
      * @param userId the identifier of the user (usually an email)
+     * @param contentSet
      */
-    public WatchlistModel(String id, String title, String userId) {
+    public WatchlistModel(String id, String title, String userId, List<String> contentSet) {
         this.id = id;
         this.title = title;
         this.userId = userId;
+        this.contentSet = contentSet;
     }
 
     /**
@@ -45,6 +50,13 @@ public class WatchlistModel {
     }
 
     /**
+     * @return contentSet
+     */
+    public List<String> getContentSet() {
+        return contentSet;
+    }
+
+    /**
      * Indicates whether some other object is "equal to" this one.
      *
      * @param o the reference object with which to compare
@@ -52,16 +64,11 @@ public class WatchlistModel {
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         WatchlistModel that = (WatchlistModel) o;
-        return Objects.equals(getId(), that.getId()) &&
-                Objects.equals(getTitle(), that.getTitle()) &&
-                Objects.equals(getUserId(), that.getUserId());
+        return Objects.equals(id, that.id) && Objects.equals(title, that.title) && Objects.equals(userId, that.userId)
+                && Objects.equals(contentSet, that.contentSet);
     }
 
     /**
@@ -71,7 +78,7 @@ public class WatchlistModel {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getTitle(), getUserId());
+        return Objects.hash(id, title, userId, contentSet);
     }
 
     /**
@@ -90,39 +97,50 @@ public class WatchlistModel {
         private String id;
         private String title;
         private String userId;
+        private List<String> contentSet;
 
         /**
          * Sets the id for the WatchlistModel being built.
          *
-         * @param pId the unique identifier for the watchlist
+         * @param Id the unique identifier for the watchlist
          * @return the current Builder instance
          */
-        public Builder withId(String pId) {
-            this.id = pId;
+        public Builder withId(String Id) {
+            this.id = Id;
             return this;
         }
 
         /**
          * Sets the title for the WatchlistModel being built.
          *
-         * @param pTitle the title of the watchlist
+         * @param title the title of the watchlist
          * @return the current Builder instance
          */
-        public Builder withTitle(String pTitle) {
-            this.title = pTitle;
+        public Builder withTitle(String title) {
+            this.title = title;
             return this;
         }
 
         /**
          * Sets the userId for the WatchlistModel being built.
          *
-         * @param pUserId the identifier of the user (usually an email)
+         * @param userId the identifier of the user (usually an email)
          * @return the current Builder instance
          */
-        public Builder withUserId(String pUserId) {
-            this.userId = pUserId;
+        public Builder withUserId(String userId) {
+            this.userId = userId;
             return this;
         }
+
+        /**
+         * Sets the userId for the WatchlistModel being built.
+         */
+        public Builder withContentSet(List<String> contentSet) {
+            this.contentSet = contentSet;
+            return this;
+        }
+
+
 
         /**
          * Builds and returns a WatchlistModel instance.
@@ -130,7 +148,7 @@ public class WatchlistModel {
          * @return a new WatchlistModel instance
          */
         public WatchlistModel build() {
-            return new WatchlistModel(id, title, userId);
+            return new WatchlistModel(id, title, userId, contentSet);
         }
     }
 }

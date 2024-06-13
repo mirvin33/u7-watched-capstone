@@ -4,17 +4,30 @@ package com.nashss.se.watched.activity.results;
  * Result class for deleting a watchlist.
  */
 public class DeleteWatchlistResult {
-    private final String message;
+    private final String deleteResult;
 
     /**
      * Constructs a DeleteWatchlistResult object with the provided message.
      *
-     * @param message the message associated with the deletion result
+     * @param deleteResult associated with the deletion result
      */
-    private DeleteWatchlistResult(String message) {
-        this.message = message;
+    private DeleteWatchlistResult(String deleteResult) {
+        this.deleteResult = deleteResult;
+    }
+    /**
+     * Retrieves the message associated with the deletion result.
+     *
+     * @return the message indicating the result of the deletion operation
+     */
+
+    public String getDeleteResult() {
+        return deleteResult;
     }
 
+    @Override
+    public String toString() {
+        return "DeleteResult{" + "deleteResult='" + deleteResult + '\'' + '}';
+    }
     /**
      * Returns a new builder to construct a DeleteWatchlistResult.
      *
@@ -25,28 +38,19 @@ public class DeleteWatchlistResult {
     }
 
     /**
-     * Retrieves the message associated with the deletion result.
-     *
-     * @return the message indicating the result of the deletion operation
-     */
-    public String getMessage() {
-        return message;
-    }
-
-    /**
      * Builder class for constructing DeleteWatchlistResult objects.
      */
     public static class Builder {
-        private String message;
+        private String deleteResult;
 
         /**
          * Sets the message for the deletion result being built.
          *
-         * @param message the message to include in the result
+         * @param deleteResult the result
          * @return the builder instance for method chaining
          */
-        public Builder withMessage(String message) {
-            this.message = message;
+        public Builder withDeleteResult(String deleteResult) {
+            this.deleteResult = deleteResult;
             return this;
         }
 
@@ -56,7 +60,7 @@ public class DeleteWatchlistResult {
          * @return the constructed DeleteWatchlistResult
          */
         public DeleteWatchlistResult build() {
-            return new DeleteWatchlistResult(message);
+            return new DeleteWatchlistResult(deleteResult);
         }
     }
 }

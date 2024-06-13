@@ -279,7 +279,7 @@ Resources:
         UpdateWatchlist:
           Type: Api
           Properties:
-            Path: /watchlist/{id}/update/{contentId}
+            Path: /watchlist/{id}/update
             Method: put
 
   DeleteWatchlistLambda:

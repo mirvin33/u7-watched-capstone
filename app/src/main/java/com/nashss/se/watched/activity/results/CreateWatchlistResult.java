@@ -1,22 +1,36 @@
 package com.nashss.se.watched.activity.results;
 
 import com.nashss.se.watched.dynamodb.models.Watchlist;
+import com.nashss.se.watched.models.WatchlistModel;
 
 /**
  * Result class for creating a new watchlist.
  */
 public class CreateWatchlistResult {
-    private final Watchlist watchlist;
+    private final WatchlistModel watchlist;
 
     /**
      * Constructs a CreateWatchlistResult object with the provided watchlist.
      *
      * @param watchlist the watchlist to include in the result
      */
-    private CreateWatchlistResult(Watchlist watchlist) {
+      private CreateWatchlistResult(WatchlistModel watchlist) {
         this.watchlist = watchlist;
     }
 
+    /**
+     * Retrieves the watchlist included in this result.
+     *
+     * @return the watchlist associated with this result
+     */
+
+    public WatchlistModel getWatchlist() {
+        return watchlist;
+    }
+    @Override
+    public String toString() {
+        return "CreateResult{" + "CreateResult='" + watchlist + '\'' + '}';
+    }
     /**
      * Returns a new builder to construct a CreateWatchlistResult.
      *
@@ -27,19 +41,10 @@ public class CreateWatchlistResult {
     }
 
     /**
-     * Retrieves the watchlist included in this result.
-     *
-     * @return the watchlist associated with this result
-     */
-    public Watchlist getWatchlist() {
-        return watchlist;
-    }
-
-    /**
      * Builder class for constructing CreateWatchlistResult objects.
      */
     public static class Builder {
-        private Watchlist watchlist;
+        private WatchlistModel watchlist;
 
         /**
          * Sets the watchlist for the result being built.
@@ -47,7 +52,7 @@ public class CreateWatchlistResult {
          * @param watchlist the watchlist to include in the result
          * @return the builder instance for method chaining
          */
-        public Builder withWatchlist(Watchlist watchlist) {
+        public Builder withWatchlist(WatchlistModel watchlist) {
             this.watchlist = watchlist;
             return this;
         }

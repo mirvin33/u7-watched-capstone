@@ -36,6 +36,7 @@ public class GetWatchlistActivity {
                 .withId(watchlist.getId())
                 .withTitle(watchlist.getTitle())
                 .withUserId(watchlist.getUserId())
+                .withContentSet(watchlist.getContentSet())
                 .build();
         return GetWatchlistResult.builder()
                 .withWatchlist(watchlistModel)

@@ -61,7 +61,9 @@ public class WatchlistDao {
      * @return The Watchlist object that was saved
      */
     public Watchlist saveWatchlist(Watchlist watchlist) {
+        System.out.println("Saving watchlist to DynamoDB: " + watchlist);
         this.dynamoDbMapper.save(watchlist);
+        System.out.println("Saved watchlist to DynamoDB: " + watchlist);
         return watchlist;
     }
 
@@ -132,14 +134,16 @@ public class WatchlistDao {
      *
      * @param id the watchlist ID
      */
-    public void deleteWatchlist(String id) {
+    public String deleteWatchlist(String id) {
         Watchlist watchlist = getWatchlist(id);
         if (watchlist != null) {
             dynamoDbMapper.delete(watchlist);
         } else {
             throw new WatchlistNotFoundException("Could not find watchlist with id " + id);
         }
+        return "Activity Deleted";
     }
+
 
 //    /**
 //     * Adds content to a watchlist with the specified ID.
@@ -156,7 +160,7 @@ public class WatchlistDao {
 //        }
 //
 //
-////        watchlist.addContent(contentId, queueNext);
+//        watchlist.addContent(contentId, queueNext);
 //        saveWatchlist(watchlist);
 //
 //        return watchlist;

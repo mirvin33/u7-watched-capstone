@@ -9,7 +9,8 @@ import DataStore from "../util/DataStore";
 class GetWatchlist extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['clientLoaded', 'mount', 'submit'], this);
+        this.bindClassMethods(['clientLoaded', 'mount', 'submit', 'updateWatchlistDisplay', 
+            'redirectToUpdateWatchlist', 'updateWatchlistName'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
         console.log("getWatchlist constructor");
@@ -19,14 +20,7 @@ class GetWatchlist extends BindingClass {
      * Once the client is loaded, get the watchlist metadata and title list.
      */
     async clientLoaded() {
-        // const urlParams = new URLSearchParams(window.location.search);
-        // const watchlistId = urlParams.get('id');
-        // document.getElementById('watchlist-name').innerText = "Loading Watchlist ...";
-        // const watchlist = await this.client.getWatchlist(watchlistId);
-        // this.dataStore.set('watchlist', watchlist);
-        // document.getElementById('titles').innerText = "(loading titles...)";
-        // const titles = await this.client.getWatchlistTitles(watchlistId);
-        // this.dataStore.set('titles', titles);
+
     }
 
     /**
@@ -34,7 +28,7 @@ class GetWatchlist extends BindingClass {
      */
     mount() {
         document.getElementById('get-watchlist').addEventListener('click', this.submit);
-
+        document.getElementById('update-watchlist').addEventListener('click', this.updateWatchlistName);
         this.header.addHeaderToPage();
 
         this.client = new WatchedClient();
@@ -43,66 +37,83 @@ class GetWatchlist extends BindingClass {
     
     async submit(evt) {
         evt.preventDefault();
-
+    
         const errorMessageDisplay = document.getElementById('error-message');
         errorMessageDisplay.innerText = ``;
         errorMessageDisplay.classList.add('hidden');
-       
+        
         const createButton = document.getElementById('get-watchlist');
         const origButtonText = createButton.innerText;
         createButton.innerText = 'Loading...';
+    
         const watchlistId = document.getElementById('watchlist-id').value;
         console.log("watchlistId = ", watchlistId);
-
-        const watchlist = await this.client.getWatchlist(watchlistId, (error) => {
-            createButton.innerText = origButtonText;
+    
+            const watchlist = await this.client.getWatchlist(watchlistId, (error) => {
+            
             errorMessageDisplay.innerText = `Error: ${error.message}`;
             errorMessageDisplay.classList.remove('hidden');
         });
-
-        if (watchlist) {
-            this.dataStore.set('watchlist', watchlist);
-            this.updateWatchlistDisplay(watchlist);
+            if (watchlist) {
+                createButton.innerText = 'Get Watchlist';
+                console.log("watchlist = ", watchlist);
+                this.dataStore.set('watchlist', watchlist);
+                this.updateWatchlistDisplay(watchlist);
+            }
         }
-
-        createButton.innerText = origButtonText;
-    } 
 
      /**
      * Update the watchlist display with the fetched watchlist data.
      * @param watchlist The watchlist data to display.
      */
-     updateWatchlistDisplay(watchlist) {
+        async updateWatchlistDisplay(watchlist) {
         const watchlistDisplay = document.getElementById('watchlist-display');
         const watchlistName = document.getElementById('watchlist-name');
         const watchlistOwner = document.getElementById('watchlist-owner');
-        const tags = document.getElementById('tags');
+        const contentListOG = document.getElementById('watchlist-content-size');
         const contentList = document.getElementById('content-list');
+        // const watchlistID = document.getElementById('watchlist-id');
 
-        watchlistName.innerText = watchlist.name;
-        watchlistOwner.innerText = watchlist.owner;
-        tags.innerHTML = '';
-
-        if (watchlist.tags) {
-            watchlist.tags.forEach(tag => {
-                const tagElement = document.createElement('span');
-                tagElement.className = 'tag';
-                tagElement.innerText = tag;
-                tags.appendChild(tagElement);
-            });
-        }
+        // watchlistID.innerText = watchlist.id;
+        watchlistName.innerText = watchlist.title;
+        watchlistOwner.innerText = watchlist.userId;
+        contentListOG.innerText = watchlist.contentSet;
 
         contentList.innerHTML = '';
-        if (watchlist.content) {
-            watchlist.content.forEach(content => {
+        const contentIds = watchlist.contentSet;
+        if (contentIds.size > 0) {
+            contentIds.forEach(async contentId => {
                 const listItem = document.createElement('li');
-                listItem.innerText = content.name;
-                contentList.appendChild(listItem);
+                listItem.innerText = await this.client.getWatchlistContent(contentId);
             });
-        }
-
+        } 
         watchlistDisplay.style.display = 'block';
     }
+
+   /**
+     * When the playlist is updated in the datastore, redirect to the view playlist page.
+     */
+    redirectToUpdateWatchlist(watchlist) {
+    if (watchlist != null) {
+        window.location.href = `/updateWatchlist.html?id=${watchlist.id}`;
+    }
+   }
+
+   async updateWatchlistName(evt) {
+    evt.preventDefault();
+
+    const errorMessageDisplay = document.getElementById('error-message');
+    errorMessageDisplay.innerText = ``;
+    errorMessageDisplay.classList.add('hidden');
+
+    const watchlist = this.dataStore.get('watchlist');
+    const watchlistName = document.getElementById('watchlist-newName').value;
+
+    const watchlistId = watchlist.id;
+    const response = await this.client.updateWatchlistName(watchlistId, watchlistName);
+
+    return ('Watchlist Name Updated Successfully')
+   }
 }
 
 
