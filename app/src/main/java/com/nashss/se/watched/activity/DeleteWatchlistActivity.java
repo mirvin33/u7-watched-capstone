@@ -6,13 +6,18 @@ import com.nashss.se.watched.dynamodb.WatchlistDao;
 import com.nashss.se.watched.dynamodb.models.Watchlist;
 import com.nashss.se.watched.exceptions.WatchlistNotFoundException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.inject.Inject;
+
 
 /**
  * Activity to delete a watchlist.
  */
 public class DeleteWatchlistActivity {
     private final WatchlistDao watchlistDao;
+    private final Logger log = LogManager.getLogger();
 
     /**
      * Constructs a DeleteWatchlistActivity with the given WatchlistDao.
@@ -28,19 +33,16 @@ public class DeleteWatchlistActivity {
      * Handles the request to delete a watchlist.
      *
      * @param request the request containing the ID of the watchlist to be deleted
-     * @return the result of the delete operation
+     * @return result of the delete operation
      * @throws WatchlistNotFoundException if the watchlist is not found
      */
-    public DeleteWatchlistResult handleRequest(DeleteWatchlistRequest request) {
-        Watchlist watchlist = watchlistDao.getWatchlist(request.getId());
-        if (watchlist == null) {
-            throw new WatchlistNotFoundException("Watchlist not found with ID: " + request.getId());
-        }
+    public DeleteWatchlistResult handleRequest(final DeleteWatchlistRequest request) {
+        log.info("Request To Delete Activity {}", request);
+        String id = request.getId();
+        String result = watchlistDao.deleteWatchlist(id);
 
-        watchlistDao.deleteWatchlist(request.getId());
-
-        return DeleteWatchlistResult.builder()
-                .withMessage("Watchlist successfully deleted")
+        return new DeleteWatchlistResult.Builder()
+                .withDeleteResult(result)
                 .build();
     }
 }

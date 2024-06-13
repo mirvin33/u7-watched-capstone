@@ -9,7 +9,7 @@ import DataStore from "../util/DataStore";
 class GetWatchlist extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['clientLoaded', 'mount', 'submit'], this);
+        this.bindClassMethods(['clientLoaded', 'mount', 'submit', 'updateWatchlistDisplay'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
         console.log("getWatchlist constructor");
@@ -48,56 +48,46 @@ class GetWatchlist extends BindingClass {
         const watchlistId = document.getElementById('watchlist-id').value;
         console.log("watchlistId = ", watchlistId);
     
-        try {
             const watchlist = await this.client.getWatchlist(watchlistId);
             if (watchlist) {
+                console.log("watchlist = ", watchlist);
                 this.dataStore.set('watchlist', watchlist);
                 this.updateWatchlistDisplay(watchlist);
+                
             }
-        } catch (error) {
-            errorMessageDisplay.innerText = `Error: ${error.message}`;
-            errorMessageDisplay.classList.remove('hidden');
-        } finally {
-            createButton.innerText = origButtonText;
+
         }
-    }
 
      /**
      * Update the watchlist display with the fetched watchlist data.
      * @param watchlist The watchlist data to display.
      */
-     updateWatchlistDisplay(watchlist) {
+        async updateWatchlistDisplay(watchlist) {
         const watchlistDisplay = document.getElementById('watchlist-display');
         const watchlistName = document.getElementById('watchlist-name');
         const watchlistOwner = document.getElementById('watchlist-owner');
-        const tags = document.getElementById('tags');
+        const contentListOG = document.getElementById('watchlist-content-size');
         const contentList = document.getElementById('content-list');
 
         watchlistName.innerText = watchlist.title;
         watchlistOwner.innerText = watchlist.userId;
-        tags.innerHTML = '';
-
-        if (watchlist.tags) {
-            watchlist.tags.forEach(tag => {
-                const tagElement = document.createElement('span');
-                tagElement.className = 'tag';
-                tagElement.innerText = tag;
-                tags.appendChild(tagElement);
-            });
-        }
+        contentListOG.innerText = watchlist.contentSet;
 
         contentList.innerHTML = '';
-        if (watchlist.content) {
-            watchlist.content.forEach(content => {
+        const contentIds = watchlist.contentSet;
+        if (contentIds.size > 0) {
+            contentIds.forEach(async contentId => {
                 const listItem = document.createElement('li');
-                listItem.innerText = content.title;
-                contentList.appendChild(listItem);
+                listItem.innerText = await this.client.getWatchlistContent(contentId);
             });
+        } else {
+            contentList.innerHTML = '<li>No content found in this watchlist.</li>';
         }
 
         watchlistDisplay.style.display = 'block';
     }
 }
+
 
 
 /**

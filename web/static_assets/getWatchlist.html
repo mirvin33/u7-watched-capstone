@@ -17,7 +17,7 @@
             <p class="form-field">
                 <label for="watchlist-id">Watchlist ID</label>
                 <input type="text" required class="validated-field" id="watchlist-id" placeholder="Enter Watchlist ID" autofocus>
-              
+             
         </form>
   <p class="button">
             <button type="submit"  id="get-watchlist" class="button">Get Watchlist</button>
@@ -33,8 +33,10 @@
     <div class="card" id="watchlist-display" style="display: none;">
         <h2 id="watchlist-name"></h2>
         <h3>Created by: <span id="watchlist-owner"></span></h3>
-        <div class="tags" id="tags"></div>
+         <h3>Watchlist Content: <span id="watchlist-content-size"></span></h3> 
+         
         <ol id="content-list"></ol>
+
     </div>
 </body>
 </html>

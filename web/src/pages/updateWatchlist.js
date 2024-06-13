@@ -9,7 +9,7 @@ import DataStore from '../util/DataStore';
 class UpdateWatchlist extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['clientLoaded', 'mount', 'submit', 'updateWatchlist', 'updateWatchlistDisplay'], this);
+        this.bindClassMethods(['clientLoaded', 'mount', 'submit', 'updateWatchlist', 'updateWatchlistDisplay', 'getContentTitle'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
         console.log("updateWatchlist constructor");
@@ -27,7 +27,7 @@ class UpdateWatchlist extends BindingClass {
      */
     mount() {
         document.getElementById('get-watchlist').addEventListener('click', this.submit);
-        document.getElementById('update-watchlist').addEventListener('click', this.updateWatchlist);
+        document.getElementById('update-watchlist').addEventListener('click', this.submit);
 
         this.header.addHeaderToPage();
 
@@ -69,8 +69,9 @@ class UpdateWatchlist extends BindingClass {
      */
     updateWatchlistDisplay(watchlist) {
         const watchlistDisplay = document.getElementById('watchlist-display');
-        const watchlistIdDisplay = document.getElementById('watchlist-id-display');
-        const watchlistTitle = document.getElementById('watchlist-title');
+        const watchlistIdDisplay = document.getElementById('watchlist-name');
+        const watchlistTitle = document.getElementById('watchlist-owner');
+        const contentList = document.getElementById('content-list');
 
         watchlistIdDisplay.innerText = watchlist.id;
         watchlistTitle.value = watchlist.title;
@@ -97,7 +98,7 @@ class UpdateWatchlist extends BindingClass {
 
         try {
             const token = await this.client.getTokenOrThrow("Only authenticated users can update watchlists.");
-            await this.client.axiosClient.put(`watchlists/${watchlistId}`, {
+            await this.client.axiosClient.put(`watchlists/${id}/update`, {
                 title: newTitle
             }, {
                 headers: {
@@ -116,14 +117,44 @@ class UpdateWatchlist extends BindingClass {
             updateButton.innerText = origButtonText;
         }
     }
+
+/**
+ * Function to fetch content title based on content ID.
+ * Replace this with your actual implementation to fetch content title.
+ * @param {string} contentId The ID of the content.
+ * @returns {string} The title of the content.
+ */
+    async getContentTitle(contentId) {
+    const params = {
+        TableName: 'content',
+        Key: {
+            'contentId': contentId
+        }
+    };
+
+    try {
+        const data = await dynamoDB.get(params).promise();
+    
+        if (!data.Item) {
+            throw new Error(`Content with ID ${contentId} not found`);
+        }
+        
+        return data.Item.title;
+        } catch (error) {
+            console.error('Error fetching content title:', error);
+            throw error;
+
+        }
+    }
 }
 
 /**
  * Main method to run when the page contents have loaded.
  */
 const main = async () => {
-    const updateWatchlist = new UpdateWatchlist();
-    updateWatchlist.mount();
+    const getWatchlist = new GetWatchlist();
+    getWatchlist.mount();
 };
 
 window.addEventListener('DOMContentLoaded', main);
+

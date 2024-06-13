@@ -42,68 +42,15 @@ class DeleteWatchlist extends BindingClass {
 
         const watchlistId = document.getElementById('watchlist-id').value;
         console.log("watchlistId = ", watchlistId);
-
-        try {
-            const watchlist = await this.client.getWatchlist(watchlistId);
-            
+        const watchlist = await this.client.getWatchlist(watchlistId);
             if (watchlist) {
-                this.dataStore.delete(watchlistId);
-                errorMessageDisplay.innerText = `Watchlist not deleted successfully.`;
-                errorMessageDisplay.classList.remove('hidden');
-            } else {
-                throw new Error("Watchlist not found");
-            }
-        } catch (error) {
-            errorMessageDisplay.innerText = `Error: ${error.message}`;
-            errorMessageDisplay.classList.remove('hidden');
-        } finally {
-            deleteButton.innerText = origButtonText;
-            deleteButton.disabled = false;
+                console.log("watchlist = ", watchlist);
+                this.dataStore.set('watchlist', watchlist);
+                console.log("Get Watchlist")
+                const response = await this.client.deleteWatchlist(watchlist.id);
+                console.log("Deleted WatchlistId")
         }
     }
-
-    /**
-     * Delete a watchlist.
-     * @param id The id of the watchlist to delete.
-     * @param errorCallback (Optional) A function to execute if the call fails.
-     */
-    async deleteWatchlist(id, errorCallback) {
-        try {
-            const token = await this.getTokenOrThrow("Only authenticated users can delete a watchlist.");
-            await this.axiosClient.delete(`watchlists/${id}/delete`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
-        } catch (error) {
-            this.handleError(error, errorCallback)
-        }
-    }
-    
-    /**
-     * Get the authentication token or throw an error if not authenticated.
-     */
-    async getTokenOrThrow(errorMessage) {
-        const token = await this.dataStore.get('authToken');
-        if (!token) {
-            throw new Error(errorMessage);
-        }
-        return token;
-    }
-
-handleError(error, errorCallback) {
-    console.error(error);
-
-    const errorFromApi = error?.response?.data?.error_message;
-    if (errorFromApi) {
-        console.error(errorFromApi)
-        error.message = errorFromApi;
-    }
-
-    if (errorCallback) {
-        errorCallback(error);
-    }
-}
 }
 
 const main = async () => {

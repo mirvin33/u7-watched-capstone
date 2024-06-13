@@ -3,75 +3,50 @@
     {
       "PutRequest": {
         "Item": {
-          "id": {
-            "S": "1"
-          },
-          "title": {
-            "S": "My Watchlist"
-          },
-          "userId": {
-            "S": "user1@example.com"
-          }
+          "id": { "S": "1" },
+          "title": { "S": "My Watchlist" },
+          "userId": { "S": "user1@example.com" },
+          "contentSet": { "SS": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"] }
         }
       }
     },
     {
       "PutRequest": {
         "Item": {
-          "id": {
-            "S": "2"
-          },
-          "title": {
-            "S": "Family Movies"
-          },
-          "userId": {
-            "S": "user2@example.com"
-          }
+          "id": { "S": "2" },
+          "title": { "S": "Family Movies" },
+          "userId": { "S": "user2@example.com" },
+          "contentSet": { "SS": ["4", "5"] }
         }
       }
     },
     {
       "PutRequest": {
         "Item": {
-          "id": {
-            "S": "3"
-          },
-          "title": {
-            "S": "Sci-Fi Favorites"
-          },
-          "userId": {
-            "S": "user3@example.com"
-          }
+          "id": { "S": "3" },
+          "title": { "S": "Sci-Fi Favorites" },
+          "userId": { "S": "user3@example.com" },
+          "contentSet": { "SS": ["8", "9"] }
         }
       }
     },
     {
       "PutRequest": {
         "Item": {
-          "id": {
-            "S": "4"
-          },
-          "title": {
-            "S": "Comedy Classics"
-          },
-          "userId": {
-            "S": "user4@example.com"
-          }
+          "id": { "S": "4" },
+          "title": { "S": "Comedy Classics" },
+          "userId": { "S": "user4@example.com" },
+          "contentSet": { "SS": ["2", "8", "3"] }
         }
       }
     },
     {
       "PutRequest": {
         "Item": {
-          "id": {
-            "S": "5"
-          },
-          "title": {
-            "S": "Documentaries"
-          },
-          "userId": {
-            "S": "user5@example.com"
-          }
+          "id": { "S": "5" },
+          "title": { "S": "Documentaries" },
+          "userId": { "S": "user5@example.com" },
+          "contentSet": { "SS": ["3", "4", "5", "6", "7"] }
         }
       }
     }

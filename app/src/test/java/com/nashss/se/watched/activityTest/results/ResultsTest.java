@@ -6,7 +6,9 @@ import com.nashss.se.watched.models.WatchlistModel;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -18,7 +20,9 @@ public class ResultsTest {
         String id = "1";
         String title = "My Watchlist";
         String userId = "user123";
-        WatchlistModel watchlist = new WatchlistModel(id, title, userId);
+        Set<String> contentSet = new HashSet<>(Arrays.asList("4", "5"));
+
+        WatchlistModel watchlist = new WatchlistModel(id, title, userId, contentSet);
         CreateWatchlistResult result = CreateWatchlistResult.builder()
                 .withWatchlist(watchlist)
                 .build();
@@ -29,9 +33,9 @@ public class ResultsTest {
     public void testDeleteWatchlistResultBuilder() {
         String message = "Watchlist deleted successfully.";
         DeleteWatchlistResult result = DeleteWatchlistResult.builder()
-                .withMessage(message)
+                .withDeleteResult(message)
                 .build();
-        assertEquals(message, result.getMessage());
+        assertEquals(message, result.getDeleteResult());
     }
 
     @Test
@@ -54,7 +58,8 @@ public class ResultsTest {
 
     @Test
     public void testUpdateWatchlistResultBuilder() {
-        WatchlistModel watchlistModel = new WatchlistModel("id", "title", "userId");
+        Set<String> contentSet = new HashSet<>(Arrays.asList("4", "5"));
+        WatchlistModel watchlistModel = new WatchlistModel("id", "title", "userId", contentSet);
 
         UpdateWatchlistResult result = UpdateWatchlistResult.builder()
                 .withWatchlist(watchlistModel)

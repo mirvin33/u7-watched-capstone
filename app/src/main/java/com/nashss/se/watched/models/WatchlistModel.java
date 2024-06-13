@@ -1,6 +1,7 @@
 package com.nashss.se.watched.models;
 
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * POJO for Watchlist.
@@ -9,6 +10,7 @@ public class WatchlistModel {
     private final String id;
     private final String title;
     private final String userId;
+    private Set<String> contentSet;
 
     /**
      * Constructs a new WatchlistModel.
@@ -16,11 +18,13 @@ public class WatchlistModel {
      * @param id the unique identifier for the watchlist
      * @param title the title of the watchlist
      * @param userId the identifier of the user (usually an email)
+     * @param contentSet
      */
-    public WatchlistModel(String id, String title, String userId) {
+    public WatchlistModel(String id, String title, String userId, Set<String> contentSet) {
         this.id = id;
         this.title = title;
         this.userId = userId;
+        this.contentSet = contentSet;
     }
 
     /**
@@ -42,6 +46,13 @@ public class WatchlistModel {
      */
     public String getUserId() {
         return userId;
+    }
+
+    /**
+     * @return contentSet
+     */
+    public Set<String> getContentSet() {
+        return contentSet;
     }
 
     /**
@@ -90,39 +101,50 @@ public class WatchlistModel {
         private String id;
         private String title;
         private String userId;
+        private Set<String> contentSet;
 
         /**
          * Sets the id for the WatchlistModel being built.
          *
-         * @param pId the unique identifier for the watchlist
+         * @param Id the unique identifier for the watchlist
          * @return the current Builder instance
          */
-        public Builder withId(String pId) {
-            this.id = pId;
+        public Builder withId(String Id) {
+            this.id = Id;
             return this;
         }
 
         /**
          * Sets the title for the WatchlistModel being built.
          *
-         * @param pTitle the title of the watchlist
+         * @param title the title of the watchlist
          * @return the current Builder instance
          */
-        public Builder withTitle(String pTitle) {
-            this.title = pTitle;
+        public Builder withTitle(String title) {
+            this.title = title;
             return this;
         }
 
         /**
          * Sets the userId for the WatchlistModel being built.
          *
-         * @param pUserId the identifier of the user (usually an email)
+         * @param userId the identifier of the user (usually an email)
          * @return the current Builder instance
          */
-        public Builder withUserId(String pUserId) {
-            this.userId = pUserId;
+        public Builder withUserId(String userId) {
+            this.userId = userId;
             return this;
         }
+
+        /**
+         * Sets the userId for the WatchlistModel being built.
+         */
+        public Builder withContentSet(Set<String> contentSet) {
+            this.contentSet = contentSet;
+            return this;
+        }
+
+
 
         /**
          * Builds and returns a WatchlistModel instance.
@@ -130,7 +152,7 @@ public class WatchlistModel {
          * @return a new WatchlistModel instance
          */
         public WatchlistModel build() {
-            return new WatchlistModel(id, title, userId);
+            return new WatchlistModel(id, title, userId, contentSet);
         }
     }
 }

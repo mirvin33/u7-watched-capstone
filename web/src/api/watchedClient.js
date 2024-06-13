@@ -155,13 +155,15 @@ export default class WatchedClient extends BindingClass {
      * @param id The id of the watchlist to delete.
      * @param errorCallback (Optional) A function to execute if the call fails.
      */
-    async deleteWatchlist(id, token, errorCallback) {
+    async deleteWatchlist(id, errorCallback) {
         try {
-            await this.axiosClient.delete(`watchlists/${id}/delete`, {
+            const token = await this.getTokenOrThrow("Only authenticated users can delete a watchlist.");
+            await this.axiosClient.delete(`watchlist/${id}/delete`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             });
+            return response.data.deleteResult;
         } catch (error) {
             this.handleError(error, errorCallback)
         }
