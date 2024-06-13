@@ -1,9 +1,13 @@
 package com.nashss.se.watched.activity.request;
 
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+
 /**
  * Request class for creating a new watchlist.
  */
+@JsonDeserialize(builder = CreateWatchlistRequest.Builder.class)
 public class CreateWatchlistRequest {
     private final String title;
     private final String userId;
@@ -14,7 +18,6 @@ public class CreateWatchlistRequest {
      * @param title The title of the new watchlist.
      * @param userId The ID of the user creating the watchlist.
      */
-
     public CreateWatchlistRequest(String title, String userId) {
         System.out.println("CreateWatchlistRequest constructor called with title: " + title + " and userId: " + userId);
         this.title = title;
@@ -48,9 +51,18 @@ public class CreateWatchlistRequest {
         return userId;
     }
 
+    @Override
+    public String toString() {
+        return "CreateWatchlistRequest{" +
+                "title='" + title + '\'' +
+                ", userId='" + userId + '\'' +
+                '}';
+    }
+
     /**
      * Builder class for constructing CreateWatchlistRequest objects.
      */
+    @JsonPOJOBuilder
     public static class Builder {
         private String title;
         private String userId;

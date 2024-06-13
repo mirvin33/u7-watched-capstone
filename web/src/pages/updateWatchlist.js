@@ -19,7 +19,8 @@ class UpdateWatchlist extends BindingClass {
      * Once the client is loaded, get the watchlist metadata.
      */
     async clientLoaded() {
-
+        const urlParams = new URLSearchParams(window.location.search);
+        const watchlistId = await this.client.getWatchlist(watchlistId);
     }
 
     /**
@@ -27,7 +28,7 @@ class UpdateWatchlist extends BindingClass {
      */
     mount() {
         document.getElementById('get-watchlist').addEventListener('click', this.submit);
-        document.getElementById('update-watchlist').addEventListener('click', this.submit);
+        // document.getElementById('update-watchlist').addEventListener('click', this.submit);
 
         this.header.addHeaderToPage();
 
@@ -67,17 +68,31 @@ class UpdateWatchlist extends BindingClass {
      * Update the watchlist display with the fetched watchlist data.
      * @param watchlist The watchlist data to display.
      */
-    updateWatchlistDisplay(watchlist) {
+    async updateWatchlistDisplay(watchlist) {
         const watchlistDisplay = document.getElementById('watchlist-display');
-        const watchlistIdDisplay = document.getElementById('watchlist-name');
-        const watchlistTitle = document.getElementById('watchlist-owner');
+        const watchlistName = document.getElementById('watchlist-name');
+        const watchlistOwner = document.getElementById('watchlist-owner');
+        const contentListOG = document.getElementById('watchlist-content-size');
         const contentList = document.getElementById('content-list');
 
-        watchlistIdDisplay.innerText = watchlist.id;
-        watchlistTitle.value = watchlist.title;
+        watchlistName.innerText = watchlist.title;
+        watchlistOwner.innerText = watchlist.userId;
+        contentListOG.innerText = watchlist.contentSet;
+
+        contentList.innerHTML = '';
+        const contentIds = watchlist.contentSet;
+        if (contentIds.size > 0) {
+            contentIds.forEach(async contentId => {
+                const listItem = document.createElement('li');
+                listItem.innerText = await this.client.getWatchlistContent(contentId);
+            });
+        } else {
+            contentList.innerHTML = '<li>No content found in this watchlist.</li>';
+        }
 
         watchlistDisplay.style.display = 'block';
     }
+
 
     /**
      * Method to run when the update watchlist submit button is pressed.
@@ -98,16 +113,22 @@ class UpdateWatchlist extends BindingClass {
 
         try {
             const token = await this.client.getTokenOrThrow("Only authenticated users can update watchlists.");
-            await this.client.axiosClient.put(`watchlists/${id}/update`, {
+            await this.client.axiosClient.put(`watchlist/${id}/update`, {
                 title: newTitle
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             });
-            const updatedWatchlist = await this.client.getWatchlist(watchlistId);
+            
+            const updatedWatchlist = await this.client.getWatchlist(watchlistId, (error) => {
+            errorMessageDisplay.innerText = `Error: ${error.message}`;
+            errorMessageDisplay.classList.remove('hidden');
+
+        });
             this.dataStore.set('watchlist', updatedWatchlist);
             this.updateWatchlistDisplay(updatedWatchlist);
+            updateButton.innerText = 'Update';
             errorMessageDisplay.innerText = 'Watchlist updated successfully';
             errorMessageDisplay.classList.remove('hidden');
         } catch (error) {
@@ -152,8 +173,8 @@ class UpdateWatchlist extends BindingClass {
  * Main method to run when the page contents have loaded.
  */
 const main = async () => {
-    const getWatchlist = new GetWatchlist();
-    getWatchlist.mount();
+    const updateWatchlist = new UpdateWatchlist();
+    updateWatchlist.mount();
 };
 
 window.addEventListener('DOMContentLoaded', main);

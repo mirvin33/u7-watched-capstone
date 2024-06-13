@@ -57,30 +57,5 @@ public class CreateWatchlistActivityTest {
         assertThrows(InvalidAttributeValueException.class, () -> createWatchlistActivity.handleRequest(request));
         verify(watchlistDao, never()).saveWatchlist(any());
     }
-
-//    @Test
-//    void testUUIDGeneration() {
-//        WatchlistDao watchlistDao = Mockito.mock(WatchlistDao.class);
-//
-//        CreateWatchlistActivity createWatchlistActivity = new CreateWatchlistActivity(watchlistDao);
-//
-//        String title = "Test Watchlist";
-//        String userId = "testUserId";
-//
-//        CreateWatchlistRequest request = new CreateWatchlistRequest(title, userId);
-//        request.setTitle("Test Watchlist");
-//        request.setUserId("testUserId");
-//
-//        CreateWatchlistResult result = createWatchlistActivity.handleRequest(request);
-//
-//        String generatedId = result.getWatchlist().getId();
-//        UUID uuid;
-//        try {
-//            uuid = UUID.fromString(generatedId);
-//        } catch (IllegalArgumentException e) {
-//            uuid = null;
-//        }
-//        assertEquals(uuid != null, true, "Generated ID is not a valid UUID");
-//    }
 }
 

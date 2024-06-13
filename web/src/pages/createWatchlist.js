@@ -9,7 +9,7 @@ import DataStore from '../util/DataStore';
 class CreateWatchlist extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['mount', 'submit', 'redirectToWatchlist'], this);
+        this.bindClassMethods(['mount', 'submit'], this);
         this.dataStore = new DataStore();
         this.dataStore.addChangeListener(this.redirectToWatchlist);
         this.header = new Header(this.dataStore);
@@ -32,7 +32,7 @@ class CreateWatchlist extends BindingClass {
      */
     async submit(evt) {
         evt.preventDefault();
-
+       
         const errorMessageDisplay = document.getElementById('error-message');
         errorMessageDisplay.innerText = ``;
         errorMessageDisplay.classList.add('hidden');
@@ -42,25 +42,15 @@ class CreateWatchlist extends BindingClass {
         createButton.innerText = 'Creating...';
 
         const watchlistTitle = document.getElementById('watchlist-title').value;
+        console.log("Create Watchlist")
+        createButton.innerText = 'Create Watchlist';
 
-
-        const watchlist = await this.client.createWatchlist(watchlistTitle, (error) => {
+        const watchlist = await this.client.createWatchlist(watchlistTitle, (error) => {    
             createButton.innerText = origButtonText;
             errorMessageDisplay.innerText = `Error: ${error.message}`;
             errorMessageDisplay.classList.remove('hidden');
         });
         this.dataStore.set('watchlist', watchlist);
-    }
-
-
-    /**
-     * When the watchlist is updated in the datastore, redirect to the view watchlist page.
-     */
-    redirectToWatchlist() {
-        const watchlist = this.dataStore.get('watchlist');
-        if (watchlist != null) {
-            window.location.href = `/watchlist/${id}.html?id=${watchlist.id}`;
-        }
     }
 }
 
@@ -72,23 +62,5 @@ const main = async () => {
     createWatchlist.mount();
 };
 
-// document.addEventListener('DOMContentLoaded', () => {
-//     const form = document.getElementById('watchlist-title');
-//     if (form) {
-//         form.addEventListener('submit', (event) => {
-//             event.preventDefault();
-//             const input = document.getElementById('watchlist-title');
-//             if (input) {
-//                 const watchlistTitle = input.value;
-//                 // Submit the form with the watchlist name
-//                 console.log(`Watchlist created: ${watchlistName}`);
-//             } else {
-//                 console.error('Input element with id "watchlistName" not found');
-//             }
-//         });
-//     } else {
-//         console.error('Form element with id "watchlistForm" not found');
-//     }
-// });
-
 window.addEventListener('DOMContentLoaded', main);
+

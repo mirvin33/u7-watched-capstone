@@ -1,8 +1,9 @@
 package com.nashss.se.watched.dynamodb.models;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
-import java.util.HashSet;
-import java.util.Set;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a record in the watchlist table.
@@ -12,13 +13,13 @@ public class Watchlist {
     private String id;
     private String title;
     private String userId;
-    private Set<String> contentSet;
+    private List<String> contentSet;
 
     /**
      * Constructs a Watchlist with an empty content set.
      */
     public Watchlist() {
-        this.contentSet = new HashSet<>();
+        this.contentSet = new ArrayList<>();
     }
 
     /**
@@ -81,10 +82,10 @@ public class Watchlist {
     /**
      * Gets the set of content IDs in the watchlist.
      *
-     * @return the set of content IDs
+     * @return the list of content IDs
      */
     @DynamoDBAttribute(attributeName = "contentSet")
-    public Set<String> getContentSet() {
+    public List<String> getContentSet() {
         return contentSet;
     }
 
@@ -93,7 +94,7 @@ public class Watchlist {
      *
      * @param contentSet the set of content IDs to set
      */
-    public void setContentSet(Set<String> contentSet) {
+    public void setContentSet(List<String> contentSet) {
         this.contentSet = contentSet;
     }
 

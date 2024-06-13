@@ -1,5 +1,6 @@
 package com.nashss.se.watched.models;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -10,7 +11,7 @@ public class WatchlistModel {
     private final String id;
     private final String title;
     private final String userId;
-    private Set<String> contentSet;
+    private final List<String> contentSet;
 
     /**
      * Constructs a new WatchlistModel.
@@ -20,7 +21,7 @@ public class WatchlistModel {
      * @param userId the identifier of the user (usually an email)
      * @param contentSet
      */
-    public WatchlistModel(String id, String title, String userId, Set<String> contentSet) {
+    public WatchlistModel(String id, String title, String userId, List<String> contentSet) {
         this.id = id;
         this.title = title;
         this.userId = userId;
@@ -51,7 +52,7 @@ public class WatchlistModel {
     /**
      * @return contentSet
      */
-    public Set<String> getContentSet() {
+    public List<String> getContentSet() {
         return contentSet;
     }
 
@@ -63,16 +64,11 @@ public class WatchlistModel {
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         WatchlistModel that = (WatchlistModel) o;
-        return Objects.equals(getId(), that.getId()) &&
-                Objects.equals(getTitle(), that.getTitle()) &&
-                Objects.equals(getUserId(), that.getUserId());
+        return Objects.equals(id, that.id) && Objects.equals(title, that.title) && Objects.equals(userId, that.userId)
+                && Objects.equals(contentSet, that.contentSet);
     }
 
     /**
@@ -82,7 +78,7 @@ public class WatchlistModel {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getTitle(), getUserId());
+        return Objects.hash(id, title, userId, contentSet);
     }
 
     /**
@@ -101,7 +97,7 @@ public class WatchlistModel {
         private String id;
         private String title;
         private String userId;
-        private Set<String> contentSet;
+        private List<String> contentSet;
 
         /**
          * Sets the id for the WatchlistModel being built.
@@ -139,7 +135,7 @@ public class WatchlistModel {
         /**
          * Sets the userId for the WatchlistModel being built.
          */
-        public Builder withContentSet(Set<String> contentSet) {
+        public Builder withContentSet(List<String> contentSet) {
             this.contentSet = contentSet;
             return this;
         }

@@ -16,7 +16,7 @@ export default class WatchedClient extends BindingClass {
         super();
 
         const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getWatchlist', 'getWatchlistContent',
-        'createWatchlist', 'addContentToWatchlist', 'deleteWatchlist', 'searchWatchlists'];
+        'createWatchlist', 'addContentToWatchlist', 'deleteWatchlist', 'searchWatchlists', 'updateWatchlist'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();
@@ -111,6 +111,7 @@ export default class WatchedClient extends BindingClass {
      */
     async createWatchlist(title, errorCallback) {
         try {
+            console.log("Create Watchlist Client Start")
             const token = await this.getTokenOrThrow("Only authenticated users can create watchlists.");
             const response = await this.axiosClient.post(`watchlist`, {
                 title: title,
@@ -172,7 +173,7 @@ export default class WatchedClient extends BindingClass {
     /**
      * Search for watchlists.
      * @param criteria A string containing search criteria to pass to the API.
-     * @param errorCallback (Optional) A function to execute if the call fails.
+     * @param errorCallback A function to execute if the call fails.
      * @returns The watchlists that match the search criteria.
      */
     async searchWatchlists(criteria, errorCallback) {
@@ -188,6 +189,46 @@ export default class WatchedClient extends BindingClass {
         }
 
     }
+
+    async updateWatchlistName(id, title) {
+        try {
+            const token = await this.getTokenOrThrow("Only authenticated users can update watchlists.");
+    
+            const response = await this.axiosClient.put(`watchlist/${id}/update`, {
+                title: title
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return response.data.watchlist; 
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
+
+
+    /**
+     * Update for watchlists.
+     * @param id A string containing update criteria to pass to the API.
+     * @param errorCallback A function to execute if the call fails.
+     * @returns The watchlists that match the updatedwatchlist.
+     */
+    async updateWatchlist(id, title, errorCallback) {
+        try {
+        const token = await this.getTokenOrThrow("Only authenticated users can delete a watchlist.");
+        const response = await this.axiosClient.put(`watchlist/${id}/update`, {
+            updatedWatchlistName : title,
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response.data.watchlist;
+    } catch (error) {
+        this.handleError(error, errorCallback)
+    }
+}
 
     /**
      * Helper method to log the error and run any error functions.

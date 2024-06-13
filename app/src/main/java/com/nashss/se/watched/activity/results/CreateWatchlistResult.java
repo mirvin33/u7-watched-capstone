@@ -17,6 +17,20 @@ public class CreateWatchlistResult {
       private CreateWatchlistResult(WatchlistModel watchlist) {
         this.watchlist = watchlist;
     }
+
+    /**
+     * Retrieves the watchlist included in this result.
+     *
+     * @return the watchlist associated with this result
+     */
+
+    public WatchlistModel getWatchlist() {
+        return watchlist;
+    }
+    @Override
+    public String toString() {
+        return "CreateResult{" + "CreateResult='" + watchlist + '\'' + '}';
+    }
     /**
      * Returns a new builder to construct a CreateWatchlistResult.
      *
@@ -24,15 +38,6 @@ public class CreateWatchlistResult {
      */
     public static Builder builder() {
         return new Builder();
-    }
-
-    /**
-     * Retrieves the watchlist included in this result.
-     *
-     * @return the watchlist associated with this result
-     */
-    public WatchlistModel getWatchlist() {
-        return watchlist;
     }
 
     /**

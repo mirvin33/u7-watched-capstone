@@ -7,6 +7,7 @@ import com.nashss.se.watched.dynamodb.models.Watchlist;
 import com.nashss.se.watched.exceptions.InvalidAttributeValueException;
 import com.nashss.se.watched.models.WatchlistModel;
 
+import java.util.Collections;
 import java.util.UUID;
 import javax.inject.Inject;
 
@@ -44,6 +45,7 @@ public class CreateWatchlistActivity {
         watchlist.setId(UUID.randomUUID().toString());
         watchlist.setTitle(request.getTitle());
         watchlist.setUserId(request.getUserId());
+        watchlist.setContentSet(Collections.emptyList());
 
         System.out.println("Saving watchlist: " + watchlist);
         watchlistDao.saveWatchlist(watchlist);
@@ -52,6 +54,7 @@ public class CreateWatchlistActivity {
                 .withId(watchlist.getId())
                 .withTitle(watchlist.getTitle())
                 .withUserId(watchlist.getUserId())
+                .withContentSet(watchlist.getContentSet())
                 .build();
 
         System.out.println("Created watchlist result: " + watchlistModel);

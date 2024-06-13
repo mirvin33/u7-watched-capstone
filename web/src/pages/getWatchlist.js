@@ -9,7 +9,8 @@ import DataStore from "../util/DataStore";
 class GetWatchlist extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['clientLoaded', 'mount', 'submit', 'updateWatchlistDisplay'], this);
+        this.bindClassMethods(['clientLoaded', 'mount', 'submit', 'updateWatchlistDisplay', 
+            'redirectToUpdateWatchlist', 'updateWatchlistName'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
         console.log("getWatchlist constructor");
@@ -27,7 +28,7 @@ class GetWatchlist extends BindingClass {
      */
     mount() {
         document.getElementById('get-watchlist').addEventListener('click', this.submit);
-
+        document.getElementById('update-watchlist').addEventListener('click', this.updateWatchlistName);
         this.header.addHeaderToPage();
 
         this.client = new WatchedClient();
@@ -48,14 +49,17 @@ class GetWatchlist extends BindingClass {
         const watchlistId = document.getElementById('watchlist-id').value;
         console.log("watchlistId = ", watchlistId);
     
-            const watchlist = await this.client.getWatchlist(watchlistId);
+            const watchlist = await this.client.getWatchlist(watchlistId, (error) => {
+            
+            errorMessageDisplay.innerText = `Error: ${error.message}`;
+            errorMessageDisplay.classList.remove('hidden');
+        });
             if (watchlist) {
+                createButton.innerText = 'Get Watchlist';
                 console.log("watchlist = ", watchlist);
                 this.dataStore.set('watchlist', watchlist);
                 this.updateWatchlistDisplay(watchlist);
-                
             }
-
         }
 
      /**
@@ -68,7 +72,9 @@ class GetWatchlist extends BindingClass {
         const watchlistOwner = document.getElementById('watchlist-owner');
         const contentListOG = document.getElementById('watchlist-content-size');
         const contentList = document.getElementById('content-list');
+        // const watchlistID = document.getElementById('watchlist-id');
 
+        // watchlistID.innerText = watchlist.id;
         watchlistName.innerText = watchlist.title;
         watchlistOwner.innerText = watchlist.userId;
         contentListOG.innerText = watchlist.contentSet;
@@ -80,14 +86,35 @@ class GetWatchlist extends BindingClass {
                 const listItem = document.createElement('li');
                 listItem.innerText = await this.client.getWatchlistContent(contentId);
             });
-        } else {
-            contentList.innerHTML = '<li>No content found in this watchlist.</li>';
-        }
-
+        } 
         watchlistDisplay.style.display = 'block';
     }
-}
 
+   /**
+     * When the playlist is updated in the datastore, redirect to the view playlist page.
+     */
+    redirectToUpdateWatchlist(watchlist) {
+    if (watchlist != null) {
+        window.location.href = `/updateWatchlist.html?id=${watchlist.id}`;
+    }
+   }
+
+   async updateWatchlistName(evt) {
+    evt.preventDefault();
+
+    const errorMessageDisplay = document.getElementById('error-message');
+    errorMessageDisplay.innerText = ``;
+    errorMessageDisplay.classList.add('hidden');
+
+    const watchlist = this.dataStore.get('watchlist');
+    const watchlistName = document.getElementById('watchlist-newName').value;
+
+    const watchlistId = watchlist.id;
+    const response = await this.client.updateWatchlistName(watchlistId, watchlistName);
+
+    return ('Watchlist Name Updated Successfully')
+   }
+}
 
 
 /**

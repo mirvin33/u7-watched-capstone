@@ -6,7 +6,18 @@
           "id": { "S": "1" },
           "title": { "S": "My Watchlist" },
           "userId": { "S": "user1@example.com" },
-          "contentSet": { "SS": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"] }
+          "contentSet": { "L": [
+            { "S": "1" }, 
+            { "S": "2" }, 
+            { "S": "3" }, 
+            { "S": "4" }, 
+            { "S": "5" }, 
+            { "S": "6" }, 
+            { "S": "7" }, 
+            { "S": "8" }, 
+            { "S": "9" }, 
+            { "S": "10" }
+          ]}
         }
       }
     },
@@ -16,7 +27,10 @@
           "id": { "S": "2" },
           "title": { "S": "Family Movies" },
           "userId": { "S": "user2@example.com" },
-          "contentSet": { "SS": ["4", "5"] }
+          "contentSet": { "L": [
+            { "S": "4" }, 
+            { "S": "5" }
+          ]}
         }
       }
     },
@@ -26,7 +40,10 @@
           "id": { "S": "3" },
           "title": { "S": "Sci-Fi Favorites" },
           "userId": { "S": "user3@example.com" },
-          "contentSet": { "SS": ["8", "9"] }
+          "contentSet": { "L": [
+            { "S": "8" }, 
+            { "S": "9" }
+          ]}
         }
       }
     },
@@ -36,7 +53,11 @@
           "id": { "S": "4" },
           "title": { "S": "Comedy Classics" },
           "userId": { "S": "user4@example.com" },
-          "contentSet": { "SS": ["2", "8", "3"] }
+          "contentSet": { "L": [
+            { "S": "2" }, 
+            { "S": "8" }, 
+            { "S": "3" }
+          ]}
         }
       }
     },
@@ -46,7 +67,13 @@
           "id": { "S": "5" },
           "title": { "S": "Documentaries" },
           "userId": { "S": "user5@example.com" },
-          "contentSet": { "SS": ["3", "4", "5", "6", "7"] }
+          "contentSet": { "L": [
+            { "S": "3" }, 
+            { "S": "4" }, 
+            { "S": "5" }, 
+            { "S": "6" }, 
+            { "S": "7" }
+          ]}
         }
       }
     }

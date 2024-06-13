@@ -42,8 +42,13 @@ class DeleteWatchlist extends BindingClass {
 
         const watchlistId = document.getElementById('watchlist-id').value;
         console.log("watchlistId = ", watchlistId);
-        const watchlist = await this.client.getWatchlist(watchlistId);
+        const watchlist = await this.client.getWatchlist(watchlistId, (error) => {
+        errorMessageDisplay.innerText = `Error: ${error.message}`;
+        errorMessageDisplay.classList.remove('hidden');
+    });
+
             if (watchlist) {
+                createButton.innerText = 'Delete Watchlist';
                 console.log("watchlist = ", watchlist);
                 this.dataStore.set('watchlist', watchlist);
                 console.log("Get Watchlist")
