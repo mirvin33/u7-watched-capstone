@@ -9,7 +9,7 @@ on:
 env:
 
   # STUDENTS: Set these environment variables 
-  API_BASE_URL: https://woc9gpzcm2.execute-api.us-east-2.amazonaws.com/Prod/
+  API_BASE_URL: https://bb5bywxi11.execute-api.us-east-2.amazonaws.com/Prod/
   COGNITO_DOMAIN: project-watched-michaelirvin
   COGNITO_REDIRECT_SIGNIN: https://project-watched-michaelirvin.auth.us-east-2.amazoncognito.com/login
   COGNITO_REDIRECT_SIGNOUT: https://project-watched-michaelirvin.auth.us-east-2.amazoncognito.com/logout
