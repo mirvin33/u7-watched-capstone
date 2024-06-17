@@ -2,7 +2,7 @@ package com.nashss.se.watched.models;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
+
 
 /**
  * POJO for Watchlist.
@@ -19,7 +19,7 @@ public class WatchlistModel {
      * @param id the unique identifier for the watchlist
      * @param title the title of the watchlist
      * @param userId the identifier of the user (usually an email)
-     * @param contentSet
+     * @param contentSet list of content data.
      */
     public WatchlistModel(String id, String title, String userId, List<String> contentSet) {
         this.id = id;
@@ -64,11 +64,17 @@ public class WatchlistModel {
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         WatchlistModel that = (WatchlistModel) o;
-        return Objects.equals(id, that.id) && Objects.equals(title, that.title) && Objects.equals(userId, that.userId)
-                && Objects.equals(contentSet, that.contentSet);
+        return Objects.equals(id, that.id) &&
+                Objects.equals(title, that.title) &&
+                Objects.equals(userId, that.userId) &&
+                Objects.equals(contentSet, that.contentSet);
     }
 
     /**
@@ -102,11 +108,11 @@ public class WatchlistModel {
         /**
          * Sets the id for the WatchlistModel being built.
          *
-         * @param Id the unique identifier for the watchlist
+         * @param id the unique identifier for the watchlist
          * @return the current Builder instance
          */
-        public Builder withId(String Id) {
-            this.id = Id;
+        public Builder withId(String id) {
+            this.id = id;
             return this;
         }
 
@@ -134,13 +140,13 @@ public class WatchlistModel {
 
         /**
          * Sets the userId for the WatchlistModel being built.
+         * @param contentSet List of content.
+         * @return contentSet as list.
          */
         public Builder withContentSet(List<String> contentSet) {
             this.contentSet = contentSet;
             return this;
         }
-
-
 
         /**
          * Builds and returns a WatchlistModel instance.

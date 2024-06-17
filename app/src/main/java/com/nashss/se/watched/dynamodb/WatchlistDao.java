@@ -132,7 +132,8 @@ public class WatchlistDao {
     /**
      * Deletes a watchlist with the specified ID.
      *
-     * @param id the watchlist ID
+     * @param id the watchlist ID.
+     * @return message.
      */
     public String deleteWatchlist(String id) {
         Watchlist watchlist = getWatchlist(id);
@@ -143,27 +144,5 @@ public class WatchlistDao {
         }
         return "Activity Deleted";
     }
-
-
-//    /**
-//     * Adds content to a watchlist with the specified ID.
-//     *
-//     * @param watchlistId the watchlist ID
-//     * @param contentId   the content ID to add
-//     * @param queueNext   whether to queue the content next
-//     * @return the updated Watchlist object
-//     */
-//    public Watchlist addContent(String watchlistId, String contentId, boolean queueNext) {
-//        Watchlist watchlist = getWatchlist(watchlistId);
-//        if (watchlist == null) {
-//            throw new WatchlistNotFoundException("Could not find watchlist with id " + watchlistId);
-//        }
-//
-//
-//        watchlist.addContent(contentId, queueNext);
-//        saveWatchlist(watchlist);
-//
-//        return watchlist;
-//    }
 }
 

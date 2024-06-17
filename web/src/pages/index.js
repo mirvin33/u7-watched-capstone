@@ -6,19 +6,14 @@ import BindingClass from "../util/bindingClass";
 class Homepage extends BindingClass {
     constructor() {
         super();
-
+        this.dataStore = {};
         this.bindClassMethods(['mount'], this);
-
-
         this.header = new Header(this.dataStore);
-
         console.log("Homepage constructor");
     }
 
 mount() {
-
         this.header.addHeaderToPage();
-
         this.client = new WatchedClient();
     }
 }

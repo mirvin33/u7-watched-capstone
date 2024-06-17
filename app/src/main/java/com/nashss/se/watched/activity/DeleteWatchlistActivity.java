@@ -3,7 +3,6 @@ package com.nashss.se.watched.activity;
 import com.nashss.se.watched.activity.request.DeleteWatchlistRequest;
 import com.nashss.se.watched.activity.results.DeleteWatchlistResult;
 import com.nashss.se.watched.dynamodb.WatchlistDao;
-import com.nashss.se.watched.dynamodb.models.Watchlist;
 import com.nashss.se.watched.exceptions.WatchlistNotFoundException;
 
 import org.apache.logging.log4j.LogManager;
