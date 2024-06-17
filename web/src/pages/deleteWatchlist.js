@@ -47,13 +47,13 @@ class DeleteWatchlist extends BindingClass {
         errorMessageDisplay.classList.remove('hidden');
     });
 
-            if (watchlist) {
-                createButton.innerText = 'Delete Watchlist';
+            if (watchlist) { 
                 console.log("watchlist = ", watchlist);
                 this.dataStore.set('watchlist', watchlist);
                 console.log("Get Watchlist")
                 const response = await this.client.deleteWatchlist(watchlist.id);
                 console.log("Deleted WatchlistId")
+                deleteButton.innerText = 'Delete';
         }
     }
 }

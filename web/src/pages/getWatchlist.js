@@ -71,13 +71,15 @@ class GetWatchlist extends BindingClass {
         const watchlistName = document.getElementById('watchlist-name');
         const watchlistOwner = document.getElementById('watchlist-owner');
         const contentListOG = document.getElementById('watchlist-content-size');
+        const watchlistID = document.getElementById('watchlist-id');
+        const watchlistIdDisplay = document.getElementById('watchlist-id-display');
         const contentList = document.getElementById('content-list');
-        // const watchlistID = document.getElementById('watchlist-id');
 
-        // watchlistID.innerText = watchlist.id;
+      
         watchlistName.innerText = watchlist.title;
         watchlistOwner.innerText = watchlist.userId;
         contentListOG.innerText = watchlist.contentSet;
+        watchlistIdDisplay.innerText = watchlist.id;
 
         contentList.innerHTML = '';
         const contentIds = watchlist.contentSet;

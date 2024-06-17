@@ -1,30 +1,75 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <script type="text/javascript" src="assets/deleteWatchlist.js"></script>
   <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <title>Delete Watchlist</title>
+  <style>
+    .card {
+      margin-top: 100px;
+      padding: 20px;
+      background-color: rgb(163, 163, 163);
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    body.background {
+      background-color: #000000;
+    }
+  </style>
 </head>
 
 <body class="background">
-  <header class="header" id="header"></header>
-
+  <div class="w3-top">
+    <div class="w3-bar w3-black w3-card">
+      <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+      <a href="index.html" class="w3-bar-item w3-button w3-padding-large">HOME</a>
+      <div class="w3-dropdown-hover w3-hide-small">
+        <button class="w3-padding-large w3-button" title="More">MORE <i class="fa fa-caret-down"></i></button>
+        <div class="w3-dropdown-content w3-bar-block w3-card-4">
+          <a href="createWatchlist.html" class="w3-bar-item w3-button">Create Watchlist</a>
+          <a href="deleteWatchlist.html" class="w3-bar-item w3-button">Delete Watchlist</a>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="card">
     <h2>Delete Watchlist</h2>
     <form id="delete-watchlist-form" class="card-content">
-        <p class="error hidden" id="error-message"></p>
-        <p class="form-field">
-          <label for="watchlist-id">Watchlist Id</label>
-          <input type="text" required class="validated-field" id="watchlist-id" placeholder="This watchlist will be deleted" autofocus>
-        
-           <p class="button">
-          <button type="submit" id="delete-watchlist" class="button">Delete Watchlist</button>
-      </form>
-        </div>
-        <div class="card" id="watchlist-display" style="display: none;">
-            <h2 id="watchlist-name"></h2>
-            <h3>Created by: <span id="watchlist-owner"></span></h3>
+      <p class="error hidden" id="error-message"></p>
+      <p class="form-field">
+        <label for="watchlist-id">Watchlist ID</label>
+        <input type="text" required class="validated-field" id="watchlist-id" placeholder="Enter Watchlist ID to delete" autofocus>
+      <p class="button">
+        <button type="submit" id="delete-watchlist" class="button">Delete Watchlist</button>
+    </form>
   </div>
+
+  </div>
+  <header class="header" id="header"></header>
+  <footer class="w3-center w3-opacity w3-light-grey w3-xlarge" style="margin-top: 20px;">
+    <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    <i class="fa fa-instagram w3-hover-opacity"></i>
+    <i class="fa fa-snapchat w3-hover-opacity"></i>
+    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+    <i class="fa fa-twitter w3-hover-opacity"></i>
+    <i class="fa fa-linkedin w3-hover-opacity"></i>
+  </footer>
+
+  <script>
+    function myFunction() {
+      var x = document.getElementsByClassName("w3-dropdown-content")[0];
+      if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+      } else {
+        x.className = x.className.replace(" w3-show", "");
+      }
+    }
+  </script>
 </body>
+
 </html>

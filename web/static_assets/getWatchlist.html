@@ -1,14 +1,41 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <script type="text/javascript" src="assets/getWatchlist.js"></script>]
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="assets/getWatchlist.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>My Watchlist</title>
+    <style>
+        .card {
+            margin-top: 100px; 
+            padding: 20px;
+            background-color: rgb(163, 163, 163);
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        body.background {
+            background-color: #000000; 
+        }
+    </style>
 </head>
-
 <body class="background">
-    <header class="header" id="header"></header>
+    <div class="w3-top">
+        <div class="w3-bar w3-black w3-card">
+            <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right"
+               href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+            <a href="index.html" class="w3-bar-item w3-button w3-padding-large">HOME</a>
+            <div class="w3-dropdown-hover w3-hide-small">
+                <button class="w3-padding-large w3-button" title="More">MORE <i class="fa fa-caret-down"></i></button>
+                <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                    <a href="createWatchlist.html" class="w3-bar-item w3-button">Create Watchlist</a>
+                    <a href="deleteWatchlist.html" class="w3-bar-item w3-button">Delete Watchlist</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="card">
         <h2>My Watchlist</h2>
@@ -17,28 +44,57 @@
             <p class="form-field">
                 <label for="watchlist-id">Watchlist ID</label>
                 <input type="text" required class="validated-field" id="watchlist-id" placeholder="Enter Watchlist ID" autofocus>
-             
-        </form>
-  <p class="button">
-            <button type="submit"  id="get-watchlist" class="button">Get Watchlist</button>
-        <p class="button">
-            <a href="createWatchlist.html" class="button">Create Watchlist</a>
+            </p>
             <p class="button">
-                <a href="deleteWatchlist.html" class="button">Delete Watchlist</a>
-
-                
+                <button type="submit" id="get-watchlist" class="button">Get Watchlist</button>
+            </p>
+        </form>
     </div>
 
     <div class="card" id="watchlist-display" style="display: none;">
         <h2 id="watchlist-name"></h2>
         <h3>Created by: <span id="watchlist-owner"></span></h3>
-         <h3>Watchlist Content: <span id="watchlist-content-size"></span></h3> 
-         <h3>Watchlist Id: <span id="watchlist-id"></span></h3>
-         <label for="watchlist-id">Watchlist Name:</label>
-      <input type="text" required class="validated-field" id="watchlist-newName" placeholder="Enter Watchlist Name" autofocus>
-      <button type="submit"  id="update-watchlist" class="button">Update</button>
+        <h3>Watchlist Content: <span id="watchlist-content-size"></span></h3>
+        <h3>Watchlist Id: <span id="watchlist-id-display"></span></h3>
+        <label for="watchlist-newName">Watchlist Name:</label>
+        <input type="text" required class="validated-field" id="watchlist-newName" placeholder="Enter Watchlist Name" autofocus>
+        <button type="submit" id="update-watchlist" class="button">Update</button>
         <ol id="content-list"></ol>
     </div>
-    
+
+    <header class="header" id="header"></header>
+    <div class="w3-container w3-content w3-padding-64" style="max-width:800px" id="contact">
+        <h2 class="w3-wide w3-right w3-text-white">CONTACT</h2>
+        <div class="w3-row w3-padding-32">
+            <div class="w3-col m6 w3-large w3-margin-bottom">
+                <i class="fa fa-map-marker" style="width:30px"></i> Nashville, US<br>
+                <i class="fa fa-phone" style="width:30px"></i> Phone: +00 151515<br>
+                <i class="fa fa-envelope" style="width:30px"> </i> Email: mail@mail.com<br>
+            </div>
+            <div class="w3-col m6">
+                <form action="/action_page.php" target="_blank">
+                    <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
+                        <div class="w3-half">
+                            <input class="w3-input w3-border" type="text" placeholder="Name" required name="Name">
+                        </div>
+                        <div class="w3-half">
+                            <input class="w3-input w3-border" type="text" placeholder="Email" required name="Email">
+                        </div>
+                    </div>
+                    <input class="w3-input w3-border" type="text" placeholder="Message" required name="Message">
+                    <button class="w3-button w3-purple w3-section w3-right" type="submit">SEND</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer class="w3-center w3-opacity w3-light-grey w3-xlarge">
+        <i class="fa fa-facebook-official w3-hover-opacity"></i>
+        <i class="fa fa-instagram w3-hover-opacity"></i>
+        <i class="fa fa-snapchat w3-hover-opacity"></i>
+        <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+        <i class="fa fa-twitter w3-hover-opacity"></i>
+        <i class="fa fa-linkedin w3-hover-opacity"></i>
+    </footer>
 </body>
 </html>
