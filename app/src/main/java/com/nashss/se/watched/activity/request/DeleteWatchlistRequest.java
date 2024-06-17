@@ -11,6 +11,7 @@ public class DeleteWatchlistRequest {
      * Constructs an instance of DeleteWatchlistRequest.
      *
      * @param id The ID of the watchlist to be deleted.
+     * @param userId the email of the user.
      */
     public DeleteWatchlistRequest(String id, String userId) {
         this.id = id;
@@ -53,6 +54,12 @@ public class DeleteWatchlistRequest {
             return this;
         }
 
+        /**
+         * Sets the userId for the watchlist.
+         *
+         * @param userId email of the user.
+         * @return This Builder instance.
+         */
         public Builder withUserId(String userId) {
             this.userId = userId;
             return this;

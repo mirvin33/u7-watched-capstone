@@ -1,6 +1,5 @@
 package com.nashss.se.watched.activity.request;
 
-
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 
@@ -81,6 +80,12 @@ public class UpdateWatchlistRequest {
             return this;
         }
 
+        /**
+         * Sets the userId for the watchlist.
+         *
+         * @param userId email of the user.
+         * @return This Builder instance.
+         */
         public Builder withUserId(String userId) {
             this.userId = userId;
             return this;

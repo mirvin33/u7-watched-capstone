@@ -1,6 +1,5 @@
 package com.nashss.se.watched.activity.results;
 
-import com.nashss.se.watched.dynamodb.models.Watchlist;
 import com.nashss.se.watched.models.WatchlistModel;
 
 /**
@@ -14,7 +13,7 @@ public class CreateWatchlistResult {
      *
      * @param watchlist the watchlist to include in the result
      */
-      private CreateWatchlistResult(WatchlistModel watchlist) {
+    private CreateWatchlistResult(WatchlistModel watchlist) {
         this.watchlist = watchlist;
     }
 

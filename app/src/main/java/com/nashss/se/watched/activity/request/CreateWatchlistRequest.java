@@ -1,6 +1,5 @@
 package com.nashss.se.watched.activity.request;
 
-
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 

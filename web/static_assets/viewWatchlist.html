@@ -1,56 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Watchlist</title>
-    <style>
-        table {
-            width: 50%;
-            margin: 20px auto;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-        th {
-            background-color: #eee8f6;
-        }
-    </style>
-</head>
-<body>
-    <h1 style="text-align:center;">Watchlist</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Title</th>
-                <th>Email</th>
-            </tr>
-        </thead>
-        <tbody id="watchlist-body">
-        </tbody>
-    </table>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            fetch('/watchlist/${id}')
-                .then(response => response.json())
-                .then(data => {
-                    const watchlistBody = document.getElementById('get-watchlist');
-                    data.watchlist.forEach(item => {
-                        const row = document.createElement('tr');
-                        row.innerHTML = `
-                            <td>${item.PutRequest.Item.id.S}</td>
-                            <td>${item.PutRequest.Item.title.S}</td>
-                            <td>${item.PutRequest.Item.userId.S}</td>
-                        `;
-                        watchlistBody.appendChild(row);
-                    });
-                })
-                .catch(error => console.error('Error fetching watchlist:', error));
-        });
-    </script>
-</body>
-</html>
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Watchlist</title>-->
+<!--    <style>-->
+<!--        table {-->
+<!--            width: 50%;-->
+<!--            margin: 20px auto;-->
+<!--            border-collapse: collapse;-->
+<!--        }-->
+<!--        th, td {-->
+<!--            border: 1px solid #ddd;-->
+<!--            padding: 8px;-->
+<!--        }-->
+<!--        th {-->
+<!--            background-color: #eee8f6;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <h1 style="text-align:center;">Watchlist</h1>-->
+<!--    <table>-->
+<!--        <thead>-->
+<!--            <tr>-->
+<!--                <th>ID</th>-->
+<!--                <th>Title</th>-->
+<!--                <th>Email</th>-->
+<!--            </tr>-->
+<!--        </thead>-->
+<!--        <tbody id="watchlist-body">-->
+<!--        </tbody>-->
+<!--    </table>-->
+<!--    -->
+<!--    <script>-->
+<!--        document.addEventListener('DOMContentLoaded', function () {-->
+<!--            fetch('/watchlist/${id}')-->
+<!--                .then(response => response.json())-->
+<!--                .then(data => {-->
+<!--                    const watchlistBody = document.getElementById('get-watchlist');-->
+<!--                    data.watchlist.forEach(item => {-->
+<!--                        const row = document.createElement('tr');-->
+<!--                        row.innerHTML = `-->
+<!--                            <td>${item.PutRequest.Item.id.S}</td>-->
+<!--                            <td>${item.PutRequest.Item.title.S}</td>-->
+<!--                            <td>${item.PutRequest.Item.userId.S}</td>-->
+<!--                        `;-->
+<!--                        watchlistBody.appendChild(row);-->
+<!--                    });-->
+<!--                })-->
+<!--                .catch(error => console.error('Error fetching watchlist:', error));-->
+<!--        });-->
+<!--    </script>-->
+<!--</body>-->
+<!--</html>-->
