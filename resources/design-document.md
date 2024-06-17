@@ -56,6 +56,7 @@ RESTful APIs, facilitating communication between frontend clients and backend se
 String id;
 String title;
 String userId;
+List<String> contentSet
 
 ```
 ```
@@ -153,6 +154,7 @@ Client will show a successful delete message.
 id // partition key, string
 title // string
 userId // string, userId-watchlistId-index partition key
+contentSet // List 
 
 ```
 ### 7.2. `content`

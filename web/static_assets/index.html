@@ -35,44 +35,34 @@
 </head>
 
 <body class="background">
-  <header class="w3-top w3-bar w3-black w3-card">
-    <div class="w3-bar">
-      <a href="index.html" class="w3-bar-item w3-button w3-padding-large">HOME</a>
-      <div class="w3-dropdown-hover w3-hide-small">
-        <button class="w3-padding-large w3-button" title="More">MORE <i class="fa fa-caret-down"></i></button>
-        <div class="w3-dropdown-content w3-bar-block w3-card-4">
-          <a href="createWatchlist.html" class="w3-bar-item w3-button">Create Watchlist</a>
-          <a href="deleteWatchlist.html" class="w3-bar-item w3-button">Delete Watchlist</a>
-        </div>
-      </div>
-    </div>
-  </header>
-  <div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
-    <div class="w3-display-topleft w3-padding-large w3-xlarge">
-      Welcome
-    </div>
+<header class="header" id="header"></header>
+<div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
+  <div class="w3-display-topleft w3-padding-large w3-xlarge">
+    Welcome
+  </div>
 
-    <div class="w3-display-middle">
-      <h1 class="w3-jumbo w3-animate-top">Watched</h1>
-      <hr class="w3-border-grey" style="margin:auto;width:40%">
-      <p class="w3-large w3-center">All your shows in one place</p>
-    </div>
-    <div class="w3-display-bottomleft w3-padding-large">
-      <a href="getWatchlist.html" class="button">My Watchlist</a>
-    </div>
+  <div class="w3-display-middle">
+    <h1 class="w3-jumbo w3-animate-top">Watched</h1>
+    <hr class="w3-border-grey" style="margin:auto;width:40%">
+    <p class="w3-large w3-center">All your shows in one place</p>
   </div>
-        <header class="header" id="header"></header>
-  <footer class="w3-center w3-opacity w3-light-grey w3-xlarge">
-    <i class="fa fa-facebook-official w3-hover-opacity"></i>
-    <i class="fa fa-instagram w3-hover-opacity"></i>
-    <i class="fa fa-snapchat w3-hover-opacity"></i>
-    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
-    <i class="fa fa-twitter w3-hover-opacity"></i>
-    <i class="fa fa-linkedin w3-hover-opacity"></i>
-  </footer>
-  <div class="card hidden" id="search-results-container">
-    <h3>Results for <span id="search-criteria-display"></span></h3>
-    <div id="search-results-display"></div>
+  <div class="w3-display-bottomleft w3-padding-large">
+    <a href="getWatchlist.html" class="button">My Watchlist</a>
   </div>
+</div>
+
+<footer class="w3-center w3-opacity w3-light-grey w3-xlarge">
+  <i class="fa fa-facebook-official w3-hover-opacity"></i>
+  <i class="fa fa-instagram w3-hover-opacity"></i>
+  <i class="fa fa-snapchat w3-hover-opacity"></i>
+  <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+  <i class="fa fa-twitter w3-hover-opacity"></i>
+  <i class="fa fa-linkedin w3-hover-opacity"></i>
+</footer>
+
+<div class="card hidden" id="search-results-container">
+  <h3>Results for <span id="search-criteria-display"></span></h3>
+  <div id="search-results-display"></div>
+</div>
 </body>
 </html>
