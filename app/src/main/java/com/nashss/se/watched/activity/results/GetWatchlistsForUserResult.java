@@ -1,6 +1,7 @@
 package com.nashss.se.watched.activity.results;
 
 import com.nashss.se.watched.dynamodb.models.Watchlist;
+import com.nashss.se.watched.models.WatchlistModel;
 
 import java.util.List;
 
@@ -8,14 +9,14 @@ import java.util.List;
  * Result class for retrieving watchlists for a user.
  */
 public class GetWatchlistsForUserResult {
-    private final List<Watchlist> watchlists;
+    private final List<WatchlistModel> watchlists;
 
     /**
      * Constructs a GetWatchlistsForUserResult object with the provided list of watchlists.
      *
      * @param watchlists the list of watchlists retrieved for the user
      */
-    private GetWatchlistsForUserResult(List<Watchlist> watchlists) {
+    private GetWatchlistsForUserResult(List<WatchlistModel> watchlists) {
         this.watchlists = watchlists;
     }
 
@@ -33,7 +34,7 @@ public class GetWatchlistsForUserResult {
      *
      * @return the list of watchlists
      */
-    public List<Watchlist> getWatchlists() {
+    public List<WatchlistModel> getWatchlists() {
         return watchlists;
     }
 
@@ -41,7 +42,7 @@ public class GetWatchlistsForUserResult {
      * Builder class for constructing GetWatchlistsForUserResult objects.
      */
     public static class Builder {
-        private List<Watchlist> watchlists;
+        private List<WatchlistModel> watchlists;
 
         /**
          * Sets the list of watchlists for the result being built.
@@ -49,7 +50,7 @@ public class GetWatchlistsForUserResult {
          * @param watchlists the list of watchlists to include in the result
          * @return the builder instance for method chaining
          */
-        public Builder withWatchlists(List<Watchlist> watchlists) {
+        public Builder withWatchlists(List<WatchlistModel> watchlists) {
             this.watchlists = watchlists;
             return this;
         }

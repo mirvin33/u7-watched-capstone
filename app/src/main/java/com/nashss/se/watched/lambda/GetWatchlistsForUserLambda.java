@@ -12,27 +12,18 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 /**
  * Lambda function to handle retrieving watchlists for a user.
  */
-public class GetWatchlistsForUserLambda implements RequestHandler<GetWatchlistsForUserRequest,
-        GetWatchlistsForUserResult> {
-    private final ServiceComponent serviceComponent;
+public class GetWatchlistsForUserLambda
+        extends LambdaActivityRunner<GetWatchlistsForUserRequest, GetWatchlistsForUserResult>
+        implements RequestHandler<LambdaRequest<GetWatchlistsForUserRequest>, LambdaResponse> {
 
-    /**
-     * Constructs a GetWatchlistsForUserLambda with a ServiceComponent.
-     */
-    public GetWatchlistsForUserLambda() {
-        this.serviceComponent = DaggerServiceComponent.create();
-    }
-
-    /**
-     * Handles the request to retrieve watchlists for a user.
-     *
-     * @param request the request containing the user ID
-     * @param context the Lambda execution environment context
-     * @return the result containing the retrieved watchlists
-     */
     @Override
-    public GetWatchlistsForUserResult handleRequest(GetWatchlistsForUserRequest request, Context context) {
-        return serviceComponent.provideGetWatchlistsForUserActivity().handleRequest(request);
+    public LambdaResponse handleRequest(LambdaRequest<GetWatchlistsForUserRequest> input, Context context) {
+        return super.runActivity(() -> input.fromBody(GetWatchlistsForUserRequest.class),
+                (request, serviceComponent) -> serviceComponent.provideGetWatchlistsForUserActivity()
+                        .handleRequest(request)
+        );
     }
 }
+
+
 

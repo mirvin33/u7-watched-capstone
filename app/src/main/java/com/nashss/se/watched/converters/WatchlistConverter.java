@@ -19,6 +19,7 @@ public class WatchlistConverter {
                 .withId(watchlist.getId())
                 .withTitle(watchlist.getTitle())
                 .withUserId(watchlist.getUserId())
+                .withContentSet(watchlist.getContentSet())
                 .build();
     }
 
@@ -33,6 +34,7 @@ public class WatchlistConverter {
         watchlist.setId(model.getId());
         watchlist.setTitle(model.getTitle());
         watchlist.setUserId(model.getUserId());
+        watchlist.setContentSet(model.getContentSet());
         return watchlist;
     }
 }

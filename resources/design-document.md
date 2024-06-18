@@ -73,7 +73,7 @@ Boolean watched;
 
 ### 6.2 Get Watchlist Endpoint
 
-* Accepts `GET` request to `/watchlist/:id`
+* Accepts `GET` request to `/watchlist/id`
 * Accepts a watchlist ID and returns the corresponding WatchlistModel.
     * If the given watchlist ID is not found, will throw a
       `WatchlistNotFoundException`
@@ -95,7 +95,7 @@ Boolean watched;
 
 ### 6.4 Update Watchlist Endpoint
 
-* Accepts `PUT` requests to `/watchlist/:userId/update/:contentId`
+* Accepts `PUT` requests to `/watchlist/id/update`
 * Accepts data to update the status of a content item on the watchlist for the user with the specified user ID.
     * If the watchlist ID is not found, will throw a `WatchlistNotFoundException`
 * For security concerns, we will validate the provided watchlist name does not
@@ -107,7 +107,7 @@ Boolean watched;
   
 ### 6.5 Add Content to Watchlist Endpoint:
 
-* Accepts `POST` `/watchlist/:id/add`
+* Accepts `POST` `/watchlist/id/add`
 * Accepts and adds a new content item to the watchlist for the user with the specified user ID.
 * Accepts a watchlist ID and a content item to be added. 
 * By default, will insert the new content to the end of the watchlist.
@@ -117,7 +117,7 @@ front of the watchlist so that it will be the first title on the list.
 ![addContent.png](images/addContent.png)
 
 ### 6.6 Delete Watchlist Endpoint
-Accepts `DELETE` `/watchlist/:id/delete`
+Accepts `DELETE` `/watchlist/id/delete`
 User is able to delete a watchlist.
 The webClient sends a DELETE request with watchlist id to DeleteWatchlist API endpoint.
 If id does not exist, will throw `WatchlistNotFoundException`.
@@ -128,7 +128,7 @@ Client will show a successful delete message.
 
 ### 6.7 Get Watchlist Content Endpoint
 
-* Accepts `GET` requests to `/watchlist/:id/content`
+* Accepts `GET` requests to `/watchlist/id/content`
 * Retrieves all content of a watchlist with the given watchlist ID
     * Returns the content list in default watchlist order.
    
@@ -140,7 +140,7 @@ Client will show a successful delete message.
 
 ### 6.8 Get Watchlists for User Endpoint
 
-* Accepts `GET` requests to `/watchlists/:userId`
+* Accepts `GET` requests to `/watchlists/userId`
 * Accepts a user ID and returns a list of  all WatchlistModels created by the user.
     * If the given customer has not created any watchlist, an empty list will be returned.
 

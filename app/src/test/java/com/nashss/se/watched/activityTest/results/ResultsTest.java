@@ -47,10 +47,26 @@ public class ResultsTest {
 
     @Test
     public void testGetWatchlistsForUserResultBuilder() {
-        List<Watchlist> watchlists = Arrays.asList(new Watchlist(), new Watchlist());
+        WatchlistModel watchlistModel1 = WatchlistModel.builder()
+                .withId("1")
+                .withTitle("Watchlist 1")
+                .withUserId("user1")
+                .withContentSet(Arrays.asList("item1", "item2"))
+                .build();
+
+        WatchlistModel watchlistModel2 = WatchlistModel.builder()
+                .withId("2")
+                .withTitle("Watchlist 2")
+                .withUserId("user2")
+                .withContentSet(Arrays.asList("item3", "item4"))
+                .build();
+
+        List<WatchlistModel> watchlists = Arrays.asList(watchlistModel1, watchlistModel2);
+
         GetWatchlistsForUserResult result = GetWatchlistsForUserResult.builder()
                 .withWatchlists(watchlists)
                 .build();
+
         assertEquals(watchlists, result.getWatchlists());
     }
 

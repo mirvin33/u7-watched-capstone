@@ -322,6 +322,26 @@ Resources:
             Path: /watchlist/{id}/add
             Method: post
 
+  GetWatchlistsForUserLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: !GetAtt AccessRole.Arn
+      CodeUri: app
+      Handler: com.nashss.se.watched.lambda.GetWatchlistsForUserLambda::handleRequest
+      Runtime: java11
+      Architectures:
+        - x86_64
+      MemorySize: 512
+      Environment:
+        Variables:
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+      Events:
+        GetWatchlistsForUser:
+          Type: Api
+          Properties:
+            Path: /watchlist/{userId}
+            Method: get
+
 
 #  -----------------------------------------------------
 #  # DynamoDB Configuration

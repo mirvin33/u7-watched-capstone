@@ -1,12 +1,12 @@
 package com.nashss.se.watched.dynamodb;
 
+import com.amazonaws.services.cloudwatch.model.StandardUnit;
+import com.amazonaws.services.dynamodbv2.datamodeling.*;
 import com.nashss.se.watched.dynamodb.models.Watchlist;
 import com.nashss.se.watched.exceptions.WatchlistNotFoundException;
 import com.nashss.se.watched.metrics.MetricsConstants;
 import com.nashss.se.watched.metrics.MetricsPublisher;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 
 import java.util.HashMap;
@@ -22,8 +22,8 @@ import javax.inject.Singleton;
  */
 @Singleton
 public class WatchlistDao {
-    private final DynamoDBMapper dynamoDbMapper;
-    private final MetricsPublisher metricsPublisher;
+    private DynamoDBMapper dynamoDbMapper;
+    private MetricsPublisher metricsPublisher;
 
     /**
      * Instantiates a WatchlistDao object.
@@ -38,8 +38,7 @@ public class WatchlistDao {
     }
 
     /**
-     * Returns the {@link Watchlist} corresponding to the specified id.
-     *
+     * Returns the Watchlist corresponding to the specified id.
      * @param id the Watchlist ID
      * @return the stored Watchlist, or null if none was found.
      */
@@ -49,8 +48,9 @@ public class WatchlistDao {
         if (watchlist == null) {
             metricsPublisher.addCount(MetricsConstants.GETWATCHLIST_WATCHLISTNOTFOUND_COUNT, 1);
             throw new WatchlistNotFoundException("Could not find watchlist with id " + id);
+        }else {
+            metricsPublisher.addCount(MetricsConstants.GETWATCHLIST_WATCHLISTNOTFOUND_COUNT, 0);
         }
-        metricsPublisher.addCount(MetricsConstants.GETWATCHLIST_WATCHLISTNOTFOUND_COUNT, 0);
         return watchlist;
     }
 
@@ -68,65 +68,17 @@ public class WatchlistDao {
     }
 
     /**
-     * Perform a search (via a "scan") of the watchlist table for watchlists matching the given criteria.
-     * The "watchlistID" attributes are searched.
-     * The criteria are an array of Strings. Each element of the array is search individually.
-     * ALL elements of the criteria array must appear in the watchlistName or the tags (or both).
-     * Searches are CASE SENSITIVE.
+     * Returns a list of Watchlist objects for a specified user ID.
      *
-     * @param criteria an array of String containing search criteria.
-     * @return a List of watchlist objects that match the search criteria.
-     */
-    public List<Watchlist> searchWatchlists(String[] criteria) {
-        DynamoDBScanExpression dynamoDBScanExpression = new DynamoDBScanExpression();
-
-        if (criteria.length > 0) {
-            Map<String, AttributeValue> valueMap = new HashMap<>();
-            String valueMapNamePrefix = ":c";
-
-            StringBuilder nameFilterExpression = new StringBuilder();
-
-            for (int i = 0; i < criteria.length; i++) {
-                valueMap.put(valueMapNamePrefix + i,
-                        new AttributeValue().withS(criteria[i]));
-                nameFilterExpression.append(
-                        filterExpressionPart("watchlistName", valueMapNamePrefix, i));
-            }
-
-            dynamoDBScanExpression.setExpressionAttributeValues(valueMap);
-            dynamoDBScanExpression.setFilterExpression(
-                    "(" + nameFilterExpression + ")");
-        }
-
-        return this.dynamoDbMapper.scan(Watchlist.class, dynamoDBScanExpression);
-    }
-
-    private StringBuilder filterExpressionPart(String target, String valueMapNamePrefix, int position) {
-        String possiblyAnd = position == 0 ? "" : "and ";
-        return new StringBuilder()
-                .append(possiblyAnd)
-                .append("contains(")
-                .append(target)
-                .append(", ")
-                .append(valueMapNamePrefix).append(position)
-                .append(") ");
-    }
-
-    /**
-     * Returns a list of {@link Watchlist} objects for a specified user ID.
-     *
-     * @param userId the user ID
      * @return a list of Watchlist objects for the specified user
      */
-    public List<Watchlist> getWatchlistsForUser(String userId) {
-        Map<String, AttributeValue> valueMap = new HashMap<>();
-        valueMap.put(":userId", new AttributeValue().withS(userId));
-
-        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression()
-                .withFilterExpression("userId = :userId")
-                .withExpressionAttributeValues(valueMap);
-
-        return dynamoDbMapper.scan(Watchlist.class, scanExpression);
+    public List<Watchlist> getWatchlistsForUser() {
+        double startTime = System.currentTimeMillis();
+        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
+        PaginatedScanList<Watchlist> watchlistList = dynamoDbMapper.scan(Watchlist.class, scanExpression);
+        double totalTime = System.currentTimeMillis() - startTime;
+        metricsPublisher.addMetric(MetricsConstants.GET_ALL_TIME, totalTime, StandardUnit.Milliseconds);
+        return watchlistList;
     }
 
     /**
