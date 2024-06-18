@@ -76,7 +76,7 @@ public class WatchlistDao {
      */
     public List<Watchlist> getWatchlistsForUser(String userId) {
         DynamoDBQueryExpression<Watchlist> queryExpression = new DynamoDBQueryExpression<Watchlist>()
-                .withIndexName("userId-watchlistId-index")
+                .withIndexName("userId-index")
                 .withConsistentRead(false)
                 .withKeyConditionExpression("userId = :val1")
                 .withExpressionAttributeValues(Map.of(":val1", new AttributeValue().withS(userId)));
