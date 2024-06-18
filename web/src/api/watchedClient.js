@@ -16,7 +16,8 @@ export default class WatchedClient extends BindingClass {
         super();
 
         const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getWatchlist', 'getWatchlistContent',
-        'createWatchlist', 'addContentToWatchlist', 'deleteWatchlist', 'searchWatchlists', 'updateWatchlist', 'getWatchlistsForUser'];
+        'createWatchlist', 'addContentToWatchlist', 'deleteWatchlist',
+        'searchWatchlists', 'updateWatchlist', 'getWatchlistsForUser'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();

@@ -261,8 +261,6 @@ Resources:
           Properties:
             Path: /watchlist
             Method: post
-            Auth:
-              Authorizer: 'NONE'
 
   UpdateWatchlistLambda:
     Type: AWS::Serverless::Function
@@ -283,8 +281,6 @@ Resources:
           Properties:
             Path: /watchlist/{id}/update
             Method: put
-            Auth:
-              Authorizer: 'NONE'
 
   DeleteWatchlistLambda:
     Type: AWS::Serverless::Function
@@ -305,8 +301,6 @@ Resources:
           Properties:
             Path: /watchlist/{id}/delete
             Method: delete
-            Auth:
-              Authorizer: 'NONE'
 
   AddContentToWatchlistLambda:
     Type: AWS::Serverless::Function
@@ -327,8 +321,6 @@ Resources:
           Properties:
             Path: /watchlist/{id}/add
             Method: post
-            Auth:
-              Authorizer: 'NONE'
 
   GetWatchlistsForUserLambda:
     Type: AWS::Serverless::Function
@@ -349,8 +341,6 @@ Resources:
           Properties:
             Path: /watchlist/{userId}
             Method: get
-            Auth:
-              Authorizer: 'NONE'
 
 
 #  -----------------------------------------------------

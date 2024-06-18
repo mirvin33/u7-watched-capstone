@@ -2,7 +2,6 @@ import WatchedClient from '../api/watchedClient';
 import Header from '../components/header';
 import BindingClass from '../util/bindingClass';
 import DataStore from '../util/DataStore';
-import Authenticator from '../api/authenticator';
 
 /**
  * Logic needed for the create watchlist page of the website.
@@ -12,7 +11,6 @@ class CreateWatchlist extends BindingClass {
         super();
         this.bindClassMethods(['mount', 'submit'], this);
         this.dataStore = new DataStore();
-        this.authenticator = new Authenticator();
         this.dataStore.addChangeListener(this.redirectToWatchlist);
         this.header = new Header(this.dataStore);
     }

@@ -2,14 +2,12 @@ import WatchedClient from '../api/watchedClient';
 import Header from '../components/header';
 import BindingClass from '../util/bindingClass';
 import DataStore from '../util/DataStore';
-import Authenticator from '../api/authenticator';
 
 class DeleteWatchlist extends BindingClass {
     constructor() {
         super();
         this.bindClassMethods(['mount', 'submit', 'clientLoaded'], this);
         this.dataStore = new DataStore();
-        this.authenticator = new Authenticator();
         this.header = new Header(this.dataStore);
         console.log("deleteWatchlist constructor");
     }
