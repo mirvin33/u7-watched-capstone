@@ -9,8 +9,8 @@ import DataStore from "../util/DataStore";
 class GetWatchlist extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['clientLoaded', 'mount', 'submit', 'updateWatchlistDisplay', 
-            'redirectToUpdateWatchlist', 'updateWatchlistName'], this);
+        this.bindClassMethods(['clientLoaded', 'mount', 'submit','submit2', 'updateWatchlistDisplay',
+            'updateWatchlistsDisplay', 'redirectToUpdateWatchlist', 'updateWatchlistName'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
         console.log("getWatchlist constructor");
@@ -62,6 +62,33 @@ class GetWatchlist extends BindingClass {
             }
         }
 
+        async submit2(evt) {
+            evt.preventDefault();
+        
+            const errorMessageDisplay = document.getElementById('error-message');
+            errorMessageDisplay.innerText = ``;
+            errorMessageDisplay.classList.add('hidden');
+            
+            const createButton = document.getElementById('get-watchlists');
+            const origButtonText = createButton.innerText;
+            createButton.innerText = 'Loading...';
+        
+            const userId = document.getElementById('user-id').value;
+            console.log("userId = ", userId);
+        
+                const watchlists = await this.client.getWatchlistsForUser(userId, (error) => {
+                
+                errorMessageDisplay.innerText = `Error: ${error.message}`;
+                errorMessageDisplay.classList.remove('hidden');
+            });
+                if (watchlists) {
+                    createButton.innerText = 'Get Watchlist';
+                    console.log("watchlists = ", watchlists);
+                    this.dataStore.set('watchlists', watchlists);
+                    this.updateWatchlistsDisplay(watchlists);
+                }
+            }    
+
      /**
      * Update the watchlist display with the fetched watchlist data.
      * @param watchlist The watchlist data to display.
@@ -90,6 +117,30 @@ class GetWatchlist extends BindingClass {
             });
         } 
         watchlistDisplay.style.display = 'block';
+    }
+
+    /**
+     * Update the watchlists display with the fetched watchlist data.
+     * @param watchlist The watchlists data to display.
+     */
+    async updateWatchlistsDisplay(watchlists) {
+        const watchlistsDisplay = document.getElementById('watchlists-display');
+        const watchlistsNames = document.getElementById('watchlists-names');
+        const watchlistsOwner = document.getElementById('watchlists-owner');
+        const userID = document.getElementById('user-id');
+        const watchlistsIdDisplay = document.getElementById('watchlists-id-display');
+ 
+        watchlistsNames.innerText = watchlists.title;
+        watchlistsOwner.innerText = watchlists.userId;
+        watchlistsIdDisplay.innerText = watchlists.id;
+
+        const userId = watchlists.userId;
+        const listsItem = document.createElement('list');
+        listsItem.innerText = await this.client.getWatchlistsForUser(userId);
+
+        if (userId != null) {
+        watchlistsDisplay.style.display = 'block';
+        }
     }
 
    /**

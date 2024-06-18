@@ -9,6 +9,7 @@ import com.nashss.se.watched.metrics.MetricsPublisher;
 
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -72,13 +73,16 @@ public class WatchlistDao {
      *
      * @return a list of Watchlist objects for the specified user
      */
-    public List<Watchlist> getWatchlistsForUser() {
-        double startTime = System.currentTimeMillis();
-        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
-        PaginatedScanList<Watchlist> watchlistList = dynamoDbMapper.scan(Watchlist.class, scanExpression);
-        double totalTime = System.currentTimeMillis() - startTime;
-        metricsPublisher.addMetric(MetricsConstants.GET_ALL_TIME, totalTime, StandardUnit.Milliseconds);
-        return watchlistList;
+    public List<Watchlist> getWatchlistsForUser(String userId) {
+        Watchlist watchlists = this.dynamoDbMapper.load(Watchlist.class, userId);
+
+        if (watchlists == null) {
+            metricsPublisher.addCount(MetricsConstants.GETWATCHLIST_WATCHLISTNOTFOUND_COUNT, 1);
+            throw new WatchlistNotFoundException("Could not find watchlist with email: " + userId);
+        }else {
+            metricsPublisher.addCount(MetricsConstants.GETWATCHLIST_WATCHLISTNOTFOUND_COUNT, 0);
+        }
+        return new ArrayList<Watchlist>();
     }
 
     /**

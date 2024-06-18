@@ -40,7 +40,7 @@ public class GetWatchlistsForUserActivity {
     public GetWatchlistsForUserResult handleRequest(final GetWatchlistsForUserRequest getWatchlistsForUserRequest) {
         log.info("Handle Request Started for Get All Watchlists: Request ={}", getWatchlistsForUserRequest);
 
-        List<Watchlist> watchlists = watchlistDao.getWatchlistsForUser();
+        List<Watchlist> watchlists = watchlistDao.getWatchlistsForUser(getWatchlistsForUserRequest.getUserId());
         log.info("Retrieved Watchlists for User = {}", watchlists);
 
         List<WatchlistModel> watchlistModels = new ArrayList<>();

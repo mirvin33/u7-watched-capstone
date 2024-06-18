@@ -2,6 +2,7 @@ import WatchedClient from '../api/watchedClient';
 import Header from '../components/header';
 import BindingClass from '../util/bindingClass';
 import DataStore from '../util/DataStore';
+import Authenticator from '../api/authenticator';
 
 /**
  * Logic needed for the update watchlist page of the website.
@@ -12,6 +13,7 @@ class UpdateWatchlist extends BindingClass {
         this.bindClassMethods(['clientLoaded', 'mount', 'submit', 'updateWatchlist', 'updateWatchlistDisplay', 'getContentTitle'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
+        this.authenticator = new Authenticator();
         console.log("updateWatchlist constructor");
     }
 
