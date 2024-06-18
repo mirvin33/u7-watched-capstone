@@ -3,8 +3,8 @@ package com.nashss.se.watched.activity;
 import com.nashss.se.watched.activity.request.GetWatchlistsForUserRequest;
 import com.nashss.se.watched.activity.results.GetWatchlistsForUserResult;
 import com.nashss.se.watched.converters.WatchlistConverter;
-import com.nashss.se.watched.dynamodb.WatchlistDao;
 
+import com.nashss.se.watched.dynamodb.WatchlistDao;
 import com.nashss.se.watched.dynamodb.models.Watchlist;
 import com.nashss.se.watched.models.WatchlistModel;
 import org.apache.logging.log4j.LogManager;
@@ -40,7 +40,7 @@ public class GetWatchlistsForUserActivity {
     public GetWatchlistsForUserResult handleRequest(final GetWatchlistsForUserRequest getWatchlistsForUserRequest) {
         log.info("Handle Request Started for Get All Watchlists: Request ={}", getWatchlistsForUserRequest);
 
-        List<Watchlist> watchlists = watchlistDao.getWatchlistsForUser();
+        List<Watchlist> watchlists = watchlistDao.getWatchlistsForUser(getWatchlistsForUserRequest.getUserId());
         log.info("Retrieved Watchlists for User = {}", watchlists);
 
         List<WatchlistModel> watchlistModels = new ArrayList<>();

@@ -16,7 +16,8 @@ export default class WatchedClient extends BindingClass {
         super();
 
         const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getWatchlist', 'getWatchlistContent',
-        'createWatchlist', 'addContentToWatchlist', 'deleteWatchlist', 'searchWatchlists', 'updateWatchlist'];
+        'createWatchlist', 'addContentToWatchlist', 'deleteWatchlist',
+        'searchWatchlists', 'updateWatchlist', 'getWatchlistsForUser'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();
@@ -74,7 +75,7 @@ export default class WatchedClient extends BindingClass {
     /**
      * Gets the watchlist for the given ID.
      * @param id Unique identifier for a watchlist
-     * @param errorCallback (Optional) A function to execute if the call fails.
+     * @param errorCallback A function to execute if the call fails.
      * @returns The watchlist's metadata.
      */
     async getWatchlist(id, errorCallback) {
@@ -89,9 +90,26 @@ export default class WatchedClient extends BindingClass {
     }
 
     /**
+     * Gets the watchlist for the given ID.
+     * @param userId Unique identifier for all watchlists
+     * @param errorCallback A function to execute if the call fails.
+     * @returns The watchlist's metadata.
+     */
+    async getWatchlistsForUser(userId, errorCallback) {
+        try {
+            console.log("getWatchlists from Client");
+            const response = await this.axiosClient.get(`watchlists/${userId}`
+               );
+            return response.data.watchlist;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
+
+    /**
      * Get the content of a given watchlist by the watchlist's identifier.
      * @param   id Unique identifier for a watchlist
-     * @param errorCallback (Optional) A function to execute if the call fails.
+     * @param errorCallback A function to execute if the call fails.
      * @returns The list of content in a watchlist.
      */
     async getWatchlistContent(id, errorCallback) {
@@ -102,6 +120,7 @@ export default class WatchedClient extends BindingClass {
             this.handleError(error, errorCallback)
         }
     }
+    
 
     /**
      * Create a new watchlist owned by the current user.

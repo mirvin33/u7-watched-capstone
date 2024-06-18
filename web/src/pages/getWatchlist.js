@@ -9,8 +9,8 @@ import DataStore from "../util/DataStore";
 class GetWatchlist extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['clientLoaded', 'mount', 'submit', 'updateWatchlistDisplay', 
-            'redirectToUpdateWatchlist', 'updateWatchlistName'], this);
+        this.bindClassMethods(['clientLoaded', 'mount', 'submit','submit2', 'updateWatchlistDisplay',
+            'updateWatchlistsDisplay', 'redirectToUpdateWatchlist', 'updateWatchlistName'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
         console.log("getWatchlist constructor");
@@ -28,6 +28,7 @@ class GetWatchlist extends BindingClass {
      */
     mount() {
         document.getElementById('get-watchlist').addEventListener('click', this.submit);
+        document.getElementById('get-watchlists-for-user').addEventListener('click', this.submit2);
         document.getElementById('update-watchlist').addEventListener('click', this.updateWatchlistName);
         this.header.addHeaderToPage();
 
@@ -62,6 +63,34 @@ class GetWatchlist extends BindingClass {
             }
         }
 
+         async submit2(evt) {
+        evt.preventDefault();
+
+        const errorMessageDisplay = document.getElementById('error-message');
+        errorMessageDisplay.innerText = ``;
+        errorMessageDisplay.classList.add('hidden');
+
+        const createButton = document.getElementById('get-watchlists-for-user');
+        const origButtonText = createButton.innerText;
+        createButton.innerText = 'Getting Watchlists...';
+
+        const userId = document.getElementById('user-id').value;
+        console.log("userId = ", userId);
+
+        try {
+            const watchlists = await this.client.getWatchlistsForUser(userId);
+            createButton.innerText = origButtonText;
+            if (watchlists) {
+                console.log("watchlists = ", watchlists);
+                this.dataStore.set('watchlists', watchlists);
+                this.updateWatchlistsDisplay(watchlists);
+            }
+        } catch (error) {
+            errorMessageDisplay.innerText = `Error: ${error.message}`;
+            errorMessageDisplay.classList.remove('hidden');
+        }
+    }
+
      /**
      * Update the watchlist display with the fetched watchlist data.
      * @param watchlist The watchlist data to display.
@@ -75,7 +104,6 @@ class GetWatchlist extends BindingClass {
         const watchlistIdDisplay = document.getElementById('watchlist-id-display');
         const contentList = document.getElementById('content-list');
 
-      
         watchlistName.innerText = watchlist.title;
         watchlistOwner.innerText = watchlist.userId;
         contentListOG.innerText = watchlist.contentSet;
@@ -90,6 +118,28 @@ class GetWatchlist extends BindingClass {
             });
         } 
         watchlistDisplay.style.display = 'block';
+    }
+
+    /**
+     * Update the watchlists display with the fetched watchlist data.
+     * @param watchlist The watchlists data to display.
+     */
+    async updateWatchlistsDisplay(watchlists) {
+        const watchlistsDisplay = document.getElementById('watchlists-display');
+        const watchlistsNames = document.getElementById('watchlists-names');
+        const watchlistsOwner = document.getElementById('watchlists-owner');
+        const userID = document.getElementById('user-id');
+        const watchlistsIdDisplay = document.getElementById('watchlists-id-display');
+ 
+        watchlistsNames.innerText = watchlists.title;
+        watchlistsOwner.innerText = watchlists.userId;
+        watchlistsIdDisplay.innerText = watchlists.id;
+
+        const userId = watchlists.userId;
+        const listsItem = document.createElement('li');
+        listsItem.innerText = await this.client.getWatchlistsForUser(userId);
+
+        watchlistsDisplay.style.display = 'block';
     }
 
    /**

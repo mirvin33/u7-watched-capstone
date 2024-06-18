@@ -2,11 +2,11 @@ package com.nashss.se.watched.lambda;
 
 import com.nashss.se.watched.activity.request.GetWatchlistsForUserRequest;
 import com.nashss.se.watched.activity.results.GetWatchlistsForUserResult;
-import com.nashss.se.watched.dependency.DaggerServiceComponent;
-import com.nashss.se.watched.dependency.ServiceComponent;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 /**
@@ -16,11 +16,16 @@ public class GetWatchlistsForUserLambda
         extends LambdaActivityRunner<GetWatchlistsForUserRequest, GetWatchlistsForUserResult>
         implements RequestHandler<LambdaRequest<GetWatchlistsForUserRequest>, LambdaResponse> {
 
+    private final Logger log =  LogManager.getLogger();
+
     @Override
     public LambdaResponse handleRequest(LambdaRequest<GetWatchlistsForUserRequest> input, Context context) {
-        return super.runActivity(() -> input.fromBody(GetWatchlistsForUserRequest.class),
-                (request, serviceComponent) -> serviceComponent.provideGetWatchlistsForUserActivity()
-                        .handleRequest(request)
+        log.info("handleRequest");
+        return super.runActivity(() -> input.fromPath(path ->
+                GetWatchlistsForUserRequest.builder()
+                        .withUserId(path.get("userId"))
+                        .build()), (request, serviceComponent) ->
+                serviceComponent.provideGetWatchlistsForUserActivity().handleRequest(request)
         );
     }
 }

@@ -1,9 +1,6 @@
 package com.nashss.se.watched.dynamodb.models;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBIndexHashKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+import com.amazonaws.services.dynamodbv2.datamodeling.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +28,7 @@ public class Watchlist {
      * @return the ID of the watchlist
      */
     @DynamoDBHashKey(attributeName = "id")
+    @DynamoDBIndexRangeKey(globalSecondaryIndexName = "userId-index", attributeName = "userId")
     public String getId() {
         return id;
     }
@@ -68,7 +66,7 @@ public class Watchlist {
      *
      * @return the user ID
      */
-    @DynamoDBIndexHashKey(globalSecondaryIndexName = "userId-watchlistId-index", attributeName = "userId")
+    @DynamoDBIndexHashKey(globalSecondaryIndexName = "userId-index", attributeName = "userId")
     public String getUserId() {
         return userId;
     }

@@ -9,6 +9,7 @@ import com.nashss.se.watched.metrics.MetricsPublisher;
 
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,17 +69,19 @@ public class WatchlistDao {
     }
 
     /**
-     * Returns a list of Watchlist objects for a specified user ID.
+     * Fetches all watchlists for a specific userId using the GSI.
      *
-     * @return a list of Watchlist objects for the specified user
+     * @param userId The userId to query watchlists for
+     * @return List of Watchlist objects associated with the userId
      */
-    public List<Watchlist> getWatchlistsForUser() {
-        double startTime = System.currentTimeMillis();
-        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
-        PaginatedScanList<Watchlist> watchlistList = dynamoDbMapper.scan(Watchlist.class, scanExpression);
-        double totalTime = System.currentTimeMillis() - startTime;
-        metricsPublisher.addMetric(MetricsConstants.GET_ALL_TIME, totalTime, StandardUnit.Milliseconds);
-        return watchlistList;
+    public List<Watchlist> getWatchlistsForUser(String userId) {
+        DynamoDBQueryExpression<Watchlist> queryExpression = new DynamoDBQueryExpression<Watchlist>()
+                .withIndexName("userId-index")
+                .withConsistentRead(false)
+                .withKeyConditionExpression("userId = :val1")
+                .withExpressionAttributeValues(Map.of(":val1", new AttributeValue().withS(userId)));
+
+        return dynamoDbMapper.query(Watchlist.class, queryExpression);
     }
 
     /**
