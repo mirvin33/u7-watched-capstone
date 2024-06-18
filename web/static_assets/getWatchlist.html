@@ -39,7 +39,7 @@
 
     <div class="card">
         <h2>My Watchlist</h2>
-        <form id="watchlist-form" class="card-content">
+        <form id="get-watchlist-form" class="card-content">
             <p class="hidden error" id="error-message"></p>
             <p class="form-field">
                 <label for="watchlist-id">Watchlist ID</label>
@@ -49,22 +49,27 @@
                 <button type="submit" id="get-watchlist" class="button">Get Watchlist</button>
             </p>
         </form>
-        <form id="watchlist-form" class="card-content">
+    </div>
+
+    <div class="card">
+        <h2>All Watchlists</h2>
+        <form id="get-watchlists-form" class="card-content">
             <p class="hidden error" id="error-message"></p>
             <p class="form-field">
-                <label for="watchlists-id">Get All Watchlist</label>
+                <label for="user-id">Email</label>
                 <input type="text" required class="validated-field" id="user-id" placeholder="Enter Email" autofocus>
             </p>
             <p class="button">
-                <button type="submit" id="get-watchlists" class="button">Get My Watchlists</button>
+                <button type="submit" id="get-watchlists-for-user" class="button">Get My Watchlists</button>
             </p>
         </form>
-        
     </div>
+
     <div class="card" id="watchlists-display" style="display: none;">
         <h2 id="watchlists-names"></h2>
         <h3>Created by: <span id="watchlists-owner"></span></h3>
         <h3>Watchlist Id: <span id="watchlists-id-display"></span></h3>
+    </div>
 
     <div class="card" id="watchlist-display" style="display: none;">
         <h2 id="watchlist-name"></h2>
@@ -78,8 +83,6 @@
     </div>
 
     <header class="header" id="header"></header>
-        </div>
-    </div>
 
     <footer class="w3-center w3-opacity w3-light-grey w3-xlarge">
         <i class="fa fa-facebook-official w3-hover-opacity"></i>

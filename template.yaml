@@ -339,7 +339,7 @@ Resources:
         GetWatchlistsForUser:
           Type: Api
           Properties:
-            Path: /watchlist/{userId}
+            Path: /watchlists/{userId}
             Method: get
 
 
@@ -359,7 +359,7 @@ Resources:
       - AttributeName: id
         KeyType: HASH
       GlobalSecondaryIndexes:
-      - IndexName: id-watchlistId-index
+      - IndexName: userId-index
         KeySchema:
         - AttributeName: userId
           KeyType: HASH

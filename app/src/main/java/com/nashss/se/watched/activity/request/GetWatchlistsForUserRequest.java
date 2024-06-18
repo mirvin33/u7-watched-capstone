@@ -1,6 +1,8 @@
 package com.nashss.se.watched.activity.request;
 
 
+import java.util.Objects;
+
 /**
  * Request class for retrieving watchlists for a user.
  */
@@ -12,8 +14,8 @@ public class GetWatchlistsForUserRequest {
      *
      * @param userId the ID of the user
      */
-    public GetWatchlistsForUserRequest(String userId) {
-        this.userId = userId;
+    public GetWatchlistsForUserRequest(Builder builder) {
+        this.userId = builder.userId;
     }
 
     /**
@@ -23,6 +25,19 @@ public class GetWatchlistsForUserRequest {
      */
     public String getUserId() {
         return userId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        GetWatchlistsForUserRequest that = (GetWatchlistsForUserRequest) o;
+        return Objects.equals(userId, that.userId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userId);
     }
 
     /**
@@ -57,7 +72,7 @@ public class GetWatchlistsForUserRequest {
          * @return the created GetWatchlistsForUserRequest
          */
         public GetWatchlistsForUserRequest build() {
-            return new GetWatchlistsForUserRequest(userId);
+            return new GetWatchlistsForUserRequest(this);
         }
     }
 }

@@ -34,7 +34,12 @@ public class GetWatchlistsForUserActivityTest {
     void handleRequest_ReturnsWatchlists() {
         // Arrange
         String userId = "userId";
-        GetWatchlistsForUserRequest request = new GetWatchlistsForUserRequest(userId);
+
+        // Assuming there's a builder for GetWatchlistsForUserRequest
+        GetWatchlistsForUserRequest request = GetWatchlistsForUserRequest.builder()
+                .withUserId(userId)
+                .build();
+
         List<Watchlist> watchlists = new ArrayList<>();
         when(watchlistDao.getWatchlistsForUser(userId)).thenReturn(watchlists);
 

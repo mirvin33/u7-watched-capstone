@@ -98,7 +98,7 @@ export default class WatchedClient extends BindingClass {
     async getWatchlistsForUser(userId, errorCallback) {
         try {
             console.log("getWatchlists from Client");
-            const response = await this.axiosClient.get(`watchlist/${userId}`
+            const response = await this.axiosClient.get(`watchlists/${userId}`
                );
             return response.data.watchlist;
         } catch (error) {

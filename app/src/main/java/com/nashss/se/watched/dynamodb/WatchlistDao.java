@@ -69,20 +69,19 @@ public class WatchlistDao {
     }
 
     /**
-     * Returns a list of Watchlist objects for a specified user ID.
+     * Fetches all watchlists for a specific userId using the GSI.
      *
-     * @return a list of Watchlist objects for the specified user
+     * @param userId The userId to query watchlists for
+     * @return List of Watchlist objects associated with the userId
      */
     public List<Watchlist> getWatchlistsForUser(String userId) {
-        Watchlist watchlists = this.dynamoDbMapper.load(Watchlist.class, userId);
+        DynamoDBQueryExpression<Watchlist> queryExpression = new DynamoDBQueryExpression<Watchlist>()
+                .withIndexName("userId-watchlistId-index")
+                .withConsistentRead(false)
+                .withKeyConditionExpression("userId = :val1")
+                .withExpressionAttributeValues(Map.of(":val1", new AttributeValue().withS(userId)));
 
-        if (watchlists == null) {
-            metricsPublisher.addCount(MetricsConstants.GETWATCHLIST_WATCHLISTNOTFOUND_COUNT, 1);
-            throw new WatchlistNotFoundException("Could not find watchlist with email: " + userId);
-        }else {
-            metricsPublisher.addCount(MetricsConstants.GETWATCHLIST_WATCHLISTNOTFOUND_COUNT, 0);
-        }
-        return new ArrayList<Watchlist>();
+        return dynamoDbMapper.query(Watchlist.class, queryExpression);
     }
 
     /**
