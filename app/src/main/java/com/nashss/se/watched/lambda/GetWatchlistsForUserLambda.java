@@ -22,12 +22,6 @@ public class GetWatchlistsForUserLambda
     @Override
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<GetWatchlistsForUserRequest> input, Context context) {
         log.info("handleRequest");
-        // return super.runActivity(() -> input.fromPath(path ->
-        //         GetWatchlistsForUserRequest.builder()
-        //                 .withUserId(path.get("userId"))
-        //                 .build()), (request, serviceComponent) ->
-        //         serviceComponent.provideGetWatchlistsForUserActivity().handleRequest(request)
-        // );
         return super.runActivity(
                 () -> {
                     return input.fromUserClaims(claims ->

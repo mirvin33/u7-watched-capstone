@@ -45,7 +45,6 @@ class DeleteWatchlistActivityTest {
     }
     @Test
     void handleRequest_watchlistNotFound_throwsException() {
-        // Arrange
         DeleteWatchlistRequest request = new DeleteWatchlistRequest.Builder()
                 .withId("nonexistentId")
                 .withUserId("useremail@email.com")
@@ -53,14 +52,12 @@ class DeleteWatchlistActivityTest {
 
         when(watchlistDao.deleteWatchlist(anyString())).thenThrow(new WatchlistNotFoundException("Watchlist not found"));
 
-        // Act & Assert
         assertThrows(WatchlistNotFoundException.class, () -> deleteWatchlistActivity.handleRequest(request));
         verify(watchlistDao, times(1)).deleteWatchlist(anyString());
     }
 
     @Test
     void handleRequest_validRequest_logsAndDeletesWatchlist() {
-        // Arrange
         DeleteWatchlistRequest request = new DeleteWatchlistRequest.Builder()
                 .withId("654")
                 .withUserId("useremail@email.com")
@@ -70,10 +67,8 @@ class DeleteWatchlistActivityTest {
 
         when(watchlistDao.deleteWatchlist(anyString())).thenReturn(message);
 
-        // Act
         DeleteWatchlistResult result = deleteWatchlistActivity.handleRequest(request);
 
-        // Assert
         assertNotNull(result);
         assertEquals(message, result.getDeleteResult());
         verify(watchlistDao, times(1)).deleteWatchlist(anyString());

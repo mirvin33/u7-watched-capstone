@@ -34,15 +34,12 @@ public class CreateWatchlistActivityTest {
 
     @Test
     void handleRequest_ValidName_CreatesWatchlist() {
-        // Arrange
         CreateWatchlistRequest request = new CreateWatchlistRequest("Test Watchlist", "userId");
         Watchlist watchlist = new Watchlist();
         when(watchlistDao.saveWatchlist(any())).thenReturn(watchlist);
 
-        // Act
         CreateWatchlistResult result = createWatchlistActivity.handleRequest(request);
 
-        // Assert
         assertNotNull(result);
         assertNotNull(result.getWatchlist());
         assertEquals("Test Watchlist", result.getWatchlist().getTitle());
@@ -52,17 +49,15 @@ public class CreateWatchlistActivityTest {
 
     @Test
     void handleRequest_InvalidName_ThrowsException() {
-        // Arrange
         CreateWatchlistRequest request = new CreateWatchlistRequest("Test'Watchlist", "userId");
 
-        // Act & Assert
         assertThrows(InvalidAttributeValueException.class, () -> createWatchlistActivity.handleRequest(request));
         verify(watchlistDao, never()).saveWatchlist(any());
     }
 
     @Test
     void handleRequest_ValidNameAndUserId_CreatesWatchlistWithNonNullFields() {
-        // Arrange
+
         String title = "Another Watchlist";
         String userId = "anotherUserId";
         CreateWatchlistRequest request = new CreateWatchlistRequest(title, userId);
@@ -75,10 +70,8 @@ public class CreateWatchlistActivityTest {
 
         when(watchlistDao.saveWatchlist(any(Watchlist.class))).thenReturn(watchlist);
 
-        // Act
         CreateWatchlistResult result = createWatchlistActivity.handleRequest(request);
 
-        // Assert
         assertNotNull(result);
         WatchlistModel watchlistModel = result.getWatchlist();
         assertNotNull(watchlistModel);
