@@ -51,7 +51,7 @@
         </form>
     </div>
 
-    <div class="card">
+    <!-- <div class="card">
         <h2>All Watchlists</h2>
         <form id="get-watchlists-form" class="card-content">
             <p class="hidden error" id="error-message"></p>
@@ -63,12 +63,10 @@
                 <button type="submit" id="get-watchlists-for-user" class="button">Get My Watchlists</button>
             </p>
         </form>
-    </div>
+    </div> -->
 
     <div class="card" id="watchlists-display" style="display: none;">
-        <h2 id="watchlists-names"></h2>
-        <h3>Created by: <span id="watchlists-owner"></span></h3>
-        <h3>Watchlist Id: <span id="watchlists-id-display"></span></h3>
+        <h2 id="watchlists"></h2>
     </div>
 
     <div class="card" id="watchlist-display" style="display: none;">
@@ -92,5 +90,14 @@
         <i class="fa fa-twitter w3-hover-opacity"></i>
         <i class="fa fa-linkedin w3-hover-opacity"></i>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            watchlistsDisplay();
+        });
+
+        async function watchlistsDisplay() {
+           
+        }
+    </script>
 </body>
 </html>
