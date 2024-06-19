@@ -47,15 +47,90 @@ public class UpdateWatchlistActivityTest {
     }
 
     @Test
-    void handleRequest_WatchlistNotFound() {
+    void handleRequest_validRequest_updatesWatchlist() {
         // Arrange
-        String watchlistId = "nonExistentId";
-        UpdateWatchlistRequest request = new UpdateWatchlistRequest(watchlistId, "New Title");
+        String watchlistId = "123";
+        String newTitle = "New Watchlist Title";
+        UpdateWatchlistRequest request = new UpdateWatchlistRequest.Builder()
+                .withId(watchlistId)
+                .withTitle(newTitle)
+                .build();
+
+        Watchlist existingWatchlist = new Watchlist();
+        existingWatchlist.setId(watchlistId);
+        existingWatchlist.setTitle("Old Title");
+
+        when(watchlistDao.getWatchlist(watchlistId)).thenReturn(existingWatchlist);
+
+        // Act
+        UpdateWatchlistResult result = updateWatchlistActivity.handleRequest(request);
+
+        // Assert
+        assertEquals(newTitle, result.getWatchlist().getTitle());
+        verify(watchlistDao, times(1)).saveWatchlist(existingWatchlist);
+    }
+
+    @Test
+    void handleRequest_watchlistNotFound_throwsException() {
+        // Arrange
+        String watchlistId = "456";
+        UpdateWatchlistRequest request = new UpdateWatchlistRequest.Builder()
+                .withId(watchlistId)
+                .withTitle("New Title")
+                .build();
+
         when(watchlistDao.getWatchlist(watchlistId)).thenReturn(null);
 
         // Act & Assert
-        assertThrows(WatchlistNotFoundException.class, () -> {
-            updateWatchlistActivity.handleRequest(request);
-        });
+        assertThrows(WatchlistNotFoundException.class, () -> updateWatchlistActivity.handleRequest(request));
+    }
+
+    @Test
+    void handleRequest_emptyTitle_updatesWatchlistWithEmptyTitle() {
+        // Arrange
+        String watchlistId = "789";
+        String newTitle = "";
+        UpdateWatchlistRequest request = new UpdateWatchlistRequest.Builder()
+                .withId(watchlistId)
+                .withTitle(newTitle)
+                .build();
+
+        Watchlist existingWatchlist = new Watchlist();
+        existingWatchlist.setId(watchlistId);
+        existingWatchlist.setTitle("Old Title");
+
+        when(watchlistDao.getWatchlist(watchlistId)).thenReturn(existingWatchlist);
+
+        // Act
+        UpdateWatchlistResult result = updateWatchlistActivity.handleRequest(request);
+
+        // Assert
+        assertEquals(newTitle, result.getWatchlist().getTitle());
+        verify(watchlistDao, times(1)).saveWatchlist(existingWatchlist);
+    }
+
+    @Test
+    void handleRequest_nullTitle_updatesWatchlistWithNullTitle() {
+        // Arrange
+        String watchlistId = "101";
+        String newTitle = null;
+        UpdateWatchlistRequest request = new UpdateWatchlistRequest.Builder()
+                .withId(watchlistId)
+                .withTitle(newTitle)
+                .build();
+
+        Watchlist existingWatchlist = new Watchlist();
+        existingWatchlist.setId(watchlistId);
+        existingWatchlist.setTitle("Old Title");
+
+        when(watchlistDao.getWatchlist(watchlistId)).thenReturn(existingWatchlist);
+
+        // Act
+        UpdateWatchlistResult result = updateWatchlistActivity.handleRequest(request);
+
+        // Assert
+        assertEquals(newTitle, result.getWatchlist().getTitle());
+        verify(watchlistDao, times(1)).saveWatchlist(existingWatchlist);
     }
 }
+

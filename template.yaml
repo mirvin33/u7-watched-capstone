@@ -339,7 +339,7 @@ Resources:
         GetWatchlistsForUser:
           Type: Api
           Properties:
-            Path: /watchlists/{userId}
+            Path: /watchlists
             Method: get
 
 

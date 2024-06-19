@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
@@ -31,7 +32,6 @@ public class GetWatchlistActivityTest {
 
     @Test
     public void handleRequest_withValidRequest_returnsWatchlist() {
-        // Arrange
         String watchlistId = "test-id";
         GetWatchlistRequest request = GetWatchlistRequest.builder().withId(watchlistId).build();
 
@@ -40,10 +40,8 @@ public class GetWatchlistActivityTest {
 
         WatchlistModel watchlistModel = WatchlistModel.builder().build();
 
-        // Act
         GetWatchlistResult result = getWatchlistActivity.handleRequest(request);
 
-        // Assert
         assertNotNull(result);
         assertNotNull(result.getWatchlist());
     }

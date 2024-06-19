@@ -19,10 +19,8 @@ export default class WatchedClient extends BindingClass {
         'createWatchlist', 'addContentToWatchlist', 'deleteWatchlist',
         'searchWatchlists', 'updateWatchlist', 'getWatchlistsForUser'];
         this.bindClassMethods(methodsToBind, this);
-
         this.authenticator = new Authenticator();
         this.props = props;
-
         axios.defaults.baseURL = process.env.API_BASE_URL;
         this.axiosClient = axios;
         this.clientLoaded();
@@ -81,8 +79,13 @@ export default class WatchedClient extends BindingClass {
     async getWatchlist(id, errorCallback) {
         try {
             console.log("getWatchlist from Client");
+            const token = await this.getTokenOrThrow("Only authenticated users can view watchlists.");
             const response = await this.axiosClient.get(`watchlist/${id}`
-               );
+                , {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+            });
             return response.data.watchlist;
         } catch (error) {
             this.handleError(error, errorCallback)
@@ -95,11 +98,16 @@ export default class WatchedClient extends BindingClass {
      * @param errorCallback A function to execute if the call fails.
      * @returns The watchlist's metadata.
      */
-    async getWatchlistsForUser(userId, errorCallback) {
+    async getWatchlistsForUser(errorCallback) {
         try {
             console.log("getWatchlists from Client");
-            const response = await this.axiosClient.get(`watchlists/${userId}`
-               );
+            const token = await this.getTokenOrThrow("Only authenticated users can view watchlists.");
+            const response = await this.axiosClient.get(`watchlists`
+                , {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+            });
             return response.data.watchlist;
         } catch (error) {
             this.handleError(error, errorCallback)
