@@ -13,11 +13,11 @@ public class RequestTest {
         AddContentToWatchlistRequest request = AddContentToWatchlistRequest.builder()
                 .withId("user123")
                 .withContentId("content456")
-                .withQueueNext(true)
+                .withWatched(true)
                 .build();
         assertEquals("user123", request.getId());
         assertEquals("content456", request.getContentId());
-        assertTrue(request.getQueueNext());
+        assertTrue(request.getWatched());
     }
 
     @Test

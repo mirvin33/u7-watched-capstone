@@ -93,7 +93,7 @@ public class AddContentToWatchlistRequest {
          * @param watched true if the content should be queued next, false otherwise.
          * @return This Builder instance.
          */
-        public Builder withQueueNext(boolean watched) {
+        public Builder withWatched(boolean watched) {
             this.watched = watched;
             return this;
         }
