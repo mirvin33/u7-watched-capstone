@@ -33,7 +33,7 @@ export default class WatchedClient extends BindingClass {
 
         if (this.props.hasOwnProperty("onReady")) {
             this.props.onReady(this);
-            
+
         }
     }
 
