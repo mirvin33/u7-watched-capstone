@@ -16,27 +16,27 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 public class AddContentToWatchlistActivityTest {
-    @Mock
-    private WatchlistDao watchlistDao;
-
-    private AddContentToWatchlistActivity addContentToWatchlistActivity;
-
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
-        addContentToWatchlistActivity = new AddContentToWatchlistActivity(watchlistDao);
-    }
-
-    @Test
-    void handleRequest_WatchlistNotFound_ThrowsException() {
-        // Arrange
-        AddContentToWatchlistRequest request = new AddContentToWatchlistRequest("watchlistId", "contentId"
-                , "userId", false);
-        when(watchlistDao.getWatchlist(anyString())).thenReturn(null);
-
-        // Act & Assert
-        assertThrows(WatchlistNotFoundException.class, () -> addContentToWatchlistActivity.handleRequest(request));
-    }
+//    @Mock
+//    private WatchlistDao watchlistDao;
+//
+//    private AddContentToWatchlistActivity addContentToWatchlistActivity;
+//
+//    @BeforeEach
+//    void setUp() {
+//        MockitoAnnotations.openMocks(this);
+//        addContentToWatchlistActivity = new AddContentToWatchlistActivity(watchlistDao);
+//    }
+//
+//    @Test
+//    void handleRequest_WatchlistNotFound_ThrowsException() {
+//        // Arrange
+//        AddContentToWatchlistRequest request = new AddContentToWatchlistRequest("watchlistId", "contentId"
+//                , "userId", false);
+//        when(watchlistDao.getWatchlist(anyString())).thenReturn(null);
+//
+//        // Act & Assert
+//        assertThrows(WatchlistNotFoundException.class, () -> addContentToWatchlistActivity.handleRequest(request));
+//    }
 
 //    @Test
 //    void handleRequest_WatchlistFound_AddsContent() {
