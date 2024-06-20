@@ -1,19 +1,13 @@
 package com.nashss.se.watched.dynamodb.models;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBIndexHashKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBIndexRangeKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+import com.amazonaws.services.dynamodbv2.datamodeling.*;
 
 
 @DynamoDBTable(tableName = "content")
 public class Content {
 
     private String contentId;
-    private String watchlistId;
     private String title;
-    private String userId;
     private String streamService;
     private Boolean watched;
 
@@ -26,33 +20,13 @@ public class Content {
         this.contentId = contentId;
     }
 
-    @DynamoDBAttribute(attributeName = "watchlistId")
-    @DynamoDBIndexRangeKey(globalSecondaryIndexName = "userId-watchlistId-index")
-    public String getWatchlistId() {
-        return watchlistId;
-    }
-
-    public void setWatchlistId(String watchlistId) {
-        this.watchlistId = watchlistId;
-    }
-
-    @DynamoDBAttribute(attributeName = "title")
+    @DynamoDBRangeKey(attributeName = "track_number")
     public String getTitle() {
         return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    @DynamoDBAttribute(attributeName = "userId")
-    @DynamoDBIndexHashKey(globalSecondaryIndexName = "userId-watchlistId-index")
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 
     @DynamoDBAttribute(attributeName = "streamService")

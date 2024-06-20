@@ -8,26 +8,20 @@ import java.util.UUID;
  */
 public class ContentModel {
     private final String contentId;
-    private final String watchlistId;
     private final String title;
-    private final String userId;
     private final String streamService;
     private final Boolean watched;
 
     /**
      * @param contentId     the unique identifier for the content.
-     * @param watchlistId   the identifier for the watchlist containing this content
      * @param title         title of the show or movie.
-     * @param userId        the identifier of the user (email).
      * @param streamService the streaming service where the content is available.
      * @param watched       indicates whether the content has been watched.
      */
-    public ContentModel(String contentId, String watchlistId, String title, String userId, String streamService,
+    public ContentModel(String contentId, String title, String streamService,
                         Boolean watched) {
         this.contentId = contentId != null ? contentId : UUID.randomUUID().toString();
-        this.watchlistId = watchlistId;
         this.title = title;
-        this.userId = userId;
         this.streamService = streamService;
         this.watched = watched;
     }
@@ -36,16 +30,8 @@ public class ContentModel {
         return contentId;
     }
 
-    public String getWatchlistId() {
-        return watchlistId;
-    }
-
     public String getTitle() {
         return title;
-    }
-
-    public String getUserId() {
-        return userId;
     }
 
     public String getStreamService() {
@@ -54,26 +40,6 @@ public class ContentModel {
 
     public Boolean getWatched() {
         return watched;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        ContentModel that = (ContentModel) o;
-        return Objects.equals(contentId, that.contentId) &&
-                Objects.equals(watchlistId, that.watchlistId) && Objects.equals(title, that.title) &&
-                Objects.equals(userId, that.userId) && Objects.equals(streamService, that.streamService) &&
-                Objects.equals(watched, that.watched);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(contentId, watchlistId, title, userId, streamService, watched);
     }
 
     /**
@@ -91,73 +57,49 @@ public class ContentModel {
      */
     public static class Builder {
         private String contentId;
-        private String watchlistId;
         private String title;
-        private String userId;
         private String streamService;
         private Boolean watched;
 
         /**
          * Sets the contentId for the ContentModel being built.
          *
-         * @param pContentId The unique identifier for the content.
+         * @param contentId The unique identifier for the content.
          * @return The builder instance for method chaining.
          */
-        public Builder withContentId(String pContentId) {
-            this.contentId = pContentId;
-            return this;
-        }
-
-        /**
-         * Sets the watchlistId for the ContentModel being built.
-         *
-         * @param pWatchlistId The identifier for the watchlist containing the content.
-         * @return The builder instance for method chaining.
-         */
-        public Builder withWatchlistId(String pWatchlistId) {
-            this.watchlistId = pWatchlistId;
+        public Builder withContentId(String contentId) {
+            this.contentId = contentId;
             return this;
         }
 
         /**
          * Sets the title for the ContentModel being built.
          *
-         * @param pTitle The title of the content.
+         * @param title The title of the content.
          * @return The builder instance for method chaining.
          */
-        public Builder withTitle(String pTitle) {
-            this.title = pTitle;
-            return this;
-        }
-
-        /**
-         * Sets the userId for the ContentModel being built.
-         *
-         * @param pUserId The identifier of the user associated with the content.
-         * @return The builder instance for method chaining.
-         */
-        public Builder withUserId(String pUserId) {
-            this.userId = pUserId;
+        public Builder withTitle(String title) {
+            this.title = title;
             return this;
         }
 
         /**
          *
-         * @param pStreamService The streaming service for the content.
+         * @param streamService The streaming service for the content.
          * @return The builder instance for method chaining.
          */
-        public Builder withStreamService(String pStreamService) {
-            this.streamService = pStreamService;
+        public Builder withStreamService(String streamService) {
+            this.streamService = streamService;
             return this;
         }
 
         /**
          *
-         * @param pWatched Boolean for if show has been watched.
+         * @param watched Boolean for if show has been watched.
          * @return The builder instance for method chaining.
          */
-        public Builder withWatched(Boolean pWatched) {
-            this.watched = pWatched;
+        public Builder withWatched(Boolean watched) {
+            this.watched = watched;
             return this;
         }
 
@@ -167,8 +109,21 @@ public class ContentModel {
          * @return The constructed ContentModel instance.
          */
         public ContentModel build() {
-            return new ContentModel(contentId, watchlistId, title, userId, streamService, watched);
+            return new ContentModel(contentId, title, streamService, watched);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ContentModel that = (ContentModel) o;
+        return Objects.equals(contentId, that.contentId) && Objects.equals(title, that.title) && Objects.equals(streamService, that.streamService) && Objects.equals(watched, that.watched);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(contentId, title, streamService, watched);
     }
 }
 

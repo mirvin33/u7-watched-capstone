@@ -373,26 +373,15 @@ Resources:
     Type: AWS::DynamoDB::Table
     Properties:
       AttributeDefinitions:
-      - AttributeName: contentId
-        AttributeType: S  
-      - AttributeName: watchlistId
-        AttributeType: S
-      - AttributeName: userId
-        AttributeType: S
+        - AttributeName: contentId
+          AttributeType: S
+        - AttributeName: title
+          AttributeType: S
       KeySchema:
-      - AttributeName: contentId
-        KeyType: HASH
-      - AttributeName: userId
-        KeyType: RANGE
-      GlobalSecondaryIndexes:
-      - IndexName: userId-watchlistId-index
-        KeySchema:
-        - AttributeName: userId
+        - AttributeName: contentId
           KeyType: HASH
-        - AttributeName: watchlistId
+        - AttributeName: title
           KeyType: RANGE
-        Projection:
-          ProjectionType: ALL
       BillingMode: PAY_PER_REQUEST
       TableName: content
 

@@ -46,14 +46,12 @@ public class WatchlistServiceTest {
         Content content1 = new Content();
         content1.setContentId("contentId1");
         content1.setTitle("Title 1");
-        content1.setUserId("userId1");
         content1.setStreamService("Netflix");
         content1.setWatched(false);
 
         Content content2 = new Content();
         content2.setContentId("contentId2");
         content2.setTitle("Title 2");
-        content2.setUserId("userId1");
         content2.setStreamService("Amazon Prime");
         content2.setWatched(true);
 
