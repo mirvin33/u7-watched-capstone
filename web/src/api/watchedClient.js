@@ -30,8 +30,10 @@ export default class WatchedClient extends BindingClass {
      * Run any functions that are supposed to be called once the client has loaded successfully.
      */
     clientLoaded() {
+
         if (this.props.hasOwnProperty("onReady")) {
             this.props.onReady(this);
+            
         }
     }
 
