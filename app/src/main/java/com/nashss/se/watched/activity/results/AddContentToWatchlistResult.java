@@ -39,6 +39,7 @@ public class AddContentToWatchlistResult {
      * Builder class for constructing AddContentToWatchlistResult objects.
      */
     public static class Builder {
+
         private Watchlist watchlist;
 
         /**

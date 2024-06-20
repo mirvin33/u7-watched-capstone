@@ -17,12 +17,43 @@
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     }
 
+    .card h2 {
+        color: #333;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+        font-family: w3-animate-top
+        }
+        body.background {
+            background-color: #000000; 
+        }
+
     body.background {
       background-color: #000000;
     }
+
+    #watchlists li {
+        margin-bottom: 10px;
+        padding: 10px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-family: w3-animate-top 
+    }
+
   </style>
 </head>
+</head>   
+<div class="card">
+       <h2>My Watchlists</h2>
+<form id="watchlists-display" style="display: none;">
+    <ul id="watchlists" id="watchlist-id-display"></ul>
 
+  </div>
+</form>
+</div>
+</div>
 <body class="background">
   <div class="w3-top">
     <div class="w3-bar w3-black w3-card">
