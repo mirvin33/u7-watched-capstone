@@ -13,6 +13,9 @@ class GetWatchlist extends BindingClass {
             'watchlistsDisplay', 'redirectToUpdateWatchlist', 'updateWatchlistName'], this);
         this.dataStore = new DataStore();
         this.dataStore.addChangeListener(this.watchlistsDisplay);
+        document.addEventListener('DOMContentLoaded', () => {
+            watchlistsDisplay();
+          });
         this.header = new Header(this.dataStore);
         console.log("getWatchlist constructor");
     }
@@ -37,6 +40,7 @@ class GetWatchlist extends BindingClass {
             errorMessageDisplay.classList.remove('hidden');
         }
     }
+    
 
     /**
      * Add the header to the page and load the WatchedClient.
@@ -72,7 +76,6 @@ class GetWatchlist extends BindingClass {
             if (watchlist) {
                 createButton.innerText = 'Get Watchlist';
                 console.log("watchlist = ", watchlist);
-                this.dataStore.set('watchlist', watchlist);
                 this.updateWatchlistDisplay(watchlist);
             }
         }
@@ -105,22 +108,28 @@ class GetWatchlist extends BindingClass {
         } 
         watchlistDisplay.style.display = 'block';
     }
+    
 
     /**
      * Update the watchlists display with the fetched watchlist data.
      * @param watchlist The watchlists data to display.
      */
-    async watchlistsDisplay() {
+    watchlistsDisplay() {
+        console.log("display1")
         const watchlists = this.dataStore.get('watchlists');
+        
         let rows = ""
         for (const watchlist of watchlists) {
             rows += "<li>" + watchlist.title + "<li/>"
+            rows += "<li>" + watchlist.id + "<li/>"
         }
+        console.log("display2")
         const watchlistsDisplay = document.getElementById('watchlists-display');
+         console.log("display3")
 
         watchlistsDisplay.style.display = 'block';
         watchlistsDisplay.innerHTML = rows;
-        console.log("display")
+        console.log("displaycomplete")
     }
 
    /**

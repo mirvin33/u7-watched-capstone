@@ -108,7 +108,8 @@ export default class WatchedClient extends BindingClass {
                         Authorization: `Bearer ${token}`
                     }
             });
-            return response.data.watchlist;
+            console.log("returned watchlists");
+            return response.data.watchlists;          
         } catch (error) {
             this.handleError(error, errorCallback)
         }

@@ -15,12 +15,41 @@
             padding: 20px;
             background-color: rgb(163, 163, 163);
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            font-family: w3-animate-top
+        }
+
+        .card h2 {
+        color: #333;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+        font-family: w3-animate-top
         }
         body.background {
             background-color: #000000; 
         }
+
+        #watchlists li {
+        margin-bottom: 10px;
+        padding: 10px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-family: w3-animate-top 
+    }
+
     </style>
-</head>
+</head>   
+<div class="card">
+       <h2>My Watchlists</h2>
+<form id="watchlists-display" style="display: none;">
+    <ul id="watchlists" id="watchlist-id-display"></ul>
+  
+            </div>
+        </form>
+    </div>
+</div>
 <body class="background">
     <div class="w3-top">
         <div class="w3-bar w3-black w3-card">
@@ -32,13 +61,14 @@
                 <div class="w3-dropdown-content w3-bar-block w3-card-4">
                     <a href="createWatchlist.html" class="w3-bar-item w3-button">Create Watchlist</a>
                     <a href="deleteWatchlist.html" class="w3-bar-item w3-button">Delete Watchlist</a>
+                    <a href="getWatchlist.html" class="w3-bar-item w3-button">My Watchlists</a>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="card">
-        <h2>My Watchlist</h2>
+        <h2>Update a Watchlist</h2>
         <form id="get-watchlist-form" class="card-content">
             <p class="hidden error" id="error-message"></p>
             <p class="form-field">
@@ -50,24 +80,11 @@
             </p>
         </form>
     </div>
-
-    <!-- <div class="card">
-        <h2>All Watchlists</h2>
-        <form id="get-watchlists-form" class="card-content">
-            <p class="hidden error" id="error-message"></p>
-            <p class="form-field">
-                <label for="user-id">Email</label>
-                <input type="text" required class="validated-field" id="user-id" placeholder="Enter Email" autofocus>
-            </p>
-            <p class="button">
-                <button type="submit" id="get-watchlists-for-user" class="button">Get My Watchlists</button>
-            </p>
-        </form>
-    </div> -->
-
-    <div class="card" id="watchlists-display" style="display: none;">
-        <h2 id="watchlists"></h2>
+        
     </div>
+</p>
+</form>
+</div>
 
     <div class="card" id="watchlist-display" style="display: none;">
         <h2 id="watchlist-name"></h2>
@@ -90,14 +107,5 @@
         <i class="fa fa-twitter w3-hover-opacity"></i>
         <i class="fa fa-linkedin w3-hover-opacity"></i>
     </footer>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            watchlistsDisplay();
-        });
-
-        async function watchlistsDisplay() {
-           
-        }
-    </script>
 </body>
 </html>
