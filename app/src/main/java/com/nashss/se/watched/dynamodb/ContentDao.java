@@ -67,17 +67,17 @@ public class ContentDao {
     }
 
     /**
-     * Returns a list of {@link Content} objects for a specified watchlist ID.
+     * Returns a list of Content objects for a specified watchlist ID.
      *
-     * @param watchlistId the watchlist ID
+     * @param contentId the watchlist ID
      * @return a list of Content objects for the specified watchlist
      */
-    public List<Content> getContentByWatchlistId(String watchlistId) {
+    public List<Content> getContentByWatchlistId(String contentId) {
         Map<String, AttributeValue> valueMap = new HashMap<>();
-        valueMap.put(":watchlistId", new AttributeValue().withS(watchlistId));
+        valueMap.put(":watchlistId", new AttributeValue().withS(contentId));
 
         DynamoDBScanExpression scanExpression = new DynamoDBScanExpression()
-                .withFilterExpression("watchlistId = :watchlistId")
+                .withFilterExpression("contentId = :contentId")
                 .withExpressionAttributeValues(valueMap);
 
         return this.dynamoDbMapper.scan(Content.class, scanExpression);
