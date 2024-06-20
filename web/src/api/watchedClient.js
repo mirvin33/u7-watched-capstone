@@ -166,6 +166,7 @@ export default class WatchedClient extends BindingClass {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can add content to a watchlist.");
             const response = await this.axiosClient.post(`watchlists/${id}/add`, {
+                contentId: contentId,
                 title: title,
                 streamingService: streamingService,
             }, {

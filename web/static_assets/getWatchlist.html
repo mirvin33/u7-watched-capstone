@@ -93,23 +93,23 @@
     </div>
 
 <div class="card">
-<h2>Add a Show or Movie</h2>
-<form id="get-watchlist-form" class="card-content">
-<p class="hidden error" id="error-message"></p>
-<p class="form-field">
-</p>
-    <input type="text" required class="validated-field" id="watchlist-id" placeholder="Watchlist Id" autofocus>
-    </p>
-    <input type="text" required class="validated-field" id="content-title" placeholder="Title of Movie or Show" autofocus>
-</p>
-    <input type="text" required class="validated-field" id="streaming-service" placeholder="Streaming Service" autofocus>
-</p>
-    <input type="text" id="Toggle" placeholder="Watched" autofocus>
-</p>
-
-<p class="button">
-    <button type="submit" id="get-watchlist" class="button">Add</button>
-</p>
+    <h1>Add Content to Watchlist</h1>
+    <form id="addContentForm">
+        <label for="watchlistId">Watchlist ID:</label>
+        <input type="text" id="watchlistId" name="watchlistId" required>
+        <br><br>
+        <label for="contentId">Content ID:</label>
+        <input type="text" id="contentId" name="contentId" required>
+        <br><br>
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required>
+        <br><br>
+        <label for="streamingService">Streaming Service:</label>
+        <input type="text" id="streamingService" name="streamingService" required>
+        <br><br>
+        <button type="submit">Add Content</button>
+    </form>
+    <div id="result"></div>
 </form>
 </div>
         
