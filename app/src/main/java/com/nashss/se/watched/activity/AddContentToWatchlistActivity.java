@@ -37,7 +37,7 @@ public class AddContentToWatchlistActivity {
             throw new WatchlistNotFoundException("Watchlist not found with ID: " + request.getId());
         }
 
-        //watchlist.addContent(request.getContentId(), request.getQueueNext());
+//        watchlist.addContent(request.getId(),request.getContentId(),request.getUserId(), request.getWatched());
         watchlistDao.saveWatchlist(watchlist);
 
         return AddContentToWatchlistResult.builder()

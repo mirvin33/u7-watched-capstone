@@ -28,7 +28,7 @@ public class AddContentToWatchlistLambda
                                     .build());
                 },
                 (request, serviceComponent) ->
-                        serviceComponent.provideAddSongToPlaylistActivity().handleRequest(request)
+                        serviceComponent.provideAddContentToWatchlistActivity().handleRequest(request)
         );
     }
 }
