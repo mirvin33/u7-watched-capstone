@@ -34,7 +34,6 @@ class CreateWatchlist extends BindingClass {
         evt.preventDefault();
        
         const errorMessageDisplay = document.getElementById('error-message');
-        const SuccessMessageDisplay = document.getElementById('watchlist-created');
         errorMessageDisplay.innerText = ``;
         errorMessageDisplay.classList.add('hidden');
 
@@ -51,12 +50,9 @@ class CreateWatchlist extends BindingClass {
             errorMessageDisplay.innerText = `Error: ${error.message}`;
             errorMessageDisplay.classList.remove('hidden');
         });
-
+        alert("Watchlist Created")
         this.dataStore.set('watchlist', watchlist);
         
-        SuccessMessageDisplay.innerText = watchlist.title;
-        SuccessMessageDisplay.innerText = watchlist.id;
-        SuccessMessageDisplay.style.display = 'block';
     }
 }
 
