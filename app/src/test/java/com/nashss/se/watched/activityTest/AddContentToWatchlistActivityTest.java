@@ -29,12 +29,12 @@ public class AddContentToWatchlistActivityTest {
 //
 //    @Test
 //    void handleRequest_WatchlistNotFound_ThrowsException() {
-//        // Arrange
+//
 //        AddContentToWatchlistRequest request = new AddContentToWatchlistRequest("watchlistId", "contentId"
 //                , "userId", false);
 //        when(watchlistDao.getWatchlist(anyString())).thenReturn(null);
 //
-//        // Act & Assert
+//
 //        assertThrows(WatchlistNotFoundException.class, () -> addContentToWatchlistActivity.handleRequest(request));
 //    }
 
@@ -51,7 +51,7 @@ public class AddContentToWatchlistActivityTest {
 //        // Assert
 //        assertNotNull(result);
 //        assertEquals(watchlist, result.getWatchlist());
-//        assertTrue(watchlist.getContentList().contains("contentId"));
+//        assertTrue(watchlist.contains("contentId"));
 //        verify(watchlistDao, times(1)).saveWatchlist(watchlist);
 //    }
 }
