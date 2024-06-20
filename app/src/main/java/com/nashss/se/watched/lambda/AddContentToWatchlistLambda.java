@@ -12,27 +12,24 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 /**
  * Lambda function to handle adding content to a watchlist.
  */
-public class AddContentToWatchlistLambda implements RequestHandler<AddContentToWatchlistRequest,
-        AddContentToWatchlistResult> {
-    private final ServiceComponent serviceComponent;
-
-    /**
-     * Constructs an AddContentToWatchlistLambda with a ServiceComponent.
-     */
-    public AddContentToWatchlistLambda() {
-        this.serviceComponent = DaggerServiceComponent.create();
-    }
-
-    /**
-     * Handles the request to add content to a watchlist.
-     *
-     * @param request the request containing the details for adding content to the watchlist
-     * @param context the Lambda execution environment context
-     * @return the result of adding content to the watchlist
-     */
+public class AddContentToWatchlistLambda
+        extends LambdaActivityRunner<AddContentToWatchlistRequest, AddContentToWatchlistResult>
+        implements RequestHandler<AuthenticatedLambdaRequest<AddContentToWatchlistRequest>, LambdaResponse> {
     @Override
-    public AddContentToWatchlistResult handleRequest(AddContentToWatchlistRequest request, Context context) {
-        return serviceComponent.provideAddContentToWatchlistActivity().handleRequest(request);
+    public LambdaResponse handleRequest(AuthenticatedLambdaRequest<AddContentToWatchlistRequest> input, Context context)
+    { return super.runActivity(
+                () -> {
+                   AddContentToWatchlistRequest unauthenticatedRequest = input
+                           .fromBody(AddContentToWatchlistRequest.class);
+                    return input.fromUserClaims(claims ->
+                            AddContentToWatchlistRequest.builder()
+                                    .withId(unauthenticatedRequest.getId())
+                                    .withUserId(claims.get("email"))
+                                    .build());
+                },
+                (request, serviceComponent) ->
+                        serviceComponent.provideAddSongToPlaylistActivity().handleRequest(request)
+        );
     }
 }
 
