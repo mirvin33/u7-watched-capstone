@@ -162,12 +162,12 @@ export default class WatchedClient extends BindingClass {
      * @param errorCallback (Optional) A function to execute if the call fails.
      * @returns The updated watchlist.
      */
-    async addContentToWatchlist(id, contentId, queueNext, errorCallback) {
+    async addContentToWatchlist(contentId, title, streamingService, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can add content to a watchlist.");
-            const response = await this.axiosClient.post(`watchlists/${id}/content`, {
-                contentId: contentId,
-                queueNext: queueNext
+            const response = await this.axiosClient.post(`watchlists/${id}/add`, {
+                title: title,
+                streamingService: streamingService,
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`

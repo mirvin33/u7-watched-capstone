@@ -33,7 +33,7 @@ public class Watchlist {
         return id;
     }
 
-    
+
     /**
      * Sets the ID of the watchlist.
      *
