@@ -13,6 +13,7 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
  */
 public class GetWatchlistContentLambda implements RequestHandler<GetWatchlistContentRequest,
         GetWatchlistContentResult> {
+
     private final ServiceComponent serviceComponent;
 
     /**

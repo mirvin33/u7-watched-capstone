@@ -6,19 +6,19 @@ package com.nashss.se.watched.activity.request;
 public class AddContentToWatchlistRequest {
     private final String id;
     private final String contentId;
-    private final boolean queueNext;
+    private final boolean watched;
 
     /**
      * Constructs an instance of AddContentToWatchlistRequest.
      *
      * @param id The ID of the user or session making the request.
      * @param contentId The ID of the content being added to the watchlist.
-     * @param queueNext Indicates whether the content should be queued next for playback.
+     * @param watched Indicates whether the content should be queued next for playback.
      */
-    public AddContentToWatchlistRequest(String id, String contentId, boolean queueNext) {
+    public AddContentToWatchlistRequest(String id, String contentId, boolean watched) {
         this.id = id;
         this.contentId = contentId;
-        this.queueNext = queueNext;
+        this.watched = watched;
     }
 
     /**
@@ -53,8 +53,8 @@ public class AddContentToWatchlistRequest {
      *
      * @return true if the content should be queued next, false otherwise.
      */
-    public boolean getQueueNext() {
-        return queueNext;
+    public boolean getWatched() {
+        return watched;
     }
 
     /**
@@ -63,7 +63,7 @@ public class AddContentToWatchlistRequest {
     public static class Builder {
         private String id;
         private String contentId;
-        private boolean queueNext;
+        private boolean watched;
 
         /**
          * Sets the ID of the user or session making the request.
@@ -90,11 +90,11 @@ public class AddContentToWatchlistRequest {
         /**
          * Sets whether the content should be queued next for playback.
          *
-         * @param queueNext true if the content should be queued next, false otherwise.
+         * @param watched true if the content should be queued next, false otherwise.
          * @return This Builder instance.
          */
-        public Builder withQueueNext(boolean queueNext) {
-            this.queueNext = queueNext;
+        public Builder withQueueNext(boolean watched) {
+            this.watched = watched;
             return this;
         }
 
@@ -104,7 +104,7 @@ public class AddContentToWatchlistRequest {
          * @return An AddContentToWatchlistRequest object.
          */
         public AddContentToWatchlistRequest build() {
-            return new AddContentToWatchlistRequest(id, contentId, queueNext);
+            return new AddContentToWatchlistRequest(id, contentId, watched);
         }
     }
 }
