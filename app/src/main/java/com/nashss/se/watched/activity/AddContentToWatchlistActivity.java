@@ -2,8 +2,11 @@ package com.nashss.se.watched.activity;
 
 import com.nashss.se.watched.activity.request.AddContentToWatchlistRequest;
 import com.nashss.se.watched.activity.results.AddContentToWatchlistResult;
+import com.nashss.se.watched.dynamodb.ContentDao;
 import com.nashss.se.watched.dynamodb.WatchlistDao;
+import com.nashss.se.watched.dynamodb.models.Content;
 import com.nashss.se.watched.dynamodb.models.Watchlist;
+import com.nashss.se.watched.exceptions.ContentNotFoundException;
 import com.nashss.se.watched.exceptions.WatchlistNotFoundException;
 
 import javax.inject.Inject;
@@ -13,6 +16,7 @@ import javax.inject.Inject;
  */
 public class AddContentToWatchlistActivity {
     private final WatchlistDao watchlistDao;
+    private final ContentDao contentDao;
 
     /**
      * Constructs an AddContentToWatchlistActivity with the given WatchlistDao.
@@ -20,8 +24,9 @@ public class AddContentToWatchlistActivity {
      * @param watchlistDao the WatchlistDao to interact with the database
      */
     @Inject
-    public AddContentToWatchlistActivity(WatchlistDao watchlistDao) {
+    public AddContentToWatchlistActivity(WatchlistDao watchlistDao, ContentDao contentDao) {
         this.watchlistDao = watchlistDao;
+        this.contentDao = contentDao;
     }
 
     /**
@@ -37,12 +42,16 @@ public class AddContentToWatchlistActivity {
             throw new WatchlistNotFoundException("Watchlist not found with ID: " + request.getId());
         }
 
-//        watchlist.addContent(request.getId(),request.getContentId(),request.getUserId());
-        watchlistDao.saveWatchlist(watchlist);
+//        Content content = contentDao.getContent(request.getContentId());
+//        if (content == null) {
+//            throw new ContentNotFoundException("Content not found with ID: " + request.getContentId());
+//        }
+            watchlist.addContent(request.getContentId());
+            watchlistDao.saveWatchlist(watchlist);
 
-        return AddContentToWatchlistResult.builder()
-                .withWatchlist(watchlist)
-                .build();
-    }
+            return AddContentToWatchlistResult.builder()
+                    .withWatchlist(watchlist)
+                    .build();
+        }
 }
 

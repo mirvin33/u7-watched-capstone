@@ -19,7 +19,7 @@ import javax.inject.Singleton;
 
 
 /**
- * Accesses data for a watchlist using {@link Watchlist} to represent the model in DynamoDB.
+ * Accesses data for a watchlist using Watchlist to represent the model in DynamoDB.
  */
 @Singleton
 public class WatchlistDao {
@@ -29,8 +29,8 @@ public class WatchlistDao {
     /**
      * Instantiates a WatchlistDao object.
      *
-     * @param dynamoDbMapper   the {@link DynamoDBMapper} used to interact with the watchlist table
-     * @param metricsPublisher the {@link MetricsPublisher} used to record metrics.
+     * @param dynamoDbMapper   the DynamoDBMapper used to interact with the watchlist table
+     * @param metricsPublisher the MetricsPublisher used to record metrics.
      */
     @Inject
     public WatchlistDao(DynamoDBMapper dynamoDbMapper, MetricsPublisher metricsPublisher) {
@@ -56,7 +56,7 @@ public class WatchlistDao {
     }
 
     /**
-     * Saves (creates or updates) the given watchlist.
+     * Saves creates or updates the given watchlist.
      *
      * @param watchlist The watchlist to save
      * @return The Watchlist object that was saved

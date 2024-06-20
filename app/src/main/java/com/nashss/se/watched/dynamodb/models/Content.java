@@ -20,7 +20,7 @@ public class Content {
         this.contentId = contentId;
     }
 
-    @DynamoDBRangeKey(attributeName = "track_number")
+    @DynamoDBRangeKey(attributeName = "title")
     public String getTitle() {
         return title;
     }
