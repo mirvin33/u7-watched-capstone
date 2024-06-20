@@ -24,6 +24,7 @@ import javax.inject.Singleton;
 @Singleton
 public class WatchlistDao {
     private DynamoDBMapper dynamoDbMapper;
+    
     private MetricsPublisher metricsPublisher;
 
     /**
