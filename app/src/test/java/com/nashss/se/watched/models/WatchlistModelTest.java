@@ -42,6 +42,7 @@ public class WatchlistModelTest {
 
         assertNotEquals(watchlist1, watchlist2);
     }
+
     @Test
     void testWatchlistModelInequalityDifferentTitles() {
         List<String> contentSet = Arrays.asList("content1", "content2", "content3");
