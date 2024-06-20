@@ -24,7 +24,6 @@ class GetWatchlist extends BindingClass {
      * Once the client is loaded, get the watchlist metadata and title list.
      */
     async clientLoaded() {
-
         const errorMessageDisplay = document.getElementById('error-message');
         errorMessageDisplay.innerText = ``;
         errorMessageDisplay.classList.add('hidden');
